@@ -30,11 +30,10 @@
         }
 
         * { box-sizing: border-box; }
-        /* ในจอคอมให้ซ่อน Scrollbar หลักแล้วใช้ของกริดแทน */
         html, body { margin: 0; padding: 0; font-family: 'Kanit', sans-serif; background-color: var(--bg-base); color: var(--text-main); height: 100dvh; overflow: hidden; }
 
         .panel { background: var(--panel-bg); border: 2px solid var(--panel-border); border-radius: 24px; box-shadow: var(--shadow-card); padding: 20px; }
-        .app-container { display: flex; gap: 20px; width: 100%; height: 100dvh; padding: 20px; align-items: stretch; transition: 0.3s; }
+        .app-container { display: flex; gap: 20px; width: 100%; height: 100dvh; padding: 20px; align-items: stretch; }
 
         /* Sidebar */
         .sidebar { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; }
@@ -62,13 +61,19 @@
             padding: 5px 10px; text-align: center;
         }
 
-        .btn-icon-only { background: #fff; color: var(--text-main); border: 2px solid var(--panel-border); padding: 8px 15px; border-radius: 10px; font-size: 16px; cursor: pointer; transition: 0.2s; }
+        .btn-icon-only { background: var(--panel-bg); color: var(--text-main); border: 2px solid var(--panel-border); padding: 8px 15px; border-radius: 10px; font-size: 16px; cursor: pointer; transition: 0.2s; }
         .btn-icon-only:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05);}
 
         /* View Toggle */
-        .view-toggle { display: flex; gap: 5px; background: var(--sub-bg); padding: 5px; border-radius: 14px; border: 1px solid var(--panel-border); }
-        .view-btn { padding: 8px 15px; border: none; background: transparent; border-radius: 10px; font-family: 'Kanit'; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: 0.2s;}
+        .view-toggle { display: flex; gap: 5px; background: var(--sub-bg); padding: 5px; border-radius: 12px; border: 1px solid var(--panel-border); }
+        .view-btn { padding: 8px 15px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: 0.2s;}
         .view-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px var(--primary-glow); }
+
+        /* Status Legend (เปลี่ยนจากจุดเป็นคำ) */
+        .status-legend { display: flex; gap: 15px; align-items: center; }
+        .legend-badge { padding: 4px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: white; }
+        .badge-free { background: var(--color-free); box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
+        .badge-booked { background: var(--color-booked); box-shadow: 0 2px 8px rgba(251, 113, 133, 0.3); }
 
         /* Highlight Today */
         @keyframes pulseGlow {
@@ -117,7 +122,7 @@
         .month-day-card { background: var(--panel-bg); border: 2px solid var(--panel-border); border-radius: 16px; padding: 15px; min-height: 120px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s;}
         .month-day-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); border-color: var(--primary);}
         .m-date-num { font-size: 22px; font-weight: 600; color: var(--text-main); margin-bottom: 10px;}
-        .m-status-badge { margin-top: auto; padding: 6px; border-radius: 8px; text-align: center; font-size: 14px; font-weight: 500; display:flex; justify-content:center; align-items:center; gap:5px;}
+        .m-status-badge { margin-top: auto; padding: 6px; border-radius: 8px; text-align: center; font-size: 13px; font-weight: 600; display:flex; justify-content:center; align-items:center; gap:5px;}
         .m-free { background: var(--color-free-bg); color: #059669; border: 1px solid var(--color-free);}
         .m-full { background: var(--color-booked-bg); color: #e11d48; border: 1px solid var(--color-booked);}
         .m-disabled { background: var(--sub-bg); color: var(--text-muted); border: 1px solid var(--panel-border);}
@@ -142,37 +147,27 @@
         .toast { background: var(--text-main); color: #fff; padding: 18px 25px; border-radius: 16px; display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); transform: translateX(120%); transition: 0.4s; }
         .toast.show { transform: translateX(0); }
 
-        /* 🔥 RESPONSIVE (ปลดล็อก Scroll ให้มือถือ/ไอแพดเลื่อนได้ลื่นๆ) 🔥 */
+        /* 🔥 Responsive (รองรับมือถือแบบเลื่อนจอได้ลื่นๆ) 🔥 */
         @media (max-width: 1080px) {
-            /* ปลดล็อก Scroll ให้เลื่อนได้ทั้งหน้า */
             html, body { height: auto; min-height: 100dvh; overflow-y: auto; overflow-x: hidden; }
             .app-container { flex-direction: column; height: auto; min-height: 100vh; overflow: visible;}
             
             .sidebar { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 20px; }
             .sidebar-actions { flex-direction: row; width: 100%; margin-top: 15px; }
             
-            /* ให้กริดยืดตามเนื้อหาไปเลย ไม่ต้องมี Scrollbar ซ้อนด้านใน */
             .weekly-grid, .monthly-grid { overflow-y: visible; height: auto; }
+            .monthly-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .app-container { padding: 10px; gap: 10px; padding-bottom: 90px; /* เผื่อพื้นที่ให้เมนูด้านล่าง */ }
-            
+            .app-container { padding: 10px; gap: 10px; }
             .sidebar { padding: 15px; border-radius: 20px; }
             .title-box { border-bottom: none; padding-bottom: 0; }
             .title { font-size: 20px; }
             .subtitle { padding: 10px; font-size: 12px; }
-            .time-container { display: none; } 
             
-            /* เมนูด้านล่างสุด (Sticky Bottom Nav) */
-            .sidebar-actions { 
-                position: fixed; bottom: 0; left: 0; right: 0; 
-                background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
-                padding: 15px 20px; box-shadow: 0 -10px 25px rgba(0,0,0,0.1); 
-                z-index: 100; flex-direction: row; justify-content: space-between; 
-                margin: 0; border-top: 1px solid var(--panel-border); gap: 10px; border-radius: 20px 20px 0 0;
-            }
-            .sidebar-actions .btn { font-size: 14px; padding: 12px; flex: 1; border-radius: 14px;}
+            .sidebar-actions { flex-direction: column; margin-top: 10px; border-top: 1px dashed var(--panel-border); padding-top: 15px;}
+            .sidebar-actions .btn { font-size: 15px; padding: 12px; }
             
             .nav-header { flex-direction: column; gap: 10px; padding: 15px; }
             .week-control { width: 100%; justify-content: space-between; }
@@ -184,12 +179,11 @@
             .time-slot.free { border-bottom-width: 4px; }
             .time-slot.booked { border-bottom-width: 4px; }
 
-            .monthly-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 2px;}
-            .month-header { font-size: 11px; padding: 5px 2px; }
-            .month-day-card { min-height: 70px; padding: 5px; border-radius: 10px;}
-            .m-date-num { font-size: 16px; margin-bottom: 5px;}
-            .m-status-text { display: none; } 
-            .m-status-badge { font-size: 10px; padding: 4px; }
+            .monthly-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 2px;}
+            .month-header { display: none; }
+            .month-day-card { min-height: 80px; padding: 10px; border-radius: 12px;}
+            .m-date-num { font-size: 18px; margin-bottom: 5px;}
+            .m-status-badge { font-size: 11px; padding: 4px; }
             
             .modal-content { padding: 25px; border-radius: 24px;}
         }
@@ -207,8 +201,10 @@
                 <h1 class="title">BSCS_Sharing</h1>
             </div>
             <div class="subtitle">
-                <div>💌 BSCS_GNR &nbsp;|&nbsp; ☎️ 3262-3264</div>
-                <div style="font-weight: 500; margin-top: 8px;">Status: <span id="connStatus" style="color:#059669;">🟢 ONLINE จ้า</span></div>
+                <div>BSCS_GNR &nbsp;|&nbsp; ☎️ 3262-3264</div>
+                <div style="font-weight: 500; margin-top: 8px; display:flex; align-items:center; justify-content:center; gap:6px;">
+                    สถานะ: <span id="connStatus" style="color:#059669; background:rgba(16,185,129,0.1); padding:2px 10px; border-radius:10px;">ปกติ (Online)</span>
+                </div>
             </div>
         </div>
         
@@ -218,31 +214,35 @@
         </div>
         
         <div class="sidebar-actions">
-            <button class="btn btn-primary" onclick="openBooking()" style="flex:2;">✨ จองห้อง</button>
-            <button class="btn btn-success" onclick="syncDataSilently()" style="flex:1;">🔄 รีเฟรช</button>
-            <button id="adminBtn" class="btn btn-outline" onclick="handleAdminClick()" style="flex:1;">👑 Admin</button>
+            <button class="btn btn-primary" onclick="openBooking()">จองห้อง / พื้นที่ 📝</button>
+            <button id="adminBtn" class="btn btn-outline" onclick="handleAdminClick()">เข้าสู่ระบบ Admin 🛡️</button>
         </div>
     </div>
 
     <div class="main-content">
         <div class="nav-header">
             <div class="week-control">
-                <button class="btn-icon-only" onclick="changeDateRange(-1)">◀️</button>
+                <button class="btn-icon-only" onclick="changeDateRange(-1)">◀</button>
                 <input type="month" id="monthSelector" class="month-selector" onchange="jumpToMonth(this.value)">
-                <button class="btn-icon-only" onclick="changeDateRange(1)">▶️</button>
+                <button class="btn-icon-only" onclick="changeDateRange(1)">▶</button>
             </div>
             
+            <div class="status-legend">
+                <div class="legend-badge badge-free">ว่าง</div>
+                <div class="legend-badge badge-booked">เต็มแล้ว</div>
+            </div>
+
             <div class="view-toggle">
-                <button class="view-btn active" id="btnViewWeek" onclick="switchView('week')">📅 สัปดาห์</button>
-                <button class="view-btn" id="btnViewMonth" onclick="switchView('month')">🗓️ เดือน</button>
+                <button class="view-btn active" id="btnViewWeek" onclick="switchView('week')">สัปดาห์</button>
+                <button class="view-btn" id="btnViewMonth" onclick="switchView('month')">เดือน</button>
             </div>
         </div>
         
         <div class="weekly-grid" id="weeklyGrid"></div>
         
         <div class="monthly-grid" id="monthlyGrid">
-            <div class="month-header">อา.</div><div class="month-header">จ.</div><div class="month-header">อ.</div>
-            <div class="month-header">พ.</div><div class="month-header">พฤ.</div><div class="month-header">ศ.</div><div class="month-header">ส.</div>
+            <div class="month-header">อาทิตย์</div><div class="month-header">จันทร์</div><div class="month-header">อังคาร</div>
+            <div class="month-header">พุธ</div><div class="month-header">พฤหัสฯ</div><div class="month-header">ศุกร์</div><div class="month-header">เสาร์</div>
         </div>
     </div>
 </div>
@@ -250,7 +250,7 @@
 <div id="dayDetailsModal" class="modal">
     <div class="modal-content">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px dashed var(--panel-border); padding-bottom:15px; margin-bottom: 20px;">
-            <h3 id="dayModalTitle" style="color: var(--primary); margin: 0;">📅 รายละเอียดการจอง</h3>
+            <h3 id="dayModalTitle" style="color: var(--primary); margin: 0;">รายละเอียดการจอง</h3>
             <button onclick="closeModal('dayDetailsModal')" class="btn-icon-only" style="padding: 5px 12px; border-radius:50%;">&times;</button>
         </div>
         <div id="modalDetailsContainer" style="max-height: 50vh; overflow-y: auto; padding-right: 5px;"></div>
@@ -259,18 +259,18 @@
 
 <div id="bookingModal" class="modal">
     <div class="modal-content">
-        <h3 style="margin-top: 0; margin-bottom: 20px; font-size: 22px;">📝✨ แบบฟอร์มจองการใช้งาน</h3>
+        <h3 style="margin-top: 0; margin-bottom: 20px; font-size: 22px;">แบบฟอร์มจองการใช้งาน</h3>
         <input type="date" id="formDate">
         
         <select id="bookType" onchange="toggleTimeInputs()">
-            <option value="hourly">⏱️ จองรายชั่วโมง</option>
-            <option value="morning">🌅 ครึ่งเช้า (08:00 - 12:00)</option>
-            <option value="afternoon">🌇 ครึ่งบ่าย (13:00 - 18:00)</option>
+            <option value="hourly">จองรายชั่วโมง</option>
+            <option value="morning">ครึ่งเช้า (08:00 - 12:00)</option>
+            <option value="afternoon">ครึ่งบ่าย (13:00 - 18:00)</option>
         </select>
 
         <div id="hourlyInputs" style="display: flex; gap: 15px;">
             <div style="flex: 1;">
-                <label style="font-size: 13px; color: var(--text-muted);">🟢 เวลาเริ่ม (24น.)</label>
+                <label style="font-size: 13px; color: var(--text-muted); font-weight:600;">เวลาเริ่ม (24น.)</label>
                 <select id="startTime">
                     <option value="08:00">08:00</option><option value="09:00">09:00</option>
                     <option value="10:00">10:00</option><option value="11:00">11:00</option>
@@ -280,7 +280,7 @@
                 </select>
             </div>
             <div style="flex: 1;">
-                <label style="font-size: 13px; color: var(--text-muted);">🔴 เวลาสิ้นสุด (24น.)</label>
+                <label style="font-size: 13px; color: var(--text-muted); font-weight:600;">เวลาสิ้นสุด (24น.)</label>
                 <select id="endTime">
                     <option value="09:00">09:00</option><option value="10:00">10:00</option>
                     <option value="11:00">11:00</option><option value="12:00">12:00</option>
@@ -291,42 +291,42 @@
             </div>
         </div>
 
-        <input type="text" id="formSubject" placeholder="📌 หัวข้อ / วัตถุประสงค์">
-        <textarea id="formDetail" placeholder="💬 รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+        <input type="text" id="formSubject" placeholder="หัวข้อ / วัตถุประสงค์">
+        <textarea id="formDetail" placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
         
         <div style="display: flex; gap: 15px;">
-            <input type="text" id="formUser" placeholder="👤 ผู้จอง / รหัสพนักงาน" style="flex: 1;">
-            <input type="text" id="formTeam" placeholder="🏢 ชื่อทีม / แผนก" style="flex: 1;">
+            <input type="text" id="formUser" placeholder="ชื่อผู้จอง / รหัสพนักงาน" style="flex: 1;">
+            <input type="text" id="formTeam" placeholder="ชื่อทีม / แผนก" style="flex: 1;">
         </div>
-        <input type="tel" id="formPhone" placeholder="📞 เบอร์โทรติดต่อ">
+        <input type="tel" id="formPhone" placeholder="เบอร์โทรติดต่อ">
 
         <div style="display: flex; gap: 15px; margin-top: 10px;">
-            <button class="btn btn-outline" style="flex: 1;" onclick="closeModal('bookingModal')">❌ ยกเลิก</button>
-            <button class="btn btn-primary" style="flex: 2;" onclick="submitBooking()" id="submitBtn">✅ ยืนยันการจอง</button>
+            <button class="btn btn-outline" style="flex: 1;" onclick="closeModal('bookingModal')">ยกเลิก</button>
+            <button class="btn btn-primary" style="flex: 2;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
         </div>
     </div>
 </div>
 
 <div id="loginModal" class="modal">
     <div class="modal-content" style="max-width: 350px;">
-        <h3 style="color: var(--text-main); margin-top: 0; border-bottom: 2px dashed var(--panel-border); padding-bottom:15px; font-size: 22px;">🔐 Admin Login</h3>
-        <input type="text" id="loginUser" placeholder="👤 Username">
-        <input type="password" id="loginPass" placeholder="🔑 Password">
+        <h3 style="color: var(--text-main); margin-top: 0; border-bottom: 2px dashed var(--panel-border); padding-bottom:15px; font-size: 22px;">Admin Login</h3>
+        <input type="text" id="loginUser" placeholder="Username">
+        <input type="password" id="loginPass" placeholder="Password">
         <div style="display: flex; gap: 15px; margin-top: 15px;">
-            <button class="btn btn-outline" style="flex: 1;" onclick="closeModal('loginModal')">❌ ยกเลิก</button>
-            <button class="btn btn-primary" style="flex: 1;" onclick="checkLogin()">🔓 เข้าระบบ</button>
+            <button class="btn btn-outline" style="flex: 1;" onclick="closeModal('loginModal')">ยกเลิก</button>
+            <button class="btn btn-primary" style="flex: 1;" onclick="checkLogin()">เข้าระบบ</button>
         </div>
     </div>
 </div>
 
 <div id="adminDashModal" class="modal">
     <div class="modal-content" style="max-width: 700px;">
-        <h3 style="color: var(--primary); margin-top: 0; border-bottom: 2px dashed var(--panel-border); padding-bottom:15px; font-size: 22px;">🛡️ Admin Dashboard</h3>
-        <div style="color: var(--text-muted); margin-bottom: 15px; font-size: 15px;">📋 รายการจองทั้งหมดที่อนุมัติแล้วในระบบ</div>
+        <h3 style="color: var(--primary); margin-top: 0; border-bottom: 2px dashed var(--panel-border); padding-bottom:15px; font-size: 22px;">Admin Dashboard</h3>
+        <div style="color: var(--text-muted); margin-bottom: 15px; font-size: 15px;">รายการจองทั้งหมดที่อนุมัติแล้วในระบบ</div>
         <div id="pendingListContainer" style="max-height: 45vh; overflow-y: auto; padding-right: 10px;"></div>
         <div style="display: flex; gap: 15px; margin-top: 25px; border-top: 2px dashed var(--panel-border); padding-top:20px;">
-            <button class="btn btn-outline" style="color: var(--color-booked); border-color: var(--color-booked); flex: 1;" onclick="logoutAdmin()">👋 ออกจากระบบ</button>
-            <button class="btn btn-primary" style="flex: 2;" onclick="closeModal('adminDashModal')">✅ ปิดหน้าต่าง</button>
+            <button class="btn btn-outline" style="color: var(--color-booked); border-color: var(--color-booked); flex: 1;" onclick="logoutAdmin()">ออกจากระบบ</button>
+            <button class="btn btn-primary" style="flex: 2;" onclick="closeModal('adminDashModal')">ปิดหน้าต่าง</button>
         </div>
     </div>
 </div>
@@ -336,9 +336,9 @@
     
     // วันหยุดนักขัตฤกษ์
     const thaiHolidays = {
-        "2026-01-01": "🎉 ปีใหม่", "2026-04-13": "💦 สงกรานต์", 
-        "2026-04-14": "💦 สงกรานต์", "2026-04-15": "💦 สงกรานต์", 
-        "2026-05-01": "👷 แรงงาน"
+        "2026-01-01": "ปีใหม่", "2026-04-13": "สงกรานต์", 
+        "2026-04-14": "สงกรานต์", "2026-04-15": "สงกรานต์", 
+        "2026-05-01": "แรงงาน"
     };
     const daysTH = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     
@@ -360,7 +360,7 @@
         const t = document.createElement('div');
         t.className = 'toast';
         t.style.backgroundColor = type === 'success' ? '#10b981' : type === 'error' ? '#fb7185' : '#f59e0b';
-        t.innerHTML = `<span>${type === 'success' ? '🎉' : type === 'error' ? '🥺' : '⚠️'}</span> <span>${msg}</span>`;
+        t.innerHTML = `<span>${msg}</span>`;
         c.appendChild(t);
         setTimeout(() => t.classList.add('show'), 10);
         setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3000);
@@ -442,17 +442,16 @@
                     <div class="day-name" style="${holidayName ? 'color:#ef4444;' : (isToday ? 'color:var(--primary); font-size:20px;' : '')}">${daysTH[currentDay.getDay()]}</div>
                     <div class="day-date ${holidayName ? 'text-red' : ''}">${currentDay.toLocaleDateString('th-TH', { day: 'numeric', month: 'short'})}</div>
                     ${holidayName ? `<div class="badge-holiday">${holidayName}</div>` : ''}
-                    ${isToday ? `<div style="background:var(--primary); color:white; font-size:11px; padding:2px 8px; border-radius:10px; margin-top:5px;">⭐ วันนี้</div>` : ''}
+                    ${isToday ? `<div style="background:var(--primary); color:white; font-size:11px; padding:2px 8px; border-radius:10px; margin-top:5px;">วันนี้</div>` : ''}
                 </div>
             `;
             
             let slotsHtml = `<div class="slots-wrapper">`;
-            
             const dayData = bookings.filter(b => b.Date && b.Date.split('T')[0] === dateStr && b['Status'] !== 'cancelled' && b['Status'] !== 'rejected');
 
             for (let h = 8; h < 18; h++) {
                 if (currentDay.getDay()===0 || currentDay.getDay()===6 || holidayName) {
-                    slotsHtml += `<div class="time-slot disabled" onclick="showToast('ปิดให้บริการจ้า 🏖️', 'error')"><div class="slot-time-label">${String(h).padStart(2,'0')}:00</div><div class="slot-status-text">🏖️</div></div>`;
+                    slotsHtml += `<div class="time-slot disabled" onclick="showToast('ปิดให้บริการจ้า', 'error')"><div class="slot-time-label">${String(h).padStart(2,'0')}:00</div><div class="slot-status-text">หยุด</div></div>`;
                     continue;
                 }
 
@@ -462,7 +461,7 @@
                 }
 
                 const slotClass = isBooked ? 'booked' : 'free';
-                const slotText = isBooked ? 'เต็ม 🔒' : 'ว่าง ✨';
+                const slotText = isBooked ? 'เต็ม' : 'ว่าง';
                 slotsHtml += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, ${isBooked})">
                     <div class="slot-time-label">${String(h).padStart(2,'0')}:00</div>
                     <div class="slot-status-text">${slotText}</div>
@@ -504,9 +503,9 @@
             let content = `<div class="m-date-num ${holidayName ? 'text-red' : ''}">${i}</div>`;
             
             if (holidayName) {
-                content += `<div class="m-status-badge m-holiday"><span class="m-icon">📌</span><span class="m-status-text"> ${holidayName}</span></div>`;
+                content += `<div class="m-status-badge m-holiday"><span class="m-status-text">${holidayName}</span></div>`;
             } else if (isWeekend) {
-                content += `<div class="m-status-badge m-disabled"><span class="m-icon">🏖️</span><span class="m-status-text"> หยุด</span></div>`;
+                content += `<div class="m-status-badge m-disabled"><span class="m-status-text">วันหยุด</span></div>`;
             } else {
                 const dayData = bookings.filter(b => b.Date && b.Date.split('T')[0] === dateStr && b['Status'] !== 'cancelled' && b['Status'] !== 'rejected');
                 let bookedHours = 0;
@@ -521,11 +520,11 @@
                 }
 
                 if (bookedHours >= 10) {
-                    content += `<div class="m-status-badge m-full"><span class="m-icon">🔴</span><span class="m-status-text"> เต็ม</span></div>`;
+                    content += `<div class="m-status-badge m-full"><span class="m-status-text">เต็ม (Booked)</span></div>`;
                 } else if (bookedHours > 0) {
-                    content += `<div class="m-status-badge m-free" style="color:#f59e0b; border-color:#f59e0b; background:rgba(245,158,11,0.1);"><span class="m-icon">🟡</span><span class="m-status-text"> ว่างบ้าง</span></div>`;
+                    content += `<div class="m-status-badge m-free" style="color:#f59e0b; border-color:#f59e0b; background:rgba(245,158,11,0.1);"><span class="m-status-text">ว่างบางช่วง</span></div>`;
                 } else {
-                    content += `<div class="m-status-badge m-free"><span class="m-icon">🟢</span><span class="m-status-text"> ว่าง</span></div>`;
+                    content += `<div class="m-status-badge m-free"><span class="m-status-text">ว่าง (Available)</span></div>`;
                 }
             }
             card.innerHTML = content;
@@ -549,25 +548,25 @@
     function showDetails(dateStr) {
         const container = document.getElementById('modalDetailsContainer');
         const thaiDate = new Date(dateStr).toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-        document.getElementById('dayModalTitle').innerHTML = `📅 ข้อมูลวันที่ ${thaiDate}`;
+        document.getElementById('dayModalTitle').innerHTML = `ข้อมูลวันที่ ${thaiDate}`;
         
         const rawDayData = bookings.filter(b => b.Date && b.Date.split('T')[0] === dateStr);
         const dayData = isAdmin ? rawDayData : rawDayData.filter(b => b['Status'] !== 'cancelled' && b['Status'] !== 'rejected');
 
         if (dayData.length === 0) {
-            container.innerHTML = `<div style="text-align:center; padding: 40px;"><div style="font-size:40px;">🍃</div><div style="color:var(--text-muted); margin-bottom:20px;">ยังไม่มีคิวจองเลยจ้า</div><button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:auto; margin:0 auto;">✨ จองเวลาใหม่</button></div>`;
+            container.innerHTML = `<div style="text-align:center; padding: 40px;"><div style="color:var(--text-muted); margin-bottom:20px;">ยังไม่มีคิวจอง</div><button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:auto; margin:0 auto;">จองเวลาใหม่</button></div>`;
         } else {
             container.innerHTML = '';
             dayData.sort((a,b) => (a['Start Time']||"").localeCompare(b['Start Time']||"")).forEach(b => {
                 
                 const statusColor = (b['Status'] === 'approved' || b['Status'] === 'pending') ? 'booked' : (b['Status'] === 'rejected' ? 'rejected' : 'free');
-                const statusText = (b['Status'] === 'approved' || b['Status'] === 'pending') ? '🔒 จองแล้ว' : b['Status'] === 'rejected' ? '❌ ไม่อนุมัติ' : `🗑️ ยกเลิก`;
+                const statusText = (b['Status'] === 'approved' || b['Status'] === 'pending') ? 'จองแล้ว' : b['Status'] === 'rejected' ? 'ไม่อนุมัติ' : `ยกเลิก`;
                 
                 let adminBtns = '';
                 if (isAdmin) {
                     adminBtns = `<div style="margin-top: 15px; display:flex; gap:10px;">
-                        <button class="btn btn-outline" style="flex:1; color:var(--color-rejected); padding:8px; border-radius:10px;" onclick="updateStatus('${b.ID}', 'rejected')">❌ Reject</button>
-                        <button class="btn btn-outline" style="flex:1; color:var(--color-booked); padding:8px; border-radius:10px;" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ Cancel</button>
+                        <button class="btn btn-outline" style="flex:1; color:var(--color-rejected); padding:8px; border-radius:10px;" onclick="updateStatus('${b.ID}', 'rejected')">Reject</button>
+                        <button class="btn btn-outline" style="flex:1; color:var(--color-booked); padding:8px; border-radius:10px;" onclick="updateStatus('${b.ID}', 'cancelled')">Cancel</button>
                     </div>`;
                 }
 
@@ -575,20 +574,19 @@
 
                 container.innerHTML += `<div style="background:var(--sub-bg); border:2px solid var(--panel-border); padding:15px; border-radius:16px; margin-bottom:12px; border-left:6px solid var(--color-${statusColor});">
                     <div style="display:flex; justify-content:space-between;">
-                        <strong style="color:var(--text-main); font-size:16px;">⏰ ${b['Start Time']} - ${b['StopTime']}</strong>
-                        <span style="font-size: 13px; font-weight:bold; color:var(--color-${statusColor});">${statusText}</span>
+                        <strong style="color:var(--text-main); font-size:16px;">${b['Start Time']} - ${b['StopTime']}</strong>
+                        <span style="font-size: 13px; font-weight:bold; color:var(--color-${statusColor}); background:rgba(0,0,0,0.05); padding:2px 8px; border-radius:6px;">${statusText}</span>
                     </div>
-                    <div style="color:var(--primary); font-size:18px; font-weight:600; margin-top:5px;">📌 ${b.Subject}</div>
-                    ${b.Detail ? `<div style="color:var(--text-muted); font-size:14px; margin:5px 0;">💬 ${b.Detail}</div>` : ''}
+                    <div style="color:var(--primary); font-size:18px; font-weight:600; margin-top:5px;">${b.Subject}</div>
+                    ${b.Detail ? `<div style="color:var(--text-muted); font-size:14px; margin:5px 0;">${b.Detail}</div>` : ''}
                     <div style="margin-top:10px; padding-top:10px; border-top:1px dashed var(--panel-border); font-size:14px; color:var(--text-muted);">
-                        👤 ผู้จอง: <b>${b.User}</b><br>
-                        🏢 ทีม: <b>${teamName}</b><br>
-                        📞 โทร: <a href="tel:${b.Phone}" style="color:var(--primary); text-decoration:none;">${(b.Phone||"").replace(/'/g,'')}</a>
+                        ผู้จอง: <b>${b.User}</b> | ทีม: <b>${teamName}</b><br>
+                        ติดต่อ: <a href="tel:${b.Phone}" style="color:var(--primary); text-decoration:none;">${(b.Phone||"").replace(/'/g,'')}</a>
                     </div>
                     ${adminBtns}
                 </div>`;
             });
-            container.innerHTML += `<button class="btn btn-outline" onclick="openBookingWithDate('${dateStr}')" style="margin-top:10px; border-style:dashed;">+ เพิ่มการจองเวลาอื่น</button>`;
+            container.innerHTML += `<button class="btn btn-outline" onclick="openBookingWithDate('${dateStr}')" style="margin-top:10px; border-style:dashed;">เพิ่มการจองเวลาอื่น</button>`;
         }
         document.getElementById('dayDetailsModal').classList.add('show');
     }
@@ -608,11 +606,13 @@
             renderCurrentView();
             if(isAdmin && document.getElementById('adminDashModal').classList.contains('show')) renderAdminDashboard();
             
-            document.getElementById('connStatus').innerText = "🟢 ONLINE จ้า";
+            document.getElementById('connStatus').innerText = "ปกติ (Online)";
             document.getElementById('connStatus').style.color = "#059669";
+            document.getElementById('connStatus').style.background = "rgba(16,185,129,0.1)";
         } catch (e) {
-            document.getElementById('connStatus').innerText = "🔴 OFFLINE ง่า";
+            document.getElementById('connStatus').innerText = "ขาดการเชื่อมต่อ (Offline)";
             document.getElementById('connStatus').style.color = "var(--color-booked)";
+            document.getElementById('connStatus').style.background = "rgba(251,113,133,0.1)";
         }
     }
 
@@ -621,7 +621,7 @@
         const inputDate = document.getElementById('formDate').value;
         const type = document.getElementById('bookType').value;
         
-        if (!inputDate) return showToast("โปรดเลือกวันที่จ้า 📅", "error");
+        if (!inputDate) return showToast("โปรดเลือกวันที่", "error");
         
         let st = "08:00", ed = "12:00";
         if (type === 'morning') { st = "08:00"; ed = "12:00"; }
@@ -629,28 +629,28 @@
         else {
             st = document.getElementById('startTime').value;
             ed = document.getElementById('endTime').value;
-            if (st >= ed) return showToast("เวลาสิ้นสุดต้องมากกว่าเวลาเริ่มน้า ⏳", "error");
+            if (st >= ed) return showToast("เวลาสิ้นสุดต้องมากกว่าเวลาเริ่ม", "error");
         }
 
         const subject = document.getElementById('formSubject').value;
         const user = document.getElementById('formUser').value;
         const team = document.getElementById('formTeam').value;
-        if (!subject || !user || !team) return showToast("กรอกข้อมูล (หัวข้อ, ชื่อ, ทีม) ให้ครบนะ ✨", "warning");
+        if (!subject || !user || !team) return showToast("กรุณากรอกข้อมูลให้ครบถ้วน", "warning");
 
         const data = { action: 'create', Date: inputDate, startTime: st, stopTime: ed, subject: subject, detail: document.getElementById('formDetail').value, user: user, phone: document.getElementById('formPhone').value, team: team };
 
-        btn.innerText = "⏳ กำลังบันทึก..."; btn.disabled = true;
+        btn.innerText = "กำลังบันทึก..."; btn.disabled = true;
         try {
             const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
             const result = await res.json();
             if (result.status === 'error') showToast(result.msg, "error");
             else { 
-                showToast("บันทึกการจองสำเร็จ! 🎉", "success"); 
+                showToast("บันทึกการจองสำเร็จ!", "success"); 
                 ['formSubject','formDetail','formUser','formTeam','formPhone'].forEach(id => document.getElementById(id).value = '');
                 closeModal('bookingModal'); 
                 syncDataSilently(); 
             }
-        } catch (e) { showToast("ล้มเหลว 🥺", "error"); } finally { btn.innerText = "✅ ยืนยันการจอง"; btn.disabled = false; }
+        } catch (e) { showToast("การเชื่อมต่อล้มเหลว", "error"); } finally { btn.innerText = "ยืนยันการจอง"; btn.disabled = false; }
     }
 
     function handleAdminClick() {
@@ -662,21 +662,21 @@
         const u = document.getElementById('loginUser').value; const p = document.getElementById('loginPass').value;
         if (adminAccounts[u] && adminAccounts[u] === p) {
             isAdmin = true; 
-            showToast(`Welcome Admin สุดหล่อ/สวย! ✨`, 'success'); 
+            showToast(`เข้าสู่ระบบสำเร็จ`, 'success'); 
             closeModal('loginModal');
-            document.getElementById('adminBtn').innerHTML = "👑 Dashboard 🛡️";
+            document.getElementById('adminBtn').innerText = "Dashboard";
             document.getElementById('adminBtn').classList.add('btn-primary');
             document.getElementById('adminBtn').classList.remove('btn-outline');
             handleAdminClick(); 
             renderCurrentView();
-        } else showToast('ข้อมูลไม่ถูกต้องน้า 🥺', 'error');
+        } else showToast('ข้อมูลเข้าสู่ระบบไม่ถูกต้อง', 'error');
     }
 
     function logoutAdmin() {
         isAdmin = false; 
-        showToast('ออกจากระบบแล้วจ้า 👋', 'warning'); 
+        showToast('ออกจากระบบแล้ว', 'warning'); 
         closeModal('adminDashModal');
-        document.getElementById('adminBtn').innerHTML = "👑 Admin 🛡️";
+        document.getElementById('adminBtn').innerText = "เข้าสู่ระบบ Admin";
         document.getElementById('adminBtn').classList.remove('btn-primary');
         document.getElementById('adminBtn').classList.add('btn-outline');
         renderCurrentView();
@@ -686,31 +686,31 @@
         const container = document.getElementById('pendingListContainer');
         const activeBookings = bookings.filter(b => b['Status'] === 'approved' || b['Status'] === 'pending');
         
-        if (activeBookings.length === 0) { container.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding:40px; font-size:16px;">✅ โล่งเลย ไม่มีรายการในระบบจ้า</div>'; return; }
+        if (activeBookings.length === 0) { container.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding:40px;">ไม่มีรายการในระบบ</div>'; return; }
         container.innerHTML = '';
         activeBookings.sort((a,b) => new Date(b.Date) - new Date(a.Date)).forEach(b => {
             const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
             let teamName = b['Team'] || b['Column 1'] || '-';
 
             container.innerHTML += `<div style="background:var(--sub-bg); border:2px solid var(--panel-border); padding:15px; border-radius:16px; margin-bottom:12px; border-left:6px solid var(--color-booked);">
-                <div style="color:var(--text-main); font-size:16px; font-weight:bold;">📅 ${dateFmt} | ⏰ ${b['Start Time']} - ${b['StopTime']}</div>
-                <div style="color:var(--primary); font-size:18px; font-weight:600; margin-top:5px;">📌 ${b.Subject}</div>
-                <div style="color:var(--text-muted); font-size:14px; margin-top:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${(b.Phone||"").replace(/'/g,'')}</div>
+                <div style="color:var(--text-main); font-size:16px; font-weight:bold;">${dateFmt} | ${b['Start Time']} - ${b['StopTime']}</div>
+                <div style="color:var(--primary); font-size:18px; font-weight:600; margin-top:5px;">${b.Subject}</div>
+                <div style="color:var(--text-muted); font-size:14px; margin-top:8px;">ผู้จอง: ${b.User} | ทีม: ${teamName} | โทร: ${(b.Phone||"").replace(/'/g,'')}</div>
                 <div style="margin-top: 15px; display:flex; gap:15px;">
-                    <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; color:var(--color-rejected); border-radius:12px;" onclick="updateStatus('${b.ID}', 'rejected')">❌ Reject</button>
-                    <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; color:var(--color-booked); border-radius:12px;" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ Cancel</button>
+                    <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; color:var(--color-rejected); border-radius:12px;" onclick="updateStatus('${b.ID}', 'rejected')">Reject</button>
+                    <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; color:var(--color-booked); border-radius:12px;" onclick="updateStatus('${b.ID}', 'cancelled')">Cancel</button>
                 </div>
             </div>`;
         });
     }
 
     async function updateStatus(id, status) {
-        if(!confirm(`ยืนยันการดำเนินการนี้นะ? 🤔`)) return;
-        closeModal('dayDetailsModal'); showToast(`⏳ กำลังดำเนินการ...`, "warning");
+        if(!confirm(`ยืนยันการดำเนินการ?`)) return;
+        closeModal('dayDetailsModal'); showToast(`กำลังดำเนินการ...`, "warning");
         try {
             await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: status }) });
-            showToast(`✅ ดำเนินการเรียบร้อย!`, "success"); syncDataSilently(); 
-        } catch(e) { showToast(`❌ ล้มเหลวง่ะ`, "error"); }
+            showToast(`ดำเนินการเรียบร้อย!`, "success"); syncDataSilently(); 
+        } catch(e) { showToast(`เกิดข้อผิดพลาด`, "error"); }
     }
 
     syncDataSilently();
