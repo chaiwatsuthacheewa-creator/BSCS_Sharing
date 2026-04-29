@@ -30,6 +30,7 @@
         }
 
         * { box-sizing: border-box; }
+        /* ในจอคอมให้ซ่อน Scrollbar หลักแล้วใช้ของกริดแทน */
         html, body { margin: 0; padding: 0; font-family: 'Kanit', sans-serif; background-color: var(--bg-base); color: var(--text-main); height: 100dvh; overflow: hidden; }
 
         .panel { background: var(--panel-bg); border: 2px solid var(--panel-border); border-radius: 24px; box-shadow: var(--shadow-card); padding: 20px; }
@@ -55,7 +56,6 @@
         
         .week-control { display: flex; align-items: center; gap: 10px; background: var(--sub-bg); border-radius: 14px; padding: 5px; border: 1px solid var(--panel-border);}
         
-        /* 🔥 Month Selector Input 🔥 */
         input[type="month"].month-selector {
             font-size: 18px; font-weight: 600; color: var(--primary); font-family: 'Kanit';
             background: transparent; border: none; outline: none; cursor: pointer;
@@ -142,24 +142,29 @@
         .toast { background: var(--text-main); color: #fff; padding: 18px 25px; border-radius: 16px; display: flex; align-items: center; gap: 15px; font-weight: 500; font-size: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); transform: translateX(120%); transition: 0.4s; }
         .toast.show { transform: translateX(0); }
 
-        /* 🔥 RESPONSIVE (MOBILE UX OPTIMIZATION) 🔥 */
+        /* 🔥 RESPONSIVE (ปลดล็อก Scroll ให้มือถือ/ไอแพดเลื่อนได้ลื่นๆ) 🔥 */
         @media (max-width: 1080px) {
-            .app-container { flex-direction: column; height: auto; }
+            /* ปลดล็อก Scroll ให้เลื่อนได้ทั้งหน้า */
+            html, body { height: auto; min-height: 100dvh; overflow-y: auto; overflow-x: hidden; }
+            .app-container { flex-direction: column; height: auto; min-height: 100vh; overflow: visible;}
+            
             .sidebar { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 20px; }
             .sidebar-actions { flex-direction: row; width: 100%; margin-top: 15px; }
+            
+            /* ให้กริดยืดตามเนื้อหาไปเลย ไม่ต้องมี Scrollbar ซ้อนด้านใน */
+            .weekly-grid, .monthly-grid { overflow-y: visible; height: auto; }
         }
 
         @media (max-width: 768px) {
-            .app-container { padding: 10px; gap: 10px; padding-bottom: 90px; /* เผื่อพื้นที่ให้ Bottom Nav */ }
+            .app-container { padding: 10px; gap: 10px; padding-bottom: 90px; /* เผื่อพื้นที่ให้เมนูด้านล่าง */ }
             
-            /* Sidebar ย่อส่วนในมือถือ */
             .sidebar { padding: 15px; border-radius: 20px; }
             .title-box { border-bottom: none; padding-bottom: 0; }
             .title { font-size: 20px; }
             .subtitle { padding: 10px; font-size: 12px; }
-            .time-container { display: none; } /* ซ่อนนาฬิกาใหญ่ในมือถือ */
+            .time-container { display: none; } 
             
-            /* ย้ายเมนูไปไว้ด้านล่างจอ (Sticky Bottom Nav) */
+            /* เมนูด้านล่างสุด (Sticky Bottom Nav) */
             .sidebar-actions { 
                 position: fixed; bottom: 0; left: 0; right: 0; 
                 background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
@@ -179,12 +184,10 @@
             .time-slot.free { border-bottom-width: 4px; }
             .time-slot.booked { border-bottom-width: 4px; }
 
-            /* Monthly Grid สำหรับมือถือ (ให้ยังแสดงเป็นตาราง 7 วัน แต่ย่อขนาด) */
             .monthly-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 2px;}
             .month-header { font-size: 11px; padding: 5px 2px; }
             .month-day-card { min-height: 70px; padding: 5px; border-radius: 10px;}
             .m-date-num { font-size: 16px; margin-bottom: 5px;}
-            /* ซ่อนข้อความ เหลือแค่สัญลักษณ์ ในมือถือ */
             .m-status-text { display: none; } 
             .m-status-badge { font-size: 10px; padding: 4px; }
             
@@ -374,7 +377,6 @@
         renderCurrentView();
     }
 
-    // ฟังก์ชันเลื่อนเดือน/สัปดาห์
     function changeDateRange(offset) {
         if (currentView === 'week') {
             currentRefDate.setDate(currentRefDate.getDate() + (offset * 7));
@@ -384,7 +386,6 @@
         renderCurrentView();
     }
 
-    // ฟังก์ชันกระโดดข้ามเดือน (จาก Input Month)
     function jumpToMonth(val) {
         if(!val) return;
         const [y, m] = val.split('-');
@@ -392,7 +393,6 @@
         renderCurrentView();
     }
 
-    // อัปเดตช่อง Input Month ให้ตรงกับข้อมูลปัจจุบัน
     function updateMonthPicker() {
         const y = currentRefDate.getFullYear();
         const m = String(currentRefDate.getMonth() + 1).padStart(2, '0');
@@ -401,7 +401,7 @@
     }
 
     function renderCurrentView() {
-        updateMonthPicker(); // ซิงค์ช่องเลือกเดือน
+        updateMonthPicker(); 
         if (currentView === 'week') renderWeek();
         else renderMonth();
     }
@@ -653,7 +653,6 @@
         } catch (e) { showToast("ล้มเหลว 🥺", "error"); } finally { btn.innerText = "✅ ยืนยันการจอง"; btn.disabled = false; }
     }
 
-    // ================= ADMIN LOGIC =================
     function handleAdminClick() {
         if (isAdmin) { renderAdminDashboard(); document.getElementById('adminDashModal').classList.add('show'); } 
         else { document.getElementById('loginModal').classList.add('show'); }
