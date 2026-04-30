@@ -8,10 +8,7 @@
     <style>
         /* ================= THEMES ================= */
         :root {
-            /* Light Theme (Apple Glassmorphism) */
-            --bg-mesh-light: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0, transparent 50%), 
-                             radial-gradient(at 50% 0%, rgba(167, 139, 250, 0.1) 0, transparent 50%), 
-                             radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            --bg-mesh-light: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(167, 139, 250, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
             --bg-base-light: #f8fafc;
             --glass-bg-light: rgba(255, 255, 255, 0.75);
             --glass-border-light: rgba(255, 255, 255, 0.5);
@@ -20,10 +17,7 @@
             --text-muted-light: #86868b;
             --card-bg-light: #fff;
             
-            /* Dark Theme (Cyber IT) */
-            --bg-mesh-dark: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0, transparent 50%), 
-                            radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.1) 0, transparent 50%), 
-                            radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            --bg-mesh-dark: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
             --bg-base-dark: #0f172a;
             --glass-bg-dark: rgba(30, 41, 59, 0.75);
             --glass-border-dark: rgba(255, 255, 255, 0.1);
@@ -32,227 +26,202 @@
             --text-muted-dark: #94a3b8;
             --card-bg-dark: #1e293b;
 
-            /* Common Colors */
             --primary-hover: #0ea5e9;
             --primary-glow: rgba(56, 189, 248, 0.3);
             --color-free: #10b981; 
             --color-partial: #f59e0b;
             --color-booked: #ef4444; 
-            --color-holiday: #8b5cf6;
+            --color-revise: #8b5cf6; 
+            --color-holiday: #ef4444;
             --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* Default Theme Configuration */
         body {
-            --bg-mesh: var(--bg-mesh-light);
-            --bg-base: var(--bg-base-light);
-            --glass-bg: var(--glass-bg-light);
-            --glass-border: var(--glass-border-light);
-            --primary: var(--primary-light);
-            --text-main: var(--text-main-light);
-            --text-muted: var(--text-muted-light);
-            --card-bg: var(--card-bg-light);
-            --modal-overlay: rgba(0,0,0,0.4);
-            --btn-outline-bg: rgba(0,0,0,0.03);
-            --input-border: rgba(0,0,0,0.1);
-            --header-bg: rgba(0,0,0,0.04);
+            --bg-mesh: var(--bg-mesh-light); --bg-base: var(--bg-base-light); --glass-bg: var(--glass-bg-light); --glass-border: var(--glass-border-light);
+            --primary: var(--primary-light); --text-main: var(--text-main-light); --text-muted: var(--text-muted-light); --card-bg: var(--card-bg-light);
+            --modal-overlay: rgba(0,0,0,0.4); --btn-outline-bg: rgba(0,0,0,0.03); --input-border: rgba(0,0,0,0.1); --header-bg: rgba(0,0,0,0.04);
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         body.dark-mode {
-            --bg-mesh: var(--bg-mesh-dark);
-            --bg-base: var(--bg-base-dark);
-            --glass-bg: var(--glass-bg-dark);
-            --glass-border: var(--glass-border-dark);
-            --primary: var(--primary-dark);
-            --text-main: var(--text-main-dark);
-            --text-muted: var(--text-muted-dark);
-            --card-bg: var(--card-bg-dark);
-            --modal-overlay: rgba(0,0,0,0.7);
-            --btn-outline-bg: rgba(255,255,255,0.05);
-            --input-border: rgba(255,255,255,0.2);
-            --header-bg: rgba(255,255,255,0.05);
+            --bg-mesh: var(--bg-mesh-dark); --bg-base: var(--bg-base-dark); --glass-bg: var(--glass-bg-dark); --glass-border: var(--glass-border-dark);
+            --primary: var(--primary-dark); --text-main: var(--text-main-dark); --text-muted: var(--text-muted-dark); --card-bg: var(--card-bg-dark);
+            --modal-overlay: rgba(0,0,0,0.7); --btn-outline-bg: rgba(255,255,255,0.05); --input-border: rgba(255,255,255,0.2); --header-bg: rgba(255,255,255,0.05);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        html, body { 
-            margin: 0; padding: 0; font-family: 'Kanit', sans-serif; 
-            background-color: var(--bg-base); background-image: var(--bg-mesh); background-attachment: fixed;
-            color: var(--text-main); height: 100vh; overflow: hidden; 
-        }
+        html, body { margin: 0; padding: 0; font-family: 'Kanit', sans-serif; background-color: var(--bg-base); background-image: var(--bg-mesh); background-attachment: fixed; color: var(--text-main); height: 100vh; overflow: hidden; }
 
-        .glass {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--shadow-premium);
-        }
-        
-        .app-container { display: flex; gap: 20px; width: 100%; height: 100vh; padding: 20px; align-items: stretch; }
+        .glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; box-shadow: var(--shadow-premium); }
+        .app-container { display: flex; gap: 15px; width: 100%; height: 100vh; padding: 15px; align-items: stretch; }
 
-        /* Sidebar */
-        .sidebar { width: 320px; flex-shrink: 0; display: flex; flex-direction: column; padding: 25px; }
-        .sidebar .title-box { text-align: center; border-bottom: 1px solid var(--input-border); padding-bottom: 20px; margin-bottom: 20px; }
-        .title { margin: 0; font-size: 26px; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 10px;}
-        .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 10px; background: var(--header-bg); padding: 12px; border-radius: 12px; }
+        /* Sidebar (Left) */
+        .sidebar { width: 220px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
+        .sidebar .title-box { text-align: center; border-bottom: 1px solid var(--input-border); padding-bottom: 15px; margin-bottom: 15px; }
+        .title { margin: 0; font-size: 20px; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 8px;}
+        .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 8px; background: var(--header-bg); padding: 8px; border-radius: 10px; }
         
         .time-container { text-align: center; margin: auto 0; }
-        #clock { font-size: 46px; font-weight: 600; color: var(--text-main); letter-spacing: -1px; margin: 0;}
-        #dateDisplay { font-size: 16px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
+        #clock { font-size: 36px; font-weight: 600; color: var(--text-main); letter-spacing: -1px; margin: 0;}
+        #dateDisplay { font-size: 14px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
 
-        .sidebar-actions { display: flex; flex-direction: column; gap: 12px; }
+        .sidebar-actions { display: flex; flex-direction: column; gap: 10px; }
 
-        /* Main Content */
+        /* Detail Panel (Right) */
+        .detail-panel { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
+
+        /* Main Content (Center) */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
-
-        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; margin-bottom: 15px; flex-shrink: 0; }
-        
-        .week-control { display: flex; align-items: center; gap: 10px; background: var(--header-bg); padding: 5px; border-radius: 14px; }
-        .month-selector { font-size: 18px; font-weight: 700; color: var(--primary); font-family: 'Kanit'; background: transparent; border: none; outline: none; cursor: pointer; padding: 5px 10px; }
-
-        .btn-icon { background: var(--card-bg); border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 18px; color: var(--text-main);}
+        .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; margin-bottom: 15px; flex-shrink: 0; }
+        .week-control { display: flex; align-items: center; gap: 8px; background: var(--header-bg); padding: 4px; border-radius: 12px; }
+        .month-selector { font-size: 16px; font-weight: 700; color: var(--primary); font-family: 'Kanit'; background: transparent; border: none; outline: none; cursor: pointer; padding: 4px 8px; }
+        .btn-icon { background: var(--card-bg); border: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 16px; color: var(--text-main);}
         .btn-icon:hover { transform: scale(1.05); background: var(--primary); color: #fff; }
-
-        .nav-actions-right { display: flex; align-items: center; gap: 15px; }
-
-        .view-toggle { display: flex; gap: 5px; background: var(--header-bg); padding: 5px; border-radius: 14px; }
-        .view-btn { padding: 10px 20px; border: none; background: transparent; border-radius: 10px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 15px;}
+        .nav-actions-right { display: flex; align-items: center; gap: 10px; }
+        .view-toggle { display: flex; gap: 4px; background: var(--header-bg); padding: 4px; border-radius: 12px; }
+        .view-btn { padding: 8px 16px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 14px;}
         .view-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-        /* Highlight */
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(56, 189, 248, 0); } 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); } }
-        .is-today-highlight { border: 3px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); } 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); } }
+        .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
 
-        /* Weekly Grid */
-        .weekly-grid { display: flex; flex-direction: column; gap: 15px; overflow-y: auto; flex-grow: 1; padding-bottom: 20px; padding-right: 5px;}
+        /* ================= WEEKLY GRID ================= */
+        .weekly-grid { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
         
-        .day-row { display: flex; background: var(--glass-bg); border-radius: 24px; border: 1px solid var(--glass-border); min-height: 110px; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);}
-        .day-label { flex: 0 0 140px; padding: 15px; background: var(--card-bg); border-right: 1px solid var(--glass-border); border-radius: 24px 0 0 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s;}
+        .day-row { display: flex; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--glass-border); min-height: 100px; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); align-items: stretch; overflow: hidden;}
+        
+        .day-label { flex: 0 0 100px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s;}
         .day-label:hover { filter: brightness(0.95); }
-        .day-name { font-size: 18px; font-weight: 700; color: var(--text-main); }
-        .day-date { font-size: 14px; color: var(--text-muted); font-weight: 500;}
+        .day-name { font-size: 15px; font-weight: 700; color: var(--text-main); }
+        .day-date { font-size: 12px; color: var(--text-muted); font-weight: 500;}
         
-        .slots-wrapper { flex: 1; display: flex; overflow-x: auto; scrollbar-width: none; padding: 12px; gap: 10px; scroll-behavior: smooth; }
-        .slots-wrapper::-webkit-scrollbar { display: none; }
+        .slots-wrapper { flex: 1; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); padding: 8px; gap: 6px; }
         
-        .time-slot { flex: 1; min-width: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
-        .time-slot:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
-        .slot-time-label { font-weight: 700; font-size: 14px; color: var(--text-main); }
-        .slot-status-text { font-size: 13px; margin-top: 4px; font-weight: 600;}
+        .time-slot { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 6px 4px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); overflow: hidden;}
+        .time-slot:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-color: var(--primary);}
+        
+        .slot-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 6px; color: #fff; display: inline-block; white-space: nowrap;}
+        .b-info-block { flex: 1; display: flex; flex-direction: column; justify-content: center; font-size: 10px; line-height: 1.3; padding: 0; color: var(--text-main); text-align: left; margin-top: 4px; overflow:hidden;}
+        .b-info-block.revise { background: rgba(139, 92, 246, 0.08); border: 1px dashed var(--color-revise); color: var(--color-revise); padding: 4px; border-radius: 6px; margin-top: 4px;}
 
-        /* Weekly Status Colors */
-        .time-slot.free { border-bottom: 5px solid var(--color-free); background: rgba(16, 185, 129, 0.05); }
-        .time-slot.free .slot-status-text { color: var(--color-free); }
-        
-        .time-slot.booked { border-bottom: 5px solid var(--color-booked); background: rgba(239, 68, 68, 0.05); }
-        .time-slot.booked .slot-status-text { color: var(--color-booked); }
-        
-        .time-slot.disabled { background: var(--header-bg); opacity: 0.8; border-bottom: 5px solid #94a3b8; cursor: not-allowed; }
-        .time-slot.disabled .slot-status-text { color: var(--text-muted); }
+        /* Status Colors - Weekly */
+        .time-slot.free { border-top: 4px solid var(--color-free); background: rgba(16, 185, 129, 0.02); }
+        .time-slot.pending { border-top: 4px solid var(--color-partial); background: rgba(245, 158, 11, 0.03); }
+        .badge-pending { background: var(--color-partial); }
+        .time-slot.pending_revise { border-top: 4px solid var(--color-revise); background: rgba(139, 92, 246, 0.03); }
+        .badge-revise { background: var(--color-revise); }
+        .time-slot.booked { border-top: 4px solid var(--color-booked); background: rgba(239, 68, 68, 0.03); }
+        .badge-booked { background: var(--color-booked); }
+        .time-slot.disabled { border-top: 4px solid #94a3b8; background: var(--header-bg); opacity: 0.8; cursor: not-allowed; }
+        .time-slot.disabled-red { border-top: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); opacity: 0.8; cursor: not-allowed; }
 
-        /* Monthly Grid */
+        /* ================= MONTHLY GRID ================= */
         .monthly-grid { display: none; grid-template-columns: repeat(7, 1fr); gap: 12px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
         .month-header { text-align: center; font-weight: 700; padding: 10px; background: var(--header-bg); border-radius: 14px; color: var(--text-main); font-size: 15px;}
-        .month-day-card { background: var(--glass-bg); border-radius: 20px; padding: 12px; min-height: 120px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; border: 1px solid var(--glass-border); box-shadow: 0 4px 12px rgba(0,0,0,0.03);}
+        .month-day-card { background: var(--glass-bg); border-radius: 20px; padding: 12px; min-height: 140px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; border: 1px solid var(--glass-border); box-shadow: 0 4px 12px rgba(0,0,0,0.03);}
         .month-day-card:hover { transform: translateY(-4px); background: var(--card-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--primary);}
-        .m-date-num { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text-main);}
         
-        /* Solid Status Badges */
-        .m-status-badge { 
-            margin-top: auto; padding: 8px; border-radius: 12px; font-size: 14px; font-weight: 600; 
-            display:flex; align-items:center; justify-content:center; gap:6px; color: #fff; border: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        .m-free { background: linear-gradient(135deg, #34d399, #10b981); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .m-partial { background: linear-gradient(135deg, #fbbf24, #f59e0b); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .m-full { background: linear-gradient(135deg, #f87171, #ef4444); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .m-holiday-badge { background: linear-gradient(135deg, #a78bfa, #8b5cf6); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .m-disabled { background: var(--btn-outline-bg); color: var(--text-muted) !important; box-shadow: none; border: 1px solid var(--input-border); text-shadow: none;}
+        .m-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--glass-border);}
+        .m-date-num { font-size: 20px; font-weight: 700; margin: 0; color: var(--text-main);}
+        .m-day-name-mobile { display: none; font-size: 16px; font-weight: 500; margin-right: 5px; opacity: 0.8;}
+        .m-status-badge { padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; display:inline-block; color: #fff; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15); margin: 0;}
+        
+        .m-card-body { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px;}
+        .m-card-body::-webkit-scrollbar { width: 4px; }
+        .m-card-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
+        
+        .m-booking-item { background: var(--btn-outline-bg); padding: 12px; border-radius: 12px; font-size: 12px; text-align: left; border-left: 4px solid var(--color-booked); color: var(--text-main); white-space: normal; word-break: break-word; }
+        .m-booking-item.pending { border-left-color: var(--color-partial); }
+        .m-booking-item.pending_revise { border-left-color: var(--color-revise); background: rgba(139, 92, 246, 0.05);}
+        .m-time { font-weight: 700; margin-bottom: 4px; color: var(--text-main); font-size: 13px; background: var(--header-bg); display: inline-block; padding: 2px 8px; border-radius: 6px;}
+        .m-info { color: var(--text-main); line-height: 1.5; margin-top: 5px;}
+        .m-info-rev { color: var(--color-revise); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--color-revise); font-weight: 500;}
+
+        /* Badge Backgrounds */
+        .m-free { background: linear-gradient(135deg, #34d399, #10b981); }
+        .m-partial { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .m-revise { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
+        .m-full { background: linear-gradient(135deg, #f87171, #ef4444); }
+        .m-holiday-badge { background: linear-gradient(135deg, #f87171, #ef4444); }
 
         /* Buttons & Inputs */
-        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 20px; border-radius: 16px; border: none; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 16px; width: 100%; color: #fff;}
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; border-radius: 14px; border: none; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 15px; width: 100%; color: #fff;}
         .btn:active { transform: scale(0.96); }
         .btn-primary { background: var(--primary); box-shadow: 0 4px 15px var(--primary-glow); }
         .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 6px 20px var(--primary-glow); transform: translateY(-2px);}
         .btn-outline { background: var(--btn-outline-bg); color: var(--text-main); border: 1px solid var(--input-border);}
         .btn-outline:hover { background: var(--header-bg); }
 
-        input, select, textarea { width: 100%; padding: 15px; margin: 8px 0 16px; border-radius: 16px; border: 1px solid var(--input-border); background: var(--glass-bg); color: var(--text-main); font-family: 'Kanit'; font-size: 15px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-weight: 500;}
+        input, select, textarea { width: 100%; padding: 12px; margin: 6px 0 14px; border-radius: 14px; border: 1px solid var(--input-border); background: var(--glass-bg); color: var(--text-main); font-family: 'Kanit'; font-size: 14px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-weight: 500;}
         input:focus, select:focus, textarea:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 0 4px var(--primary-glow); }
-        textarea { min-height: 100px; resize: vertical; }
-        
-        /* แก้ปัญหาสี Text ใน Dropdown บน Dark Mode */
+        textarea { min-height: 80px; resize: vertical; }
         select option { background: var(--card-bg); color: var(--text-main); }
 
-        /* Modals */
+        /* Modals & Toast */
         .modal { position: fixed; inset: 0; background: var(--modal-overlay); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: 0.3s; padding: 20px; }
         .modal.show { display: flex; opacity: 1; }
-        .modal-content { background: var(--card-bg); padding: 35px; border-radius: 32px; width: 100%; max-width: 550px; box-shadow: 0 25px 80px rgba(0,0,0,0.3); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
+        .modal-content { background: var(--card-bg); padding: 30px; border-radius: 28px; width: 100%; max-width: 500px; box-shadow: 0 25px 80px rgba(0,0,0,0.3); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
         .modal.show .modal-content { transform: scale(1) translateY(0); }
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; max-width: 90vw; }
+        .toast { background: var(--card-bg); color: var(--text-main); padding: 15px 20px; border-radius: 14px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transform: translateX(120%); transition: 0.4s; border: 1px solid var(--glass-border);}
+        .toast.show { transform: translateX(0); }
 
-        /* ================= MOBILE & IPAD RESPONSIVE ================= */
+        /* ================= MOBILE RESPONSIVE ================= */
+        @media (max-width: 1200px) {
+            .slots-wrapper { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; }
+            .time-slot { flex: 0 0 auto; width: 140px; }
+        }
+
         @media (max-width: 1080px) {
             html, body { overflow-y: auto; height: auto; min-height: 100dvh; }
             .app-container { flex-direction: column; height: auto; padding: 15px; padding-bottom: 110px; } 
-            .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 28px; }
+            
+            .detail-panel { display: none !important; }
+            
+            .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 24px; }
             .time-container { display: none; }
+            .sidebar-actions { position: fixed; bottom: 0; left: 0; right: 0; flex-direction: row; background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 15px 20px; z-index: 100; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.08); }
             
-            /* Sticky Bottom Nav */
-            .sidebar-actions { 
-                position: fixed; bottom: 0; left: 0; right: 0; 
-                flex-direction: row; background: var(--glass-bg);
-                backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-                padding: 15px 20px; z-index: 100; gap: 10px;
-                border-top: 1px solid var(--input-border); border-radius: 30px 30px 0 0;
-                box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
-            }
-            .sidebar-actions .btn { flex: 1; font-size: 15px; padding: 14px; border-radius: 18px; }
-            
-            .weekly-grid, .monthly-grid { overflow-y: visible; height: auto; padding-bottom: 0;}
-            .day-row { flex-direction: column; border-radius: 24px; }
-            .day-label { width: 100%; flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid var(--glass-border); border-radius: 24px 24px 0 0; padding: 15px 20px; }
-            
-            .slots-wrapper { overflow-x: auto; scroll-snap-type: x mandatory; padding: 15px; gap: 12px; }
-            .time-slot { scroll-snap-align: start; min-width: 90px; padding: 15px 0; border-radius: 18px; }
+            .weekly-grid { padding-bottom: 0;}
+            .day-row { flex-direction: column; border-radius: 16px; }
+            .day-label { width: 100%; flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid var(--glass-border); border-radius: 16px 16px 0 0; padding: 12px 15px; }
         }
         
         @media (max-width: 768px) {
             .title { font-size: 24px; }
-            .nav-header { flex-direction: column; gap: 15px; border-radius: 24px; padding: 20px;}
+            .nav-header { flex-direction: column; gap: 15px; border-radius: 20px; padding: 15px;}
             .nav-actions-right { width: 100%; justify-content: space-between; }
-            .week-control { width: 100%; justify-content: space-between; padding: 8px; border-radius: 16px;}
+            .week-control { width: 100%; justify-content: space-between;}
             .view-toggle { width: 100%; }
             .view-btn { flex: 1; text-align: center; }
 
-            .monthly-grid { grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 0;}
-            .month-header { font-size: 12px; padding: 5px 2px; border-radius: 8px; }
-            .month-day-card { min-height: 80px; padding: 6px; border-radius: 16px; justify-content: space-between;}
-            .m-date-num { font-size: 18px; margin: 0; text-align: center;}
-            
-            .m-icon { display: none; }
-            .m-status-text { display: block; font-size: 12px; letter-spacing: -0.5px;}
-            .m-status-badge { width: 100%; height: auto; border-radius: 8px; padding: 6px 0; margin-top: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15);}
-            
-            .modal-content { padding: 25px; border-radius: 32px; margin: 15px;}
+            .monthly-grid { grid-template-columns: 1fr; gap: 15px; padding: 5px;}
+            .month-header { display: none; } 
+            .month-day-card { min-height: auto; padding: 15px; border-radius: 16px;}
+            .m-card-header { justify-content: space-between; border-bottom: 1px solid var(--input-border); padding-bottom: 10px; margin-bottom: 10px;}
+            .m-day-name-mobile { display: inline; } 
         }
+
+        .admin-menu-section { display: none; flex-direction: column; gap: 8px; margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--input-border); }
     </style>
 </head>
 <body>
 
-<div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:9999;"></div>
+<div id="toastContainer" class="toast-container"></div>
 
 <div class="app-container">
     <div class="sidebar glass">
         <div class="title-box">
             <div class="title-header-row">
-                <span style="font-size: 32px;">🏢✨</span>
+                <span style="font-size: 28px;">🏢</span>
                 <h1 class="title">BSCS_Sharing</h1>
             </div>
             <div class="subtitle">
                 BSCS_GNR | 📞 3262-3264<br>
-                <div style="margin-top:8px; display:inline-block; background:rgba(16, 185, 129, 0.15); color:var(--color-free); padding:6px 14px; border-radius:20px; font-weight:700; font-size:13px; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);">🟢 ONLINE</div>
+                <div style="margin-top:6px; display:inline-block; background:rgba(16, 185, 129, 0.15); color:var(--color-free); padding:4px 10px; border-radius:12px; font-weight:700; font-size:11px;">🟢 ONLINE</div>
             </div>
         </div>
         
@@ -261,12 +230,19 @@
             <div id="dateDisplay">--</div>
         </div>
         
-        <div class="sidebar-actions">
+        <div class="sidebar-actions" id="mainSidebarBtn">
             <button class="btn btn-primary" onclick="openBooking()" style="flex:2;">✨ จองห้อง</button>
-            <button id="adminBtn" class="btn btn-outline" onclick="handleAdminClick()" style="flex:1;">👑 Admin</button>
+            <button id="adminLoginBtn" class="btn btn-outline" onclick="openLoginModal()" style="flex:1;">👑 แอดมิน</button>
+        </div>
+
+        <div id="adminMenuSection" class="admin-menu-section">
+            <div style="font-size: 12px; color: var(--text-muted); font-weight: 700; margin-bottom: 4px;">👑 เมนูผู้ดูแล (<span id="adminTeamLabel"></span>)</div>
+            <button class="btn btn-primary" onclick="openAdminDashboard()" style="justify-content: flex-start; background:var(--color-partial); box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);">📋 จัดการคิว</button>
+            <button class="btn btn-outline" onclick="logoutAdmin()" style="justify-content: flex-start; color: var(--color-booked);">🚪 ออกจากระบบ</button>
         </div>
     </div>
 
+    <!-- ส่วนกลาง: ปฏิทิน -->
     <div class="main-content">
         <div class="nav-header glass">
             <div class="week-control">
@@ -290,13 +266,26 @@
             <div class="month-header">พ.</div><div class="month-header">พฤ.</div><div class="month-header">ศ.</div><div class="month-header">ส.</div>
         </div>
     </div>
+
+    <!-- แถบขวา: แสดงรายละเอียด (โชว์บนคอมพ์เท่านั้น) -->
+    <div class="detail-panel glass" id="rightDetailPanel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px dashed var(--input-border); padding-bottom: 10px;">
+            <h3 id="panelModalTitle" style="margin:0; color:var(--text-main); font-size: 18px;">📋 ข้อมูลการจอง</h3>
+        </div>
+        <div id="panelDetailsContainer" style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
+            <div style="text-align:center; padding: 40px 10px; color: var(--text-muted); opacity: 0.6;">
+                <div style="font-size: 40px; margin-bottom: 10px;">👆</div>
+                คลิกที่ตาราง<br>เพื่อดูรายละเอียด
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Modal Day Details -->
+<!-- Modal Day Details (เด้งเฉพาะบน Mobile) -->
 <div id="dayDetailsModal" class="modal">
     <div class="modal-content">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h3 id="dayModalTitle" style="margin:0; color:var(--text-main); font-size: 22px;">📅 รายละเอียด</h3>
+            <h3 id="dayModalTitle" style="margin:0; color:var(--text-main); font-size: 20px;">📅 รายละเอียด</h3>
             <button onclick="closeModal('dayDetailsModal')" class="btn-icon" style="border-radius: 50%; background: var(--btn-outline-bg); font-weight:bold;">✕</button>
         </div>
         <div id="modalDetailsContainer"></div>
@@ -306,7 +295,8 @@
 <!-- Modal Booking Form -->
 <div id="bookingModal" class="modal">
     <div class="modal-content">
-        <h3 style="margin-top:0; color:var(--text-main); font-size: 24px;">📝 สร้างการจองใหม่</h3>
+        <h3 id="bookingModalTitle" style="margin-top:0; color:var(--text-main); font-size: 22px;">📝 สร้างการจองใหม่</h3>
+        <input type="hidden" id="editingId" value="">
         <input type="date" id="formDate">
         
         <select id="bookType" onchange="toggleTimeInputs()">
@@ -315,9 +305,9 @@
             <option value="afternoon">🌇 ครึ่งบ่าย (13:00 - 18:00)</option>
         </select>
 
-        <div id="hourlyInputs" style="display:flex; gap:15px;">
+        <div id="hourlyInputs" style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:14px; font-weight:700; color:var(--primary); margin-left:5px;">เวลาเริ่ม</label>
+                <label style="font-size:13px; font-weight:700; color:var(--primary); margin-left:5px;">เวลาเริ่ม</label>
                 <select id="startTime">
                     <option value="08:00">08:00</option><option value="09:00">09:00</option>
                     <option value="10:00">10:00</option><option value="11:00">11:00</option>
@@ -327,7 +317,7 @@
                 </select>
             </div>
             <div style="flex:1;">
-                <label style="font-size:14px; font-weight:700; color:var(--color-booked); margin-left:5px;">เวลาสิ้นสุด</label>
+                <label style="font-size:13px; font-weight:700; color:var(--color-booked); margin-left:5px;">เวลาสิ้นสุด</label>
                 <select id="endTime">
                     <option value="09:00">09:00</option><option value="10:00">10:00</option>
                     <option value="11:00">11:00</option><option value="12:00">12:00</option>
@@ -341,26 +331,37 @@
         <input type="text" id="formSubject" placeholder="📌 หัวข้อการใช้งาน">
         <textarea id="formDetail" placeholder="💬 รายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
         
-        <div style="display:flex; gap:15px;">
-            <input type="text" id="formUser" placeholder="👤 ชื่อผู้จอง">
-            <input type="text" id="formTeam" placeholder="🏢 ทีม/แผนก">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="formUser" placeholder="👤 ชื่อผู้จอง" style="flex: 1; min-width:130px;">
+            <select id="formTeamSelect" onchange="toggleOtherTeam()" style="flex: 1; min-width:130px;">
+                <option value="">-- เลือกทีม/แผนก --</option>
+                <option value="GNR1">GNR1</option>
+                <option value="GNR2">GNR2</option>
+                <option value="GNR3">GNR3</option>
+                <option value="BL">BL</option>
+                <option value="DC">DC</option>
+                <option value="FM">FM</option>
+                <option value="GA">GA</option>
+                <option value="อื่นๆ">อื่นๆ (โปรดระบุ)</option>
+            </select>
         </div>
+        <input type="text" id="formTeamOther" placeholder="ระบุชื่อทีม/แผนกอื่นๆ" style="display:none; width:100%;">
         <input type="tel" id="formPhone" placeholder="📞 เบอร์ติดต่อ">
 
-        <div style="display:flex; gap:15px; margin-top:15px;">
+        <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('bookingModal')">ยกเลิก</button>
-            <button class="btn btn-primary" style="flex:2; font-size:18px;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
+            <button class="btn btn-primary" style="flex:2; font-size:16px;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
         </div>
     </div>
 </div>
 
 <!-- Admin Login Modal -->
 <div id="loginModal" class="modal">
-    <div class="modal-content" style="max-width: 350px;">
-        <h3 style="margin-top:0; font-size: 24px; color:var(--text-main);">🔐 Admin Login</h3>
+    <div class="modal-content" style="max-width: 320px;">
+        <h3 style="margin-top:0; font-size: 22px; color:var(--text-main);">🔐 Admin Login</h3>
         <input type="text" id="loginUser" placeholder="Username">
         <input type="password" id="loginPass" placeholder="Password">
-        <div style="display:flex; gap:15px; margin-top:20px;">
+        <div style="display:flex; gap:10px; margin-top:15px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('loginModal')">ยกเลิก</button>
             <button class="btn btn-primary" style="flex:1;" onclick="checkLogin()">เข้าสู่ระบบ</button>
         </div>
@@ -369,13 +370,12 @@
 
 <!-- Admin Dashboard Modal -->
 <div id="adminDashModal" class="modal">
-    <div class="modal-content" style="max-width: 750px;">
-        <h3 style="margin-top:0; font-size: 24px; color:var(--primary);">🛡️ Admin Dashboard</h3>
-        <div style="color:var(--text-muted); margin-bottom: 20px; font-size: 15px; font-weight:600;">รายการคิวทั้งหมดในระบบ</div>
-        <div id="pendingListContainer" style="max-height: 50vh; overflow-y: auto; padding-right: 10px;"></div>
-        <div style="display:flex; gap:15px; margin-top:20px; padding-top:20px; border-top:1px solid var(--input-border);">
-            <button class="btn btn-outline" style="flex:1; color:var(--color-booked); font-weight:700;" onclick="logoutAdmin()">ออกจากระบบ</button>
-            <button class="btn btn-primary" style="flex:2;" onclick="closeModal('adminDashModal')">ปิดหน้าต่าง</button>
+    <div class="modal-content" style="max-width: 700px;">
+        <h3 style="margin-top:0; font-size: 22px; color:var(--primary);">🛡️ จัดการคิวจอง (<span id="dashTeamLabel"></span>)</h3>
+        <div style="color:var(--text-muted); margin-bottom: 15px; font-size: 14px; font-weight:600;">รายการขออนุมัติและรายการที่อนุมัติแล้ว</div>
+        <div id="pendingListContainer" style="max-height: 55vh; overflow-y: auto; padding-right: 5px;"></div>
+        <div style="display:flex; gap:10px; margin-top:15px; padding-top:15px; border-top:1px solid var(--input-border);">
+            <button class="btn btn-primary" style="flex:1;" onclick="closeModal('adminDashModal')">ปิดหน้าต่าง</button>
         </div>
     </div>
 </div>
@@ -385,13 +385,26 @@
     const thaiHolidays = {"2026-01-01": "ปีใหม่", "2026-04-13": "สงกรานต์", "2026-04-14": "สงกรานต์", "2026-04-15": "สงกรานต์", "2026-05-01": "แรงงาน"};
     const daysTH = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     
+    const adminAccounts = {
+        'GNR1': { pass: 'gnr1admin', team: 'GNR1' },
+        'GNR2': { pass: 'gnr2admin', team: 'GNR2' },
+        'GNR3': { pass: 'gnr3admin', team: 'GNR3', super: true }, 
+        'DC':   { pass: 'dcadmin', team: 'DC' },
+        'BL':   { pass: 'bladmin', team: 'BL' },
+        'FM':   { pass: 'fmadmin', team: 'FM' },
+        'GA':   { pass: 'gaadmin', team: 'GA' }
+    };
+    
     let bookings = [];
     let currentView = 'week'; 
     let currentRefDate = new Date(); 
-    let isAdmin = false;
-    const adminAccounts = { 'admin1': 'gnr3admin' };
+    let currentAdmin = null; 
+    let selectedDateStr = new Date().toLocaleDateString('en-CA'); 
 
-    // ================= THEME TOGGLE =================
+    function getTeamName(b) {
+        return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim();
+    }
+
     function toggleTheme() {
         const body = document.body;
         const btn = document.getElementById('themeBtn');
@@ -401,7 +414,6 @@
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
-    // Load saved theme
     window.onload = () => {
         if(localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
@@ -418,7 +430,8 @@
     function showToast(msg, type = 'success') {
         const c = document.getElementById('toastContainer');
         const t = document.createElement('div');
-        t.style = `background:var(--card-bg); backdrop-filter:blur(10px); color:var(--text-main); padding:16px 24px; border-radius:20px; margin-bottom:12px; box-shadow:0 12px 40px rgba(0,0,0,0.15); border-left:6px solid ${type==='success'?'var(--color-free)':'var(--color-booked)'}; transition:0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform:translateX(120%); font-family:'Kanit'; font-weight:600; font-size:16px; border:1px solid var(--glass-border);`;
+        let borderColor = type === 'success' ? 'var(--color-free)' : (type === 'warning' ? 'var(--color-partial)' : (type === 'info' ? 'var(--color-revise)' : 'var(--color-booked)'));
+        t.style = `background:var(--card-bg); backdrop-filter:blur(10px); color:var(--text-main); padding:16px 20px; border-radius:14px; margin-bottom:10px; box-shadow:0 12px 30px rgba(0,0,0,0.15); border-left:6px solid ${borderColor}; transition:0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform:translateX(120%); font-family:'Kanit'; font-weight:600; font-size:14px; border:1px solid var(--glass-border);`;
         t.innerHTML = msg;
         c.appendChild(t);
         setTimeout(() => t.style.transform = 'translateX(0)', 10);
@@ -460,6 +473,7 @@
         return h + (m / 60);
     }
 
+    // ================= Weekly View =================
     function renderWeek() {
         const grid = document.getElementById('weeklyGrid');
         grid.innerHTML = '';
@@ -477,10 +491,10 @@
             row.className = `day-row ${isToday ? 'is-today-highlight' : ''}`;
             
             row.innerHTML = `
-                <div class="day-label" onclick="showDetails('${dateStr}')">
+                <div class="day-label" onclick="showDetails('${dateStr}', true)">
                     <div class="day-name" style="color:${holiday ? 'var(--color-booked)' : (isToday ? 'var(--primary)' : 'var(--text-main)')}">${daysTH[current.getDay()]}</div>
                     <div class="day-date">${current.getDate()} ${current.toLocaleDateString('th-TH',{month:'short'})}</div>
-                    ${holiday ? `<div style="background:var(--color-booked); color:white; font-size:11px; padding:4px 10px; border-radius:12px; margin-top:5px; font-weight:700; box-shadow:0 4px 10px rgba(239, 68, 68, 0.3); text-align:center;">${holiday}</div>` : ''}
+                    ${holiday ? `<div style="background:var(--color-booked); color:white; font-size:10px; padding:2px 8px; border-radius:8px; margin-top:4px; font-weight:700; box-shadow:0 2px 8px rgba(239, 68, 68, 0.3); text-align:center;">${holiday}</div>` : ''}
                 </div>
                 <div class="slots-wrapper">${renderSlots(dateStr, holiday)}</div>
             `;
@@ -490,21 +504,93 @@
 
     function renderSlots(dateStr, isHoliday) {
         let html = '';
-        const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr && b.Status !== 'cancelled' && b.Status !== 'rejected');
+        const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
         for (let h = 8; h < 18; h++) {
+            let endTimeStr = String(h+1).padStart(2,'0') + ":00";
+            let defaultTimeLabel = `${String(h).padStart(2,'0')}:00 - ${endTimeStr}`;
+
             if (isHoliday) {
-                html += `<div class="time-slot disabled"><div class="slot-time-label">${String(h).padStart(2,'0')}:00</div><div class="slot-status-text">หยุด</div></div>`;
+                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', true)">
+                            <div style="text-align:center; font-weight:700; font-size:11px; color:var(--text-main); margin-bottom:4px; background:var(--header-bg); padding:2px; border-radius:4px;">${defaultTimeLabel}</div>
+                            <div style="margin:auto; font-size:12px; font-weight:700; color:var(--text-muted);">หยุด</div>
+                         </div>`;
                 continue;
             }
-            const booked = dayData.some(b => timeToDecimal(b['Start Time']) < (h+1) && timeToDecimal(b.StopTime) > h);
-            html += `<div class="time-slot ${booked?'booked':'free'}" onclick="handleSlotClick('${dateStr}', ${h}, ${booked})">
-                <div class="slot-time-label">${String(h).padStart(2,'0')}:00</div>
-                <div class="slot-status-text">${booked?'เต็ม':'ว่าง'}</div>
-            </div>`;
+
+            const isCancelled = dayData.some(b => b.Status === 'cancelled' && timeToDecimal(b['Start Time']) < (h+1) && timeToDecimal(b.StopTime) > h);
+            if (isCancelled) {
+                html += `<div class="time-slot disabled-red" onclick="showDetails('${dateStr}', true)">
+                            <div style="text-align:center; font-weight:700; font-size:11px; color:var(--text-main); margin-bottom:4px; background:var(--header-bg); padding:2px; border-radius:4px;">${defaultTimeLabel}</div>
+                            <div style="margin:auto; font-size:12px; font-weight:700; color:#ef4444;">ปิดใช้งาน</div>
+                         </div>`;
+                continue;
+            }
+
+            const matchedBooking = dayData.find(b => (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise') && timeToDecimal(b['Start Time']) < (h+1) && timeToDecimal(b.StopTime) > h);
+            
+            if (matchedBooking) {
+                let b = matchedBooking;
+                let uName = b.User;
+                let tName = getTeamName(b);
+                let phone = (b.Phone||"").replace(/'/g,'');
+                let timeLabel = `${b['Start Time']} - ${b.StopTime}`;
+
+                let slotClass = ''; let badgeClass = ''; let statusLabel = '';
+                if (b.Status === 'pending') { slotClass = 'pending'; statusLabel = 'รออนุมัติ'; badgeClass = 'badge-pending'; } 
+                else if (b.Status === 'pending_revise') { slotClass = 'pending_revise'; statusLabel = '✏️ รอแก้ไข'; badgeClass = 'badge-revise'; } 
+                else { slotClass = 'booked'; statusLabel = 'เต็ม'; badgeClass = 'badge-booked'; }
+
+                let infoHtml = '';
+                if (b.Status === 'pending_revise') {
+                    let origU = uName, origT = tName, origP = phone;
+                    let revU = uName, revT = tName, revP = phone;
+                    
+                    if (b.Backup) {
+                        try {
+                            let backup = JSON.parse(b.Backup);
+                            origU = backup.User || '-'; origT = backup.Team || '-'; origP = (backup.Phone||"").replace(/'/g,'');
+                        } catch(e) {}
+                    }
+                    
+                    infoHtml = `
+                        <div class="b-info-block" style="margin-bottom: 2px;">
+                            <span style="color:var(--text-muted); font-weight:700;">เดิม:</span> ${origU} | ${origT} | ${origP}
+                        </div>
+                        <div class="b-info-block revise">
+                            <span style="font-weight:700;">แก้โดย:</span> ${revU} | ${revT} | ${revP}
+                        </div>
+                    `;
+                } else {
+                    infoHtml = `
+                        <div class="b-info-block" style="background:transparent; padding:2px; margin-top:2px;">
+                            ${uName} | ${tName} | ${phone}
+                        </div>
+                    `;
+                }
+
+                html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                        <div style="font-weight:700; font-size:11px; color:var(--text-main); background:var(--header-bg); padding:2px 4px; border-radius:4px;">${timeLabel}</div>
+                    </div>
+                    <div style="text-align:left; margin-bottom:4px;">
+                        <span class="slot-badge ${badgeClass}">${statusLabel}</span>
+                    </div>
+                    <div style="text-align:left; flex:1; display:flex; flex-direction:column; justify-content:flex-start;">
+                        ${infoHtml}
+                    </div>
+                </div>`;
+            } else {
+                html += `<div class="time-slot free" onclick="handleSlotClick('${dateStr}', ${h}, 'free')">
+                    <div style="text-align:left; font-weight:700; font-size:11px; color:var(--text-main); background:var(--header-bg); display:inline-block; padding:2px 4px; border-radius:4px; align-self:flex-start;">${defaultTimeLabel}</div>
+                    <div style="margin:auto; color:var(--color-free); font-weight:700; font-size:14px;">ว่าง</div>
+                    <div style="text-align:right; font-size:10px; color:var(--color-free); opacity:0.8; margin-top:auto;">+ กดเพื่อจอง</div>
+                </div>`;
+            }
         }
         return html;
     }
 
+    // ================= Monthly View =================
     function renderMonth() {
         const grid = document.getElementById('monthlyGrid');
         const headers = Array.from(grid.querySelectorAll('.month-header'));
@@ -519,122 +605,272 @@
         for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
 
         for (let i = 1; i <= daysInMonth; i++) {
-            const dateStr = new Date(year, month, i).toLocaleDateString('en-CA');
+            const currentDay = new Date(year, month, i);
+            const dateStr = currentDay.toLocaleDateString('en-CA');
             const isToday = dateStr === new Date().toLocaleDateString('en-CA');
             const holiday = thaiHolidays[dateStr];
+            const dayNameMobile = daysTH[currentDay.getDay()];
             
             const card = document.createElement('div');
             card.className = `month-day-card ${isToday ? 'is-today-highlight' : ''}`;
-            card.onclick = () => showDetails(dateStr);
+            card.onclick = () => showDetails(dateStr, true);
             
-            let content = `<div class="m-date-num" style="color:${holiday ? 'var(--color-booked)' : 'var(--text-main)'}">${i}</div>`;
+            let content = `<div class="m-card-header">
+                <div class="m-date-num" style="color:${holiday ? 'var(--color-booked)' : 'var(--text-main)'}">
+                    <span class="m-day-name-mobile">${dayNameMobile}</span> ${i}
+                </div></div>`;
+
+            let bodyHtml = `<div class="m-card-body" style="justify-content:flex-end;">`;
 
             if (holiday) {
-                content += `<div class="m-status-badge m-holiday-badge"><span class="m-icon">📌</span><span class="m-status-text">${holiday}</span></div>`;
+                bodyHtml += `<div class="m-status-badge m-holiday-badge" style="width:100%; text-align:center;">${holiday}</div>`;
             } else {
-                const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr && b.Status !== 'cancelled' && b.Status !== 'rejected');
-                let bookedCount = 0;
-                for(let h=8; h<18; h++) if(dayData.some(b => timeToDecimal(b['Start Time']) < (h+1) && timeToDecimal(b.StopTime) > h)) bookedCount++;
+                const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
+                let validBookings = dayData.filter(b => (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise'));
+                
+                let activeCount = validBookings.length;
+                let hasRevise = validBookings.some(b => b.Status === 'pending_revise');
 
-                if (bookedCount >= 10) content += `<div class="m-status-badge m-full"><span class="m-icon">🔒</span><span class="m-status-text">เต็มแล้ว</span></div>`;
-                else if (bookedCount > 0) content += `<div class="m-status-badge m-partial"><span class="m-icon">🔥</span><span class="m-status-text">ว่างบางส่วน</span></div>`;
-                else content += `<div class="m-status-badge m-free"><span class="m-icon">✨</span><span class="m-status-text">ว่างจองได้</span></div>`;
+                if (hasRevise) bodyHtml += `<div class="m-status-badge m-revise" style="width:100%; justify-content:center;">✏️ รออนุมัติแก้ไข</div>`;
+                else if (activeCount >= 10) bodyHtml += `<div class="m-status-badge m-full" style="width:100%; justify-content:center;">🔒 เต็มแล้ว</div>`;
+                else if (activeCount > 0) bodyHtml += `<div class="m-status-badge m-partial" style="width:100%; justify-content:center;">🔥 ว่างบางส่วน</div>`;
+                else bodyHtml += `<div class="m-status-badge m-free" style="width:100%; justify-content:center;">✨ ว่างจองได้</div>`;
             }
-
-            card.innerHTML = content;
+            bodyHtml += `</div>`; 
+            card.innerHTML = content + bodyHtml;
             grid.appendChild(card);
         }
     }
 
-    function handleSlotClick(dateStr, hour, isBooked) {
-        if (isBooked) showDetails(dateStr);
-        else {
+    function handleSlotClick(dateStr, hour, slotClass) {
+        showDetails(dateStr, true); 
+        
+        if (slotClass === 'free') {
             openBooking();
             document.getElementById('formDate').value = dateStr;
             document.getElementById('bookType').value = 'hourly';
             toggleTimeInputs();
             document.getElementById('startTime').value = String(hour).padStart(2,'0') + ":00";
             document.getElementById('endTime').value = String(hour+1).padStart(2,'0') + ":00";
+        } else {
+            if (window.innerWidth <= 1080) {
+                document.getElementById('dayDetailsModal').classList.add('show');
+            }
         }
     }
 
-    function showDetails(dateStr) {
-        const container = document.getElementById('modalDetailsContainer');
+    function showDetails(dateStr, preventModal = false) {
+        selectedDateStr = dateStr; 
+        
+        const containerModal = document.getElementById('modalDetailsContainer');
+        const containerPanel = document.getElementById('panelDetailsContainer');
+        const titleModal = document.getElementById('dayModalTitle');
+        const titlePanel = document.getElementById('panelModalTitle');
+        
         const thaiDate = new Date(dateStr).toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         const isHoliday = thaiHolidays[dateStr];
         
-        document.getElementById('dayModalTitle').innerHTML = `วันที่ ${thaiDate}`;
+        if(titleModal) titleModal.innerHTML = `📅 วันที่ ${thaiDate}`;
+        if(titlePanel) titlePanel.innerHTML = `📅 วันที่ ${thaiDate}`;
+
         const rawData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
-        const dayData = isAdmin ? rawData : rawData.filter(b => b.Status !== 'cancelled' && b.Status !== 'rejected');
+        const dayData = currentAdmin ? rawData : rawData.filter(b => b.Status !== 'rejected');
+
+        let html = '';
 
         if (isHoliday) {
-            container.innerHTML = `<div style="text-align:center; padding:30px 10px; background:rgba(255,59,48,0.05); border-radius:24px; border:2px solid rgba(255,59,48,0.2);">
-                <div style="font-size:60px; margin-bottom:10px;">🏖️</div>
-                <h3 style="color:var(--color-booked); margin:0 0 10px 0; font-size:24px;">ปิดให้บริการ</h3>
-                <p style="color:var(--text-muted); font-size:16px;">วันนี้เป็นวันหยุดนักขัตฤกษ์ (${isHoliday})</p>
+            html = `<div style="text-align:center; padding:30px 10px; background:rgba(239,68,68,0.05); border-radius:20px; border:2px solid rgba(239,68,68,0.2);">
+                <div style="font-size:50px; margin-bottom:10px;">🏖️</div>
+                <h3 style="color:var(--color-booked); margin:0 0 5px 0;">ปิดให้บริการ</h3>
+                <p style="color:var(--text-muted); font-size:14px;">วันนี้เป็นวันหยุดนักขัตฤกษ์ (${isHoliday})</p>
             </div>`;
         } else if (dayData.length === 0) {
-            container.innerHTML = `
-                <div style="text-align:center; padding:40px 10px; background:rgba(52,199,89,0.05); border-radius:24px; border:2px dashed rgba(52,199,89,0.3);">
-                    <div style="font-size:60px; margin-bottom:10px;">✨</div>
-                    <h3 style="color:var(--color-free); margin:0 0 10px 0; font-size:26px; font-weight:700;">ว่างทั้งวัน!</h3>
-                    <p style="color:var(--text-main); font-size:16px; margin-bottom:25px; font-weight:500;">ยังไม่มีใครจอง สามารถกดเลือกเวลาที่ต้องการได้เลยครับ</p>
-                    <button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:100%; font-size:18px; padding:18px;">+ สร้างการจองใหม่</button>
+            html = `
+                <div style="text-align:center; padding:40px 10px; background:rgba(16,185,129,0.05); border-radius:20px; border:2px dashed rgba(16,185,129,0.3);">
+                    <div style="font-size:50px; margin-bottom:10px;">✨</div>
+                    <h3 style="color:var(--color-free); margin:0 0 10px 0; font-size:20px;">ว่างทั้งวัน!</h3>
+                    <p style="color:var(--text-main); font-size:14px; margin-bottom:20px; font-weight:500;">สามารถเลือกเวลาที่ต้องการจองได้เลยครับ</p>
+                    <button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:100%; font-size:16px; padding:15px;">+ สร้างการจองใหม่</button>
                 </div>
             `;
         } else {
-            container.innerHTML = `<div style="margin-bottom:20px; font-size:16px; font-weight:700; color:var(--text-main);">📋 รายการที่มีการจองแล้ว:</div>`;
+            html = `<div style="margin-bottom:15px; font-size:15px; font-weight:700; color:var(--text-main);">📋 รายการคิวจอง:</div>`;
             dayData.sort((a,b) => (a['Start Time']||"").localeCompare(b['Start Time']||"")).forEach(b => {
-                const statusText = (b.Status === 'approved' || b.Status === 'pending') ? 'จองแล้ว' : b.Status === 'rejected' ? 'ไม่อนุมัติ' : `ยกเลิก`;
-                const statusColor = (b.Status === 'approved' || b.Status === 'pending') ? 'var(--color-booked)' : 'var(--text-muted)';
                 
-                let adminBtns = '';
-                if (isAdmin) {
-                    adminBtns = `<div style="margin-top:15px; display:flex; gap:10px; border-top:1px solid var(--input-border); padding-top:15px;">
-                        <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; font-weight:700; color:var(--color-booked);" onclick="updateStatus('${b.ID}', 'rejected')">Reject</button>
-                        <button class="btn btn-outline" style="flex:1; padding:10px; font-size:14px; font-weight:700; color:var(--text-muted);" onclick="updateStatus('${b.ID}', 'cancelled')">Cancel</button>
-                    </div>`;
+                let statusText = 'จองแล้ว'; let statusColor = 'var(--color-booked)';
+                if (b.Status === 'pending') { statusText = 'รออนุมัติ'; statusColor = 'var(--color-partial)'; }
+                else if (b.Status === 'pending_revise') { statusText = 'รอแก้ไข'; statusColor = 'var(--color-revise)'; }
+                else if (b.Status === 'rejected') { statusText = 'ไม่อนุมัติ'; statusColor = 'var(--color-rejected)'; }
+                else if (b.Status === 'cancelled') { statusText = 'ปิดใช้งาน (ยกเลิก)'; statusColor = 'var(--color-rejected)'; }
+
+                let teamName = getTeamName(b);
+                
+                let canManage = false;
+                if (currentAdmin) {
+                    if (currentAdmin.super) canManage = true;
+                    else if (currentAdmin.team.toUpperCase() === teamName.toUpperCase()) canManage = true;
                 }
 
-                container.innerHTML += `
-                    <div style="background:var(--card-bg); padding:20px; border-radius:24px; margin-bottom:15px; border:1px solid var(--input-border); box-shadow:0 6px 20px rgba(0,0,0,0.04); border-left:8px solid ${statusColor};">
+                let actionBtns = '';
+                if (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise') {
+                    if (canManage) {
+                        actionBtns = `<div style="margin-top:12px; display:flex; gap:8px; border-top:1px dashed var(--input-border); padding-top:12px; flex-wrap:wrap;">
+                            <button class="btn btn-outline" style="flex:1; padding:8px; font-size:12px; font-weight:600; color:var(--text-main); border-color:var(--input-border);" onclick="openReviseBooking('${b.ID}')">✏️ แก้ไขข้อมูล</button>
+                            <button class="btn btn-outline" style="flex:1; padding:8px; font-size:12px; font-weight:600; color:var(--color-booked); border-color:var(--input-border);" onclick="userDeleteBooking('${b.ID}')">🗑️ ลบ/ยกเลิก</button>
+                        </div>`;
+                    } else if (b.Status !== 'pending_revise') {
+                        actionBtns = `<div style="margin-top:12px; display:flex; gap:8px; border-top:1px dashed var(--input-border); padding-top:12px; flex-wrap:wrap;">
+                            <button class="btn btn-primary" style="flex:1; padding:8px; font-size:12px; font-weight:600; background:var(--color-revise); border:none; color:#fff;" onclick="openReviseBooking('${b.ID}')">✏️ ขอ Revise (แทรก/แก้ไขคิว)</button>
+                        </div>`;
+                    }
+                }
+
+                let infoHtml = '';
+                if (b.Status === 'pending_revise') {
+                    let origU = b.User, origT = teamName, origP = b.Phone;
+                    let revU = b.User, revT = teamName, revP = b.Phone;
+                    
+                    if (b.Backup) {
+                        try {
+                            let backup = JSON.parse(b.Backup);
+                            origU = backup.User || '-'; origT = backup.Team || '-'; origP = (backup.Phone||"").replace(/'/g,'');
+                        } catch(e) {}
+                    }
+                    
+                    infoHtml = `
+                        <div style="font-size:13px; color:var(--text-main); line-height:1.5; background:var(--btn-outline-bg); padding:10px 12px; border-radius:10px; margin-bottom:8px;">
+                            <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">คิวเดิม:</div>
+                            👤 <b>${origU}</b> | 🏢 <b>${origT}</b> | 📞 <b>${origP}</b>
+                        </div>
+                        <div style="font-size:13px; color:var(--color-revise); line-height:1.5; background:rgba(139, 92, 246, 0.05); padding:10px 12px; border-radius:10px; border: 1px dashed var(--color-revise);">
+                            <div style="font-size:11px; font-weight:700; margin-bottom:4px;">✏️ ขอแก้ไขคิวโดย:</div>
+                            👤 <b>${revU}</b> | 🏢 <b>${revT}</b> | 📞 <b>${(revP||"").replace(/'/g,'')}</b>
+                        </div>
+                    `;
+                } else {
+                    infoHtml = `
+                        <div style="font-size:13px; color:var(--text-main); line-height:1.5; background:var(--btn-outline-bg); padding:10px 12px; border-radius:10px;">
+                            👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone||"").replace(/'/g,'')}</b>
+                        </div>
+                    `;
+                }
+
+                html += `
+                    <div style="background:var(--card-bg); padding:15px; border-radius:20px; margin-bottom:12px; border:1px solid var(--input-border); box-shadow:0 4px 15px rgba(0,0,0,0.03); border-left:6px solid ${statusColor};">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                            <strong style="color:var(--text-main); font-size:16px; background:var(--header-bg); padding:6px 14px; border-radius:12px;">⏰ ${b['Start Time']} - ${b.StopTime}</strong>
-                            <span style="font-size:13px; font-weight:700; color:${statusColor}; background:var(--header-bg); padding:4px 12px; border-radius:10px;">${statusText}</span>
+                            <strong style="color:var(--text-main); font-size:14px; background:var(--header-bg); padding:4px 10px; border-radius:8px;">⏰ ${b['Start Time']} - ${b.StopTime}</strong>
+                            <span style="font-size:11px; font-weight:700; color:${statusColor}; background:var(--header-bg); padding:4px 10px; border-radius:8px;">${statusText}</span>
                         </div>
-                        <div style="color:var(--primary); font-size:20px; font-weight:700; margin-bottom:10px;">📌 ${b.Subject}</div>
-                        <div style="font-size:15px; color:var(--text-main); line-height:1.6; background:var(--btn-outline-bg); padding:10px 15px; border-radius:12px;">
-                            👤 <b>${b.User}</b> &nbsp;|&nbsp; 🏢 <b>${b.Team || b.Column1 || '-'}</b><br>
-                            📞 <a href="tel:${b.Phone}" style="color:var(--primary); text-decoration:none; font-weight:600;">${(b.Phone||"").replace(/'/g,'')}</a>
-                        </div>
-                        ${adminBtns}
+                        <div style="color:var(--primary); font-size:16px; font-weight:700; margin-bottom:10px;">📌 ${b.Subject}</div>
+                        ${infoHtml}
+                        ${actionBtns}
                     </div>
                 `;
             });
-            container.innerHTML += `<button class="btn btn-outline" onclick="openBookingWithDate('${dateStr}')" style="width:100%; padding:18px; border:2px dashed var(--input-border); font-size:16px; background:transparent;">+ เพิ่มการจองช่วงเวลาอื่น</button>`;
+            html += `<button class="btn btn-outline" onclick="openBookingWithDate('${dateStr}')" style="width:100%; padding:15px; border:2px dashed var(--input-border); font-size:14px; background:transparent;">+ สร้างการจองใหม่</button>`;
         }
-        document.getElementById('dayDetailsModal').classList.add('show');
+
+        if(containerModal) containerModal.innerHTML = html;
+        if(containerPanel) containerPanel.innerHTML = html;
+
+        if (!preventModal && window.innerWidth <= 1080) {
+            document.getElementById('dayDetailsModal').classList.add('show');
+        }
     }
 
     function toggleTimeInputs() { document.getElementById('hourlyInputs').style.display = document.getElementById('bookType').value === 'hourly' ? 'flex' : 'none'; }
-    function openBooking() { document.getElementById('bookingModal').classList.add('show'); toggleTimeInputs(); }
+    
+    function toggleOtherTeam() {
+        const select = document.getElementById('formTeamSelect');
+        const otherInput = document.getElementById('formTeamOther');
+        if (select.value === 'อื่นๆ') {
+            otherInput.style.display = 'block';
+        } else {
+            otherInput.style.display = 'none';
+            otherInput.value = '';
+        }
+    }
+
+    function openBooking() { 
+        document.getElementById('bookingModalTitle').innerText = "📝 สร้างการจองใหม่";
+        document.getElementById('editingId').value = "";
+        ['formSubject','formDetail','formUser','formPhone','formTeamOther'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('formTeamSelect').value = "";
+        document.getElementById('formUser').placeholder = "👤 ชื่อผู้จอง";
+        document.getElementById('submitBtn').innerText = "ยืนยันการจอง";
+        toggleOtherTeam();
+        document.getElementById('bookingModal').classList.add('show'); 
+        toggleTimeInputs(); 
+    }
     function openBookingWithDate(d) { closeModal('dayDetailsModal'); document.getElementById('formDate').value = d; openBooking(); }
     function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
+    function openReviseBooking(id) {
+        closeModal('dayDetailsModal');
+        const b = bookings.find(x => x.ID === id);
+        if(!b) return;
+
+        document.getElementById('bookingModalTitle').innerText = "✏️ แก้ไขข้อมูลการจอง";
+        document.getElementById('editingId').value = b.ID;
+        
+        if(b.Date) document.getElementById('formDate').value = b.Date.split('T')[0];
+        document.getElementById('bookType').value = 'hourly';
+        toggleTimeInputs();
+        
+        document.getElementById('startTime').value = b['Start Time'];
+        document.getElementById('endTime').value = b.StopTime;
+        document.getElementById('formSubject').value = b.Subject.replace(" (Revise)", "");
+        document.getElementById('formDetail').value = b.Detail !== "-" ? b.Detail : "";
+        
+        document.getElementById('formUser').value = ""; 
+        document.getElementById('formUser').placeholder = "👤 ชื่อของคุณ (ผู้แก้ไข)";
+        document.getElementById('formPhone').value = "";
+        document.getElementById('formPhone').placeholder = "📞 เบอร์ติดต่อของคุณ";
+        
+        let tName = getTeamName(b);
+        let select = document.getElementById('formTeamSelect');
+        let options = Array.from(select.options).map(o => o.value);
+        if (options.includes(tName)) {
+            select.value = tName;
+            toggleOtherTeam();
+        } else {
+            select.value = 'อื่นๆ';
+            toggleOtherTeam();
+            document.getElementById('formTeamOther').value = tName;
+        }
+
+        document.getElementById('submitBtn').innerText = "บันทึกการแก้ไข";
+        document.getElementById('bookingModal').classList.add('show');
+    }
+
+    async function userDeleteBooking(id) {
+        if(!confirm(`คุณต้องการยกเลิกและคืนคิวนี้ให้ว่างใช่หรือไม่?`)) return;
+        closeModal('dayDetailsModal');
+        showToast(`⏳ กำลังยกเลิกคิว...`, "warning");
+        try {
+            await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: 'rejected' }) });
+            showToast(`✅ ยกเลิกคิวเรียบร้อย! (คืนห้องว่าง)`, "success"); 
+            syncDataSilently(); 
+        } catch(e) { showToast(`❌ ดำเนินการล้มเหลว`, "error"); }
+    }
+
     async function syncDataSilently() {
         try {
-            const res = await fetch(API_URL);
+            const res = await fetch(API_URL + "?t=" + new Date().getTime());
             bookings = JSON.parse(await res.text());
             renderCurrentView();
-            if(isAdmin && document.getElementById('adminDashModal').classList.contains('show')) renderAdminDashboard();
+            showDetails(selectedDateStr, true);
+            if(currentAdmin && document.getElementById('adminDashModal').classList.contains('show')) renderAdminDashboard();
         } catch (e) { console.log("Sync Error"); }
     }
 
     async function submitBooking() {
         const btn = document.getElementById('submitBtn');
         const inputDate = document.getElementById('formDate').value;
+        const editingId = document.getElementById('editingId').value; 
+        
         if (!inputDate) return showToast("โปรดเลือกวันที่จ้า", "error");
-        if (thaiHolidays[inputDate]) return showToast("วันหยุดนักขัตฤกษ์ จองไม่ได้น้า", "error");
+        if (thaiHolidays[inputDate]) return showToast("วันหยุดนักขัตฤกษ์ จอง/แก้ไขไม่ได้น้า", "error");
 
         const type = document.getElementById('bookType').value;
         let st = "08:00", ed = "12:00";
@@ -646,78 +882,127 @@
             if (st >= ed) return showToast("เวลาสิ้นสุดต้องมากกว่าเวลาเริ่มจ้า", "error");
         }
 
+        let selectedTeam = document.getElementById('formTeamSelect').value;
+        if (selectedTeam === 'อื่นๆ') selectedTeam = document.getElementById('formTeamOther').value;
+
         const data = {
-            action: 'create', Date: inputDate, startTime: st, stopTime: ed,
+            action: editingId ? 'revise' : 'create', 
+            id: editingId,
+            Date: inputDate, startTime: st, stopTime: ed,
             subject: document.getElementById('formSubject').value,
             detail: document.getElementById('formDetail').value,
             user: document.getElementById('formUser').value,
-            team: document.getElementById('formTeam').value,
+            team: selectedTeam,
             phone: document.getElementById('formPhone').value
         };
 
-        if(!data.subject || !data.user) return showToast("กรอกข้อมูลให้ครบถ้วนก่อนน้า", "error");
+        if(!data.subject || !data.user || !data.team) return showToast("กรอกข้อมูลให้ครบถ้วนก่อนน้า", "warning");
         
-        btn.innerText = "กำลังบันทึก..."; btn.disabled = true;
+        btn.innerText = "กำลังส่งข้อมูล..."; btn.disabled = true;
         try {
             const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
             const result = await res.json();
             if(result.status === 'success') {
-                showToast("✨ จองเวลาเรียบร้อยแล้ว!");
+                showToast(editingId ? "✨ บันทึกการแก้ไขแล้ว (รออนุมัติ)!" : "✨ จองเวลาเรียบร้อยแล้ว!", "success");
                 closeModal('bookingModal');
                 syncDataSilently();
             } else showToast(result.msg, "error");
         } catch(e) { showToast("เกิดข้อผิดพลาดในการส่งข้อมูล", "error"); } finally { btn.innerText = "ยืนยันการจอง"; btn.disabled = false; }
     }
 
-    function handleAdminClick() {
-        if(isAdmin) { renderAdminDashboard(); document.getElementById('adminDashModal').classList.add('show'); }
-        else document.getElementById('loginModal').classList.add('show');
-    }
+    function openLoginModal() { document.getElementById('loginModal').classList.add('show'); }
 
     function checkLogin() {
-        if(adminAccounts[document.getElementById('loginUser').value] === document.getElementById('loginPass').value) {
-            isAdmin = true;
-            document.getElementById('adminBtn').classList.add('btn-primary');
-            document.getElementById('adminBtn').classList.remove('btn-outline');
-            showToast("เข้าสู่ระบบ Admin สำเร็จ");
-            closeModal('loginModal'); renderCurrentView(); handleAdminClick();
-        } else showToast("รหัสไม่ถูกต้อง", "error");
+        const u = document.getElementById('loginUser').value.toUpperCase(); 
+        const p = document.getElementById('loginPass').value;
+        
+        if (adminAccounts[u] && adminAccounts[u].pass === p) {
+            currentAdmin = adminAccounts[u]; 
+            showToast(`✅ ยินดีต้อนรับ Admin ทีม ${currentAdmin.team}`);
+            closeModal('loginModal');
+            
+            document.getElementById('adminLoginBtn').style.display = 'none';
+            document.getElementById('adminMenuSection').style.display = 'flex';
+            document.getElementById('adminTeamLabel').innerText = currentAdmin.team;
+            
+            renderCurrentView();
+            showDetails(selectedDateStr, true);
+        } else {
+            showToast('❌ Username หรือ Password ไม่ถูกต้อง', 'error');
+        }
     }
 
     function logoutAdmin() {
-        isAdmin = false;
-        document.getElementById('adminBtn').classList.remove('btn-primary');
-        document.getElementById('adminBtn').classList.add('btn-outline');
-        showToast("ออกจากระบบแล้ว");
-        closeModal('adminDashModal'); renderCurrentView();
+        currentAdmin = null;
+        showToast('👋 ออกจากระบบผู้ดูแลเรียบร้อย');
+        closeModal('adminDashModal');
+        
+        document.getElementById('adminLoginBtn').style.display = 'flex';
+        document.getElementById('adminMenuSection').style.display = 'none';
+        
+        renderCurrentView();
+        showDetails(selectedDateStr, true);
+    }
+
+    function openAdminDashboard() {
+        renderAdminDashboard(); 
+        document.getElementById('adminDashModal').classList.add('show');
     }
 
     function renderAdminDashboard() {
+        if(!currentAdmin) return;
+        document.getElementById('dashTeamLabel').innerText = currentAdmin.team;
         const container = document.getElementById('pendingListContainer');
-        const active = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending');
-        if (active.length === 0) { container.innerHTML = '<p style="text-align:center; font-size:16px;">ไม่มีข้อมูล</p>'; return; }
+        
+        let activeBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
+        if (!currentAdmin.super) {
+            activeBookings = activeBookings.filter(b => getTeamName(b).toUpperCase() === currentAdmin.team.toUpperCase());
+        }
+        
+        if (activeBookings.length === 0) { container.innerHTML = '<p style="text-align:center; font-size:16px;">✅ โล่งเลย ไม่มีรายการในระบบ</p>'; return; }
         container.innerHTML = '';
-        active.sort((a,b) => new Date(b.Date) - new Date(a.Date)).forEach(b => {
+        
+        activeBookings.sort((a,b) => {
+            const aWait = (a.Status === 'pending' || a.Status === 'pending_revise');
+            const bWait = (b.Status === 'pending' || b.Status === 'pending_revise');
+            if(aWait && !bWait) return -1;
+            if(!aWait && bWait) return 1;
+            return new Date(b.Date) - new Date(a.Date);
+        }).forEach(b => {
+            const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
+            let teamName = getTeamName(b);
+            
+            let statusBadge = ''; let borderCol = '';
+            if (b.Status === 'pending') { statusBadge = '⚠️ รออนุมัติการจอง'; borderCol = 'var(--color-partial)'; }
+            else if (b.Status === 'pending_revise') { statusBadge = '✏️ รออนุมัติแก้ไขคิว'; borderCol = 'var(--color-revise)'; }
+            else { statusBadge = '🔒 อนุมัติแล้ว'; borderCol = 'var(--color-booked)'; }
+
             container.innerHTML += `
-                <div style="background:var(--card-bg); padding:20px; border-radius:20px; margin-bottom:15px; border:1px solid var(--input-border); box-shadow:0 4px 15px rgba(0,0,0,0.03); border-left:8px solid var(--color-booked);">
-                    <strong style="background:var(--header-bg); padding:4px 12px; border-radius:8px; color:var(--text-main);">📅 ${b.Date?.split('T')[0]} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
-                    <div style="color:var(--primary); font-size:18px; font-weight:700; margin:10px 0;">📌 ${b.Subject}</div>
-                    <div style="font-size:14px; color:var(--text-main); background:var(--btn-outline-bg); padding:10px; border-radius:10px;">👤 ${b.User} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
-                    <div style="display:flex; gap:12px; margin-top:15px;">
-                        <button class="btn btn-outline" style="flex:1; padding:12px; font-size:14px; font-weight:700; color:var(--color-booked);" onclick="updateStatus('${b.ID}', 'rejected')">Reject</button>
-                        <button class="btn btn-outline" style="flex:1; padding:12px; font-size:14px; font-weight:700;" onclick="updateStatus('${b.ID}', 'cancelled')">Cancel</button>
+                <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--input-border); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid ${borderCol};">
+                    <div style="display:flex; justify-content:space-between;">
+                        <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:13px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
+                        <span style="font-size:12px; font-weight:700; color:${borderCol};">${statusBadge}</span>
+                    </div>
+                    <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
+                    <div style="font-size:13px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
+                    <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+                        ${(b.Status === 'pending' || b.Status === 'pending_revise') ? `<button class="btn btn-success" style="flex:1; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติ</button>` : ''}
+                        <button class="btn btn-outline" style="flex:1; padding:8px; font-size:13px; color:var(--color-rejected);" onclick="updateStatus('${b.ID}', 'rejected')">❌ ไม่อนุมัติ</button>
+                        ${b.Status === 'approved' ? `<button class="btn btn-outline" style="flex:1; padding:8px; font-size:13px; color:var(--text-muted);" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ ลบคิวนี้</button>` : ''}
                     </div>
                 </div>`;
         });
     }
 
     async function updateStatus(id, status) {
-        if(!confirm("ยืนยันการทำรายการ?")) return;
-        closeModal('dayDetailsModal');
+        let actionWord = status === 'approved' ? 'อนุมัติ' : 'ปฏิเสธ/ยกเลิก';
+        if(!confirm(`ยืนยันการ ${actionWord} รายการนี้?`)) return;
+        closeModal('adminDashModal'); 
+        showToast(`⏳ กำลังประมวลผล...`, "warning");
         try {
             await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: status }) });
-            showToast("อัปเดตเรียบร้อย"); syncDataSilently();
-        } catch(e) { showToast("อัปเดตล้มเหลว", "error"); }
+            showToast(`✅ อัปเดตข้อมูลเรียบร้อย!`, "success"); syncDataSilently(); 
+        } catch(e) { showToast(`❌ อัปเดตล้มเหลว`, "error"); }
     }
 
     syncDataSilently();
