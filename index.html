@@ -102,6 +102,15 @@
         .view-btn { padding: 6px 14px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 13px;}
         .view-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
+        /* ================= LEGEND (คำอธิบายสัญลักษณ์) ================= */
+        .status-legend { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: var(--header-bg); padding: 8px 15px; border-radius: 10px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .dot-free { background: linear-gradient(135deg, var(--color-free), #059669); box-shadow: 0 0 5px var(--color-free); }
+        .dot-booked { background: linear-gradient(135deg, var(--color-booked), #e11d48); box-shadow: 0 0 5px var(--color-booked); }
+        .dot-revise { background: linear-gradient(135deg, var(--color-revise), #7c3aed); box-shadow: 0 0 5px var(--color-revise); }
+        .dot-disabled { background: linear-gradient(135deg, var(--color-holiday), #475569); box-shadow: 0 0 5px var(--color-holiday); }
+
         @keyframes pulseGlow { 
             0% { box-shadow: 0 0 5px var(--primary), inset 0 0 5px var(--primary); border-color: var(--primary); } 
             50% { box-shadow: 0 0 15px var(--primary), inset 0 0 10px var(--primary); border-color: #fff; } 
@@ -109,13 +118,13 @@
         }
         .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 1.5s infinite alternate !important; background: rgba(139, 92, 246, 0.05); }
 
-        /* Weekly Grid */
+        /* ================= WEEKLY GRID (ปรับฟอนต์ให้สมดุล) ================= */
         .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
         
-        .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 90px; transition: 0.2s; align-items: stretch; overflow: hidden;}
+        .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 95px; transition: 0.2s; align-items: stretch; overflow: hidden;}
         .day-label { flex: 0 0 90px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; text-align: center;}
         .day-label:hover { filter: brightness(0.95); }
         .day-name { font-size: 14px; font-weight: 700; color: var(--text-main); line-height: 1.2; margin-bottom: 2px;}
@@ -127,14 +136,16 @@
         
         .time-slot { flex: 0 0 135px; display: flex; flex-direction: column; padding: 8px 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative;}
         .time-slot:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08);}
-        .slot-time-label { font-weight: 700; font-size: 10px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9;}
         
-        .w-status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
-        .w-status-badge svg { width: 12px; height: 12px; flex-shrink: 0;}
+        /* 🔥 ปรับฟอนต์ให้สมดุลตรงนี้ 🔥 */
+        .slot-time-label { font-weight: 700; font-size: 11.5px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9; text-align: center; letter-spacing: 0.5px;}
         
-        .slot-info-bottom { font-size: 10px; color: var(--text-main); margin-top: auto; line-height: 1.3; word-break: break-word;}
+        .w-status-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+        .w-status-badge svg { width: 13px; height: 13px; flex-shrink: 0;}
+        
+        .slot-info-bottom { font-size: 11px; color: var(--text-main); margin-top: auto; padding-top: 4px; line-height: 1.4; font-weight: 500; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
         .slot-info-bottom.revise { border: 1px dashed var(--color-revise); padding: 4px; border-radius: 6px; margin-top: 4px; background: rgba(139, 92, 246, 0.05); color: var(--color-revise);}
-        .slot-action-bottom { text-align: right; font-size: 10px; color: var(--color-free); opacity: 0.9; margin-top: auto; font-weight: 600;}
+        .slot-action-bottom { text-align: center; font-size: 11px; color: var(--color-free); opacity: 0.9; margin-top: auto; padding-top: 4px; font-weight: 600;}
 
         .time-slot.free { border-top: 4px solid var(--color-free); }
         .badge-free { background: linear-gradient(135deg, var(--color-free), #059669); }
@@ -160,7 +171,7 @@
         .ampm-container { display: flex; flex-direction: column; gap: 4px; width: 100%; margin-top: auto; }
         .ampm-badge { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; font-weight: 600; color: #fff; padding: 4px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-shadow: 0 1px 2px rgba(0,0,0,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
         .ampm-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
-        .ampm-text { flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; }
+        .ampm-text { flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; display: inline-block; }
 
         .ampm-badge.free { background: linear-gradient(135deg, var(--color-free), #059669); }
         .ampm-badge.pending { background: linear-gradient(135deg, var(--color-partial), #d97706); }
@@ -196,7 +207,7 @@
             .detail-panel { display: none !important; }
             .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 20px; }
             .time-container { display: none; }
-            .sidebar-actions { position: fixed; bottom: 0; left: 0; right: 0; flex-direction: row; background: var(--glass-bg); backdrop-filter: blur(25px); padding: 15px 20px; z-index: 100; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.08); }
+            .sidebar-actions { position: static; flex-direction: row; background: transparent; backdrop-filter: none; padding: 15px 0 0 0; z-index: auto; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 0; box-shadow: none; margin-top: 15px; }
             .weekly-grid { padding-bottom: 0;}
             .day-row { flex-direction: column; border-radius: 16px; }
             .day-label { width: 100%; flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid var(--glass-border); border-radius: 16px 16px 0 0; padding: 12px 15px; }
@@ -210,6 +221,8 @@
             .view-toggle { width: 100%; }
             .view-btn { flex: 1; text-align: center; }
 
+            .sidebar-actions { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--input-border); padding-top: 10px; margin-top: 0; gap: 8px;}
+
             .monthly-grid { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 2px;}
             .month-header { display: block !important; font-size: 11px; padding: 4px 0; border-radius: 6px; margin-bottom: 2px;} 
             .month-day-card { min-height: 60px; padding: 4px; border-radius: 8px; justify-content: flex-start; align-items: center; min-width: 0;}
@@ -217,16 +230,17 @@
             .m-day-name-mobile { display: none !important; } 
             
             .ampm-container { gap: 2px; width: 100%;}
-            .ampm-badge { font-size: 9px; padding: 2px; border-radius: 4px; gap: 2px; width: 100%; max-width: 100%;}
-            .ampm-badge svg { width: 10px; height: 10px; }
-            .ampm-text { display: none; } 
+            .ampm-badge { font-size: 8px; padding: 3px 2px; border-radius: 4px; gap: 2px; width: 100%; max-width: 100%; flex-direction: row;}
+            .ampm-badge svg { width: 9px; height: 9px; }
+            .ampm-text { display: inline-block; font-size: 8px; letter-spacing: -0.5px;} 
+            
+            .status-legend { width: 100%; justify-content: center; }
             
             .modal-content { padding: 25px; border-radius: 32px; margin: 15px;}
         }
 
-        .admin-menu-section { display: none; flex-direction: column; gap: 6px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--input-border); }
+        .admin-menu-section { display: none; flex-direction: column; gap: 6px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--input-border); grid-column: span 2;}
         
-        /* สไตล์ปุ่ม Tab ในหน้า Admin */
         .tab-btn { flex: 1; padding: 10px; border-radius: 10px; font-weight: 600; font-family: 'Kanit'; cursor: pointer; transition: 0.2s; font-size: 13px; border: 1px solid var(--input-border); background: var(--btn-outline-bg); color: var(--text-main); position: relative;}
         .tab-btn.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 4px 12px var(--primary-glow);}
         .badge-count { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 10px; border: 2px solid var(--card-bg); display: none;}
@@ -266,12 +280,12 @@
         <div class="sidebar-actions" id="mainSidebarBtn">
             <button class="btn btn-primary" onclick="openBooking()">✨ จองห้อง</button>
             <button id="adminLoginBtn" class="btn btn-outline" onclick="openLoginModal()">👑 แอดมิน</button>
-        </div>
-
-        <div id="adminMenuSection" class="admin-menu-section">
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; margin-bottom: 2px;">👑 เมนูผู้ดูแล (<span id="adminTeamLabel"></span>)</div>
-            <button class="btn btn-primary" onclick="openAdminDashboard()" style="justify-content: flex-start; background:var(--color-partial); box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);">📋 จัดการคิว</button>
-            <button class="btn btn-outline" onclick="logoutAdmin()" style="justify-content: flex-start; color: var(--color-booked);">🚪 ออกจากระบบ</button>
+            
+            <div id="adminMenuSection" class="admin-menu-section">
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 700; margin-bottom: 2px;">👑 เมนูผู้ดูแล (<span id="adminTeamLabel"></span>)</div>
+                <button class="btn btn-primary" onclick="openAdminDashboard()" style="justify-content: flex-start; background:var(--color-partial); box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);">📋 จัดการคิว</button>
+                <button class="btn btn-outline" onclick="logoutAdmin()" style="justify-content: flex-start; color: var(--color-booked);">🚪 ออกจากระบบ</button>
+            </div>
         </div>
     </div>
 
@@ -295,6 +309,14 @@
                     <button class="view-btn" id="btnViewMonth" onclick="switchView('month')">เดือน</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="status-legend" style="margin-bottom: 10px;">
+            <div class="legend-item"><span class="legend-dot dot-free"></span> ว่าง</div>
+            <div class="legend-item"><span class="legend-dot dot-booked"></span> เต็ม/จองแล้ว</div>
+            <div class="legend-item"><span class="legend-dot dot-revise"></span> ขอแทรกคิว</div>
+            <div class="legend-item"><span class="legend-dot dot-disabled"></span> วันหยุด</div>
         </div>
         
         <div class="weekly-grid" id="weeklyGrid"></div>
@@ -421,7 +443,30 @@
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbyYXNtU-QwCmxXK_y5BIjjhI3cISlHQyHucd2h8tKb803qe1mJs_x51nenwKZ6Cv0_r/exec"; 
-    const thaiHolidays = {"2026-01-01": "ปีใหม่", "2026-04-13": "สงกรานต์", "2026-04-14": "สงกรานต์", "2026-04-15": "สงกรานต์", "2026-05-01": "แรงงาน"};
+    
+    // วันหยุด 2026 
+    const thaiHolidays = {
+        "2026-01-01": "วันขึ้นปีใหม่",
+        "2026-03-03": "วันมาฆบูชา",
+        "2026-04-06": "วันจักรี",
+        "2026-04-13": "สงกรานต์",
+        "2026-04-14": "สงกรานต์",
+        "2026-04-15": "สงกรานต์",
+        "2026-05-01": "วันแรงงานแห่งชาติ",
+        "2026-05-04": "วันฉัตรมงคล",
+        "2026-05-31": "วันวิสาขบูชา",
+        "2026-06-03": "เฉลิมฯ พระราชินี",
+        "2026-07-28": "เฉลิมฯ ร.10",
+        "2026-07-29": "วันอาสาฬหบูชา",
+        "2026-07-30": "วันเข้าพรรษา",
+        "2026-08-12": "วันแม่แห่งชาติ",
+        "2026-10-13": "วันนวมินทรมหาราช",
+        "2026-10-23": "วันปิยมหาราช",
+        "2026-12-05": "วันพ่อแห่งชาติ",
+        "2026-12-10": "วันรัฐธรรมนูญ",
+        "2026-12-31": "วันสิ้นปี"
+    };
+
     const daysTH = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
     
     const adminAccounts = {
@@ -439,7 +484,15 @@
     let currentRefDate = new Date(); 
     let currentAdmin = null; 
     let currentAdminTab = 'normal';
-    let selectedDateStr = new Date().toLocaleDateString('en-CA'); 
+
+    function getYYYYMMDD(dateObj) {
+        const y = dateObj.getFullYear();
+        const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const d = String(dateObj.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
+    let selectedDateStr = getYYYYMMDD(new Date()); 
 
     function getTeamName(b) { return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim(); }
 
@@ -499,8 +552,12 @@
     }
 
     function changeDateRange(offset) {
-        if (currentView === 'week') currentRefDate.setDate(currentRefDate.getDate() + (offset * 7));
-        else currentRefDate.setMonth(currentRefDate.getMonth() + offset);
+        if (currentView === 'week') {
+            currentRefDate.setDate(currentRefDate.getDate() + (offset * 7));
+        } else {
+            currentRefDate.setDate(1); 
+            currentRefDate.setMonth(currentRefDate.getMonth() + offset);
+        }
         renderCurrentView();
     }
 
@@ -513,7 +570,8 @@
 
     function jumpToDate(val) {
         if(!val) return;
-        currentRefDate = new Date(val);
+        const [yy, mm, dd] = val.split('-').map(Number);
+        currentRefDate = new Date(yy, mm - 1, dd);
         renderCurrentView();
         showDetails(val, false); 
     }
@@ -567,9 +625,12 @@
         for (let i = 0; i < 7; i++) {
             const current = new Date(start);
             current.setDate(start.getDate() + i);
-            const dateStr = current.toLocaleDateString('en-CA');
-            const isToday = dateStr === new Date().toLocaleDateString('en-CA');
-            const holiday = thaiHolidays[dateStr];
+            const dateStr = getYYYYMMDD(current);
+            const isToday = dateStr === getYYYYMMDD(new Date());
+            const dayOfWeek = current.getDay();
+            const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+            
+            const holiday = thaiHolidays[dateStr] || (isWeekend ? "วันหยุดสุดสัปดาห์" : null);
 
             const row = document.createElement('div');
             row.className = `day-row ${isToday ? 'is-today-highlight' : ''}`;
@@ -593,7 +654,7 @@
             let timeLabel = `${String(h).padStart(2,'0')}:00 - ${endTimeStr}`;
 
             if (isHoliday) {
-                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', true)"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted);">หยุด</div></div>`;
+                html += `<div class="time-slot disabled" onclick="showToast('❌ ไม่สามารถจองได้: ${isHoliday}', 'error')"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted); text-align:center;">หยุด</div></div>`;
                 continue;
             }
 
@@ -624,11 +685,19 @@
                     infoText = `👤 ${uName} | 🏢 ${tName}`;
                 }
 
-                html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
-                    <div class="slot-time-label">${timeLabel}</div>
-                    <div style="text-align:${b.Status==='pending_revise'?'left':'center'}; margin-bottom:4px; margin-top:2px;">${statusLabel}</div>
-                    <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">${infoText}</div>
-                </div>`;
+                if (b.Status === 'pending_revise') {
+                    html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
+                        <div class="slot-time-label">${timeLabel}</div>
+                        <div style="text-align:center; margin-bottom:4px; margin-top:2px;">${statusLabel}</div>
+                        <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">${infoText}</div>
+                    </div>`;
+                } else {
+                    html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
+                        <div class="slot-time-label">${timeLabel}</div>
+                        <div style="margin:auto 0; text-align:center;">${statusLabel}</div>
+                        <div class="slot-info-bottom">${infoText}</div>
+                    </div>`;
+                }
             } else {
                 html += `<div class="time-slot free" onclick="handleSlotClick('${dateStr}', ${h}, 'free')">
                     <div class="slot-time-label">${timeLabel}</div>
@@ -655,11 +724,12 @@
 
         for (let i = 1; i <= daysInMonth; i++) {
             const currentDay = new Date(year, month, i);
-            const dateStr = currentDay.toLocaleDateString('en-CA');
-            const isToday = dateStr === new Date().toLocaleDateString('en-CA');
-            const holiday = thaiHolidays[dateStr];
+            const dateStr = getYYYYMMDD(currentDay);
+            const isToday = dateStr === getYYYYMMDD(new Date());
             const dayOfWeek = currentDay.getDay();
             const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+            
+            const holiday = thaiHolidays[dateStr] || (isWeekend ? "วันหยุดสุดสัปดาห์" : null);
             const dayNameMobile = daysTH[dayOfWeek];
             
             let cardClass = `month-day-card ${isToday ? 'is-today-highlight' : ''}`;
@@ -708,8 +778,13 @@
         const titleModal = document.getElementById('dayModalTitle');
         const titlePanel = document.getElementById('panelModalTitle');
         
-        const thaiDate = new Date(dateStr).toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-        const isHoliday = thaiHolidays[dateStr];
+        const [yy, mm, dd] = dateStr.split('-').map(Number);
+        const localDate = new Date(yy, mm - 1, dd);
+        const thaiDate = localDate.toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        
+        const dayOfWeek = localDate.getDay();
+        const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+        const isHoliday = thaiHolidays[dateStr] || (isWeekend ? "วันหยุดเสาร์-อาทิตย์" : null);
         
         if(titleModal) titleModal.innerHTML = `📅 วันที่ ${thaiDate}`;
         if(titlePanel) titlePanel.innerHTML = `📅 วันที่ ${thaiDate}`;
@@ -721,7 +796,7 @@
 
         if (isHoliday) {
             html = `<div style="text-align:center; padding:30px 10px; background:rgba(239,68,68,0.05); border-radius:16px; border:2px solid rgba(239,68,68,0.2);">
-                <div style="font-size:40px; margin-bottom:10px;">🏖️</div><h3 style="color:var(--color-booked); margin:0 0 5px 0;">ปิดให้บริการ</h3><p style="color:var(--text-muted); font-size:13px;">วันนี้เป็นวันหยุดนักขัตฤกษ์ (${isHoliday})</p></div>`;
+                <div style="font-size:40px; margin-bottom:10px;">🏖️</div><h3 style="color:var(--color-booked); margin:0 0 5px 0;">ปิดให้บริการ</h3><p style="color:var(--text-muted); font-size:13px;">${isHoliday}</p></div>`;
         } else if (dayData.length === 0) {
             html = `<div style="text-align:center; padding:30px 10px; background:rgba(16,185,129,0.05); border-radius:16px; border:2px dashed rgba(16,185,129,0.3);">
                 <div style="font-size:40px; margin-bottom:10px;">✨</div><h3 style="color:var(--color-free); margin:0 0 10px 0; font-size:18px;">ว่างทั้งวัน!</h3>
@@ -745,7 +820,6 @@
                 let canManage = false;
                 if (currentAdmin) {
                     if (currentAdmin.super) canManage = true;
-                    // ให้แอดมินเห็นและจัดการได้ ถ้าคิวเดิมเป็นของทีมตัวเอง หรือ คิวใหม่เป็นของทีมตัวเอง
                     else if (currentAdmin.team.toUpperCase() === teamName.toUpperCase() || currentAdmin.team.toUpperCase() === origTeam.toUpperCase()) canManage = true;
                 }
 
@@ -767,10 +841,12 @@
                         actionBtns += `<button class="btn btn-outline" style="flex:1; color:var(--color-booked); border-color:var(--color-booked); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ ลบ (คืนว่าง)</button>`;
                     }
                     actionBtns += `</div>`;
-                } else if (b.Status === 'approved' || b.Status === 'pending') {
-                    actionBtns = `<div style="margin-top:10px; display:flex; gap:6px; border-top:1px dashed var(--input-border); padding-top:10px; flex-wrap:wrap;">
-                        <button class="btn btn-primary" style="flex:1; padding:6px; font-size:11px; font-weight:600; background:var(--color-revise); border:none; color:#fff;" onclick="openReviseBooking('${b.ID}', 'revise')">✏️ ขอแทรกคิว (Revise)</button>
-                    </div>`;
+                } else if (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise') {
+                    if (b.Status !== 'pending_revise') {
+                        actionBtns = `<div style="margin-top:10px; display:flex; gap:6px; border-top:1px dashed var(--input-border); padding-top:10px; flex-wrap:wrap;">
+                            <button class="btn btn-primary" style="flex:1; padding:6px; font-size:11px; font-weight:600; background:var(--color-revise); border:none; color:#fff;" onclick="openReviseBooking('${b.ID}', 'revise')">✏️ ขอ Revise (แทรกคิว)</button>
+                        </div>`;
+                    }
                 }
 
                 let infoHtml = '';
@@ -827,7 +903,6 @@
     function openBookingWithDate(d) { closeModal('dayDetailsModal'); document.getElementById('formDate').value = d; openBooking(); }
     function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
-    // ฟังก์ชันเปิดแก้ไขข้อมูล 
     function openReviseBooking(id, mode = 'revise') {
         closeModal('dayDetailsModal');
         closeModal('adminDashModal');
@@ -918,7 +993,14 @@
         const editingId = document.getElementById('editingId').value; 
         
         if (!inputDate) return showToast("โปรดเลือกวันที่จ้า", "error");
-        if (thaiHolidays[inputDate]) return showToast("วันหยุดนักขัตฤกษ์ จอง/แก้ไขไม่ได้น้า", "error");
+        
+        const [yy, mm, dd] = inputDate.split('-').map(Number);
+        const localDate = new Date(yy, mm - 1, dd);
+        const dayOfWeek = localDate.getDay();
+        const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+        const isHoliday = thaiHolidays[inputDate] || (isWeekend ? "วันหยุดเสาร์-อาทิตย์" : null);
+
+        if (isHoliday) { showToast(`❌ ไม่สามารถจองได้: ${isHoliday}`, "error"); return; }
 
         const type = document.getElementById('bookType').value;
         let st = "08:00", ed = "12:00";
@@ -951,7 +1033,7 @@
             const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
             const result = await res.json();
             if(result.status === 'success') {
-                showToast(editingId ? "✨ บันทึกการแก้ไขแล้ว (รออนุมัติ)!" : "✨ จองเวลาเรียบร้อยแล้ว!", "success");
+                showToast(editingId ? "✨ ส่งข้อมูลแก้ไขแล้ว!" : "✨ จองเวลาเรียบร้อยแล้ว!", "success");
                 closeModal('bookingModal');
                 syncDataSilently();
             } else showToast(result.msg, "error");
@@ -1010,7 +1092,6 @@
         
         let allTeamBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
         
-        // 🌟 แก้ไข: กรองข้อมูลโดยเช็คทั้ง "ทีมเจ้าของคิวเดิม" และ "ทีมที่ขอแทรก"
         if (!currentAdmin.super) {
             allTeamBookings = allTeamBookings.filter(b => {
                 let currentTeam = getTeamName(b).toUpperCase();
@@ -1049,7 +1130,7 @@
                         <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
                         
                         <div class="admin-action-btns" style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:8px;">
-                            ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); padding:8px; font-size:13px; color:#fff;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติการจอง</button>` : ''}
+                            ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติ</button>` : ''}
                             
                             <button class="btn btn-outline" style="flex:1; color:var(--text-main); border-color:var(--text-muted); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'edit')">✏️ แก้ไข</button>
                             <button class="btn btn-outline" style="flex:1; color:var(--color-partial); border-color:var(--color-partial); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'transfer')">🔄 โอนคิว</button>
@@ -1084,7 +1165,7 @@
                         </div>
                         
                         <div class="admin-action-btns" style="margin-top: 15px; display:flex; gap:10px;">
-                            <button class="btn" style="flex:1; background:var(--color-free); padding:8px; font-size:12px; color:#fff;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติให้แทรก</button>
+                            <button class="btn" style="flex:1; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติให้แทรก</button>
                             <button class="btn btn-outline" style="flex:1; color:var(--color-rejected); border-color:var(--color-rejected); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'rejected')">❌ ปฏิเสธ</button>
                         </div>
                     </div>`;
