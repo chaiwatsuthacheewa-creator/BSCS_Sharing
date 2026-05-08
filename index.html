@@ -6,64 +6,66 @@
     <title>BSCS_Sharing ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ================= THEMES ================= */
+        /* ================= THEMES (Neon Professional) ================= */
         :root {
-            --bg-mesh-light: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(167, 139, 250, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
-            --bg-base-light: #f8fafc;
-            --glass-bg-light: rgba(255, 255, 255, 0.75);
-            --glass-border-light: rgba(255, 255, 255, 0.5);
-            --primary-light: #0071e3; 
-            --text-main-light: #1d1d1f;
+            --bg-mesh-light: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.1) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(167, 139, 250, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            --bg-base-light: #f4f6f8;
+            --glass-bg-light: rgba(255, 255, 255, 0.85);
+            --glass-border-light: rgba(255, 255, 255, 0.6);
+            --primary-light: #0ea5e9; 
+            --text-main-light: #0f172a;
             --text-muted-light: #64748b;
-            --card-bg-light: #fff;
+            --card-bg-light: #ffffff;
             
-            --bg-mesh-dark: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            --bg-mesh-dark: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0, transparent 50%), radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.1) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
             --bg-base-dark: #0f172a;
-            --glass-bg-dark: rgba(30, 41, 59, 0.75);
-            --glass-border-dark: rgba(255, 255, 255, 0.1);
+            --glass-bg-dark: rgba(30, 41, 59, 0.85);
+            --glass-border-dark: rgba(255, 255, 255, 0.05);
             --primary-dark: #38bdf8; 
             --text-main-dark: #f8fafc;
             --text-muted-dark: #94a3b8;
             --card-bg-dark: #1e293b;
 
-            --primary-hover: #0ea5e9;
-            --primary-glow: rgba(56, 189, 248, 0.3);
-            --color-free: #10b981; 
-            --color-partial: #f59e0b;
-            --color-booked: #ef4444; 
-            --color-revise: #8b5cf6; 
+            /* Neon Colors */
+            --color-free: #00e676; /* Neon Emerald */
+            --color-partial: #ffaa00; /* Neon Amber */
+            --color-booked: #ff2a5f; /* Neon Rose/Red */
+            --color-revise: #b721ff; /* Neon Purple */
             --color-holiday: #64748b;
-            --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+            
+            --primary-hover: #0284c7;
+            --primary-glow: rgba(14, 165, 233, 0.4);
+            --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
         }
 
         body {
             --bg-mesh: var(--bg-mesh-light); --bg-base: var(--bg-base-light); --glass-bg: var(--glass-bg-light); --glass-border: var(--glass-border-light);
             --primary: var(--primary-light); --text-main: var(--text-main-light); --text-muted: var(--text-muted-light); --card-bg: var(--card-bg-light);
-            --modal-overlay: rgba(0,0,0,0.4); --btn-outline-bg: rgba(0,0,0,0.03); --input-border: rgba(0,0,0,0.1); --header-bg: rgba(0,0,0,0.04);
+            --modal-overlay: rgba(0,0,0,0.5); --btn-outline-bg: rgba(0,0,0,0.03); --input-border: rgba(0,0,0,0.1); --header-bg: rgba(0,0,0,0.04);
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         body.dark-mode {
             --bg-mesh: var(--bg-mesh-dark); --bg-base: var(--bg-base-dark); --glass-bg: var(--glass-bg-dark); --glass-border: var(--glass-border-dark);
             --primary: var(--primary-dark); --text-main: var(--text-main-dark); --text-muted: var(--text-muted-dark); --card-bg: var(--card-bg-dark);
-            --modal-overlay: rgba(0,0,0,0.7); --btn-outline-bg: rgba(255,255,255,0.05); --input-border: rgba(255,255,255,0.2); --header-bg: rgba(255,255,255,0.05);
+            --modal-overlay: rgba(0,0,0,0.8); --btn-outline-bg: rgba(255,255,255,0.05); --input-border: rgba(255,255,255,0.2); --header-bg: rgba(255,255,255,0.05);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { margin: 0; padding: 0; font-family: 'Kanit', sans-serif; background-color: var(--bg-base); background-image: var(--bg-mesh); background-attachment: fixed; color: var(--text-main); height: 100vh; overflow: hidden; }
 
-        .glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; box-shadow: var(--shadow-premium); }
+        .glass { background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 20px; box-shadow: var(--shadow-premium); }
         .app-container { display: flex; gap: 15px; width: 100%; height: 100vh; padding: 15px; align-items: stretch; }
 
         /* Sidebar (Left) */
         .sidebar { width: 220px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
         .sidebar .title-box { text-align: center; border-bottom: 1px solid var(--input-border); padding-bottom: 15px; margin-bottom: 15px; }
         .title { margin: 0; font-size: 20px; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 8px;}
-        .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 8px; background: var(--header-bg); padding: 8px; border-radius: 8px; font-weight: 500;}
+        .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 8px; background: var(--header-bg); padding: 8px; border-radius: 10px; font-weight: 500;}
         
         .time-container { text-align: center; margin: auto 0; }
-        #clock { font-size: 32px; font-weight: 600; color: var(--text-main); letter-spacing: -1px; margin: 0;}
-        #dateDisplay { font-size: 13px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
+        #clock { font-size: 36px; font-weight: 600; color: var(--text-main); letter-spacing: -1px; margin: 0;}
+        #dateDisplay { font-size: 14px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
 
         .sidebar-actions { display: flex; flex-direction: column; gap: 10px; }
 
@@ -73,107 +75,124 @@
         /* Main Content (Center) */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
         .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; margin-bottom: 15px; flex-shrink: 0; }
-        .week-control { display: flex; align-items: center; gap: 8px; background: var(--header-bg); padding: 4px; border-radius: 12px; position: relative; }
+        .week-control { display: flex; align-items: center; gap: 8px; background: var(--header-bg); padding: 4px; border-radius: 12px; position: relative;}
         .month-selector { font-size: 16px; font-weight: 700; color: var(--primary); font-family: 'Kanit'; background: transparent; border: none; outline: none; cursor: pointer; padding: 4px 8px; }
         .hidden-date-picker { position: absolute; opacity: 0; width: 40px; height: 40px; right: 45px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10; }
         
         .btn-icon { background: var(--card-bg); border: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 16px; color: var(--text-main);}
         .btn-icon:hover { transform: scale(1.05); background: var(--primary); color: #fff; }
         .nav-actions-right { display: flex; align-items: center; gap: 10px; }
-        .view-toggle { display: flex; gap: 4px; background: var(--header-bg); padding: 4px; border-radius: 10px; }
-        .view-btn { padding: 6px 14px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 13px;}
+        .view-toggle { display: flex; gap: 4px; background: var(--header-bg); padding: 4px; border-radius: 12px; }
+        .view-btn { padding: 8px 16px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 14px;}
         .view-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); } 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); } 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); } }
         .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
 
-        /* ================= WEEKLY GRID (ตามรูปภาพ: เรียง 10 ช่อง เลื่อนแนวนอน) ================= */
-        .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
+        /* ================= WEEKLY GRID ================= */
+        .weekly-grid { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
         
-        .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 90px; transition: 0.2s; align-items: stretch; overflow: hidden;}
+        .day-row { display: flex; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--glass-border); min-height: 100px; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); align-items: stretch; overflow: hidden;}
         
-        .day-label { flex: 0 0 90px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s;}
+        .day-label { flex: 0 0 100px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s;}
         .day-label:hover { filter: brightness(0.95); }
-        .day-name { font-size: 14px; font-weight: 700; color: var(--text-main); }
-        .day-date { font-size: 11px; color: var(--text-muted); font-weight: 500;}
+        .day-name { font-size: 15px; font-weight: 700; color: var(--text-main); }
+        .day-date { font-size: 12px; color: var(--text-muted); font-weight: 500;}
         
-        .slots-wrapper { flex: 1; display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 8px 10px; gap: 8px; align-items: stretch; scroll-behavior: smooth;}
+        .slots-wrapper { flex: 1; display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 10px; gap: 10px; align-items: stretch; scroll-behavior: smooth;}
         .slots-wrapper::-webkit-scrollbar { height: 6px; }
         .slots-wrapper::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         
         .time-slot { 
-            flex: 0 0 130px; 
+            flex: 0 0 140px; 
             display: flex; flex-direction: column; 
-            padding: 8px; cursor: pointer; transition: 0.2s; border-radius: 8px; 
+            padding: 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; 
             background: var(--card-bg); border: 1px solid var(--glass-border); 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02); min-height: 85px; position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02); min-height: 90px; position: relative;
         }
-        .time-slot:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.06);}
+        .time-slot:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.08);}
         
-        .slot-time-label { font-weight: 700; font-size: 10px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9;}
-        .slot-status-center { margin: auto; font-size: 13px; font-weight: 700; }
-        .slot-info-bottom { font-size: 10px; color: var(--text-main); margin-top: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.8; font-weight: 500;}
-        .slot-action-bottom { text-align: right; font-size: 10px; color: var(--color-free); opacity: 0.8; margin-top: auto; font-weight: 500;}
+        .slot-time-label { font-weight: 700; font-size: 11px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9;}
+        .slot-status-center { margin: auto; font-size: 14px; font-weight: 700; }
+        .slot-info-bottom { font-size: 11px; color: var(--text-main); margin-top: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500;}
+        .slot-action-bottom { text-align: right; font-size: 10px; color: var(--color-free); font-weight: 600; margin-top: auto;}
 
-        .time-slot.free { border-top: 4px solid var(--color-free); }
-        .time-slot.free .slot-status-center { color: var(--color-free); }
+        /* Neon Status Colors - Weekly Top Borders */
+        .time-slot.free { border-top: 4px solid var(--color-free); box-shadow: inset 0 15px 20px -15px rgba(0, 230, 118, 0.2), 0 2px 4px rgba(0,0,0,0.02); }
+        .time-slot.free .slot-status-center { color: var(--color-free); text-shadow: 0 0 8px rgba(0, 230, 118, 0.4);}
         
-        .time-slot.pending { border-top: 4px solid var(--color-partial); }
-        .time-slot.pending .slot-status-center { color: var(--color-partial); }
+        .time-slot.pending { border-top: 4px solid var(--color-partial); box-shadow: inset 0 15px 20px -15px rgba(255, 170, 0, 0.2), 0 2px 4px rgba(0,0,0,0.02); }
+        .time-slot.pending .slot-status-center { color: var(--color-partial); text-shadow: 0 0 8px rgba(255, 170, 0, 0.4);}
         
-        .time-slot.pending_revise { border-top: 4px solid var(--color-revise); background: rgba(139, 92, 246, 0.03); }
-        .time-slot.pending_revise .slot-status-center { color: var(--color-revise); }
+        .time-slot.pending_revise { border-top: 4px solid var(--color-revise); background: rgba(183, 33, 255, 0.03); box-shadow: inset 0 15px 20px -15px rgba(183, 33, 255, 0.2), 0 2px 4px rgba(0,0,0,0.02); }
+        .time-slot.pending_revise .slot-status-center { color: var(--color-revise); text-shadow: 0 0 8px rgba(183, 33, 255, 0.4);}
 
-        .time-slot.booked { border-top: 4px solid var(--color-booked); }
-        .time-slot.booked .slot-status-center { color: var(--text-main); } 
+        .time-slot.booked { border-top: 4px solid var(--color-booked); box-shadow: inset 0 15px 20px -15px rgba(255, 42, 95, 0.2), 0 2px 4px rgba(0,0,0,0.02); }
+        .time-slot.booked .slot-status-center { color: var(--color-booked); text-shadow: 0 0 8px rgba(255, 42, 95, 0.4); } 
         
-        .time-slot.disabled { border-top: 4px solid #94a3b8; background: var(--header-bg); opacity: 0.7; cursor: not-allowed; }
+        .time-slot.disabled { border-top: 4px solid var(--color-holiday); background: var(--header-bg); opacity: 0.7; cursor: not-allowed; }
         .time-slot.disabled .slot-status-center { color: var(--text-muted); }
         
-        .time-slot.disabled-red { border-top: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); opacity: 0.7; cursor: not-allowed; }
-        .time-slot.disabled-red .slot-status-center { color: #ef4444; }
+        .time-slot.disabled-red { border-top: 4px solid var(--color-booked); background: rgba(255, 42, 95, 0.05); opacity: 0.7; cursor: not-allowed; }
+        .time-slot.disabled-red .slot-status-center { color: var(--color-booked); }
 
-        /* ================= MONTHLY GRID (ปฏิทิน 30 วัน สีมืออาชีพ) ================= */
+        /* Neon Badges */
+        .badge-free { background: var(--color-free); box-shadow: 0 0 10px rgba(0, 230, 118, 0.5); color: #000 !important; }
+        .badge-pending { background: var(--color-partial); box-shadow: 0 0 10px rgba(255, 170, 0, 0.5); color: #000 !important; }
+        .badge-revise { background: var(--color-revise); box-shadow: 0 0 10px rgba(183, 33, 255, 0.5); color: #fff !important; }
+        .badge-booked { background: var(--color-booked); box-shadow: 0 0 10px rgba(255, 42, 95, 0.5); color: #fff !important; }
+
+        /* ================= MONTHLY GRID (Solid Neon 30 Days) ================= */
         .monthly-grid { display: none; grid-template-columns: repeat(7, 1fr); gap: 10px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
         .month-header { text-align: center; font-weight: 700; padding: 8px; background: var(--header-bg); border-radius: 12px; color: var(--text-main); font-size: 14px;}
         
-        .month-day-card { border-radius: 14px; padding: 10px; min-height: 90px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); align-items: center; justify-content: center; text-align: center; border: 1px solid rgba(0,0,0,0.05);}
-        .month-day-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); filter: brightness(1.05);}
+        .month-day-card { border-radius: 16px; padding: 10px; min-height: 100px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); align-items: center; justify-content: center; text-align: center; border: 1px solid rgba(0,0,0,0.05);}
+        .month-day-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); filter: brightness(1.1);}
         
-        .m-date-num { font-size: 24px; font-weight: 700; margin-bottom: 6px; line-height: 1; color: inherit;}
-        .m-status-text { font-size: 12px; font-weight: 700; background: rgba(0,0,0,0.25); padding: 4px 10px; border-radius: 6px; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; letter-spacing: 0.5px;}
-        .m-day-name-mobile { display: none; font-size: 13px; font-weight: 500; opacity: 0.9; margin-bottom: 2px; color: inherit;}
+        .m-date-num { font-size: 26px; font-weight: 700; margin-bottom: 6px; line-height: 1; color: inherit;}
+        .m-status-text { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 8px; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.5px;}
+        .m-day-name-mobile { display: none; font-size: 13px; font-weight: 500; margin-bottom: 2px; color: inherit; opacity: 0.8;}
 
-        /* 🔥 สีทึบเฉดเข้มแบบมืออาชีพ (Professional Solid Colors) 🔥 */
-        .m-free-card { background: #059669 !important; color: #ffffff !important; border: none !important; }
-        .m-partial-card { background: #D97706 !important; color: #ffffff !important; border: none !important; }
-        .m-revise-card { background: #7C3AED !important; color: #ffffff !important; border: none !important; }
-        .m-full-card { background: #DC2626 !important; color: #ffffff !important; border: none !important; }
-        .m-holiday-card { background: #475569 !important; color: #ffffff !important; border: none !important; }
+        /* 🔥 สีทึบเฉดนีออนเข้มทั้งช่อง 🔥 */
+        .m-free-card { background: var(--color-free) !important; color: #000 !important; box-shadow: 0 0 15px rgba(0, 230, 118, 0.3) !important; border:none;}
+        .m-free-card .m-status-text { background: rgba(255,255,255,0.4); color: #000; }
+        
+        .m-partial-card { background: var(--color-partial) !important; color: #000 !important; box-shadow: 0 0 15px rgba(255, 170, 0, 0.3) !important; border:none;}
+        .m-partial-card .m-status-text { background: rgba(255,255,255,0.4); color: #000; }
+        
+        .m-revise-card { background: var(--color-revise) !important; color: #fff !important; box-shadow: 0 0 15px rgba(183, 33, 255, 0.3) !important; border:none;}
+        .m-revise-card .m-status-text { background: rgba(0,0,0,0.25); color: #fff; }
+        
+        .m-full-card { background: var(--color-booked) !important; color: #fff !important; box-shadow: 0 0 15px rgba(255, 42, 95, 0.3) !important; border:none;}
+        .m-full-card .m-status-text { background: rgba(0,0,0,0.25); color: #fff; }
+        
+        .m-holiday-card { background: var(--color-holiday) !important; color: #fff !important; opacity: 0.9; border:none;}
+        .m-holiday-card .m-status-text { background: rgba(0,0,0,0.25); color: #fff; }
 
         /* Buttons & Inputs */
-        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 12px; border: none; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 14px; width: 100%; color: #fff;}
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 18px; border-radius: 12px; border: none; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 15px; width: 100%; color: #fff;}
         .btn:active { transform: scale(0.96); }
-        .btn-primary { background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
-        .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 6px 16px var(--primary-glow); transform: translateY(-2px);}
+        .btn-primary { background: var(--primary); box-shadow: 0 4px 15px var(--primary-glow); }
+        .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 6px 20px var(--primary-glow); transform: translateY(-2px);}
         .btn-outline { background: var(--btn-outline-bg); color: var(--text-main); border: 1px solid var(--input-border);}
         .btn-outline:hover { background: var(--header-bg); }
 
-        input, select, textarea { width: 100%; padding: 10px 12px; margin: 6px 0 12px; border-radius: 10px; border: 1px solid var(--input-border); background: var(--glass-bg); color: var(--text-main); font-family: 'Kanit'; font-size: 13px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-weight: 500;}
+        input, select, textarea { width: 100%; padding: 12px 14px; margin: 6px 0 14px; border-radius: 12px; border: 1px solid var(--input-border); background: var(--glass-bg); color: var(--text-main); font-family: 'Kanit'; font-size: 14px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-weight: 500;}
         input:focus, select:focus, textarea:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 0 4px var(--primary-glow); }
         textarea { min-height: 80px; resize: vertical; }
         select option { background: var(--card-bg); color: var(--text-main); }
 
         /* Modals & Toast */
-        .modal { position: fixed; inset: 0; background: var(--modal-overlay); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: 0.3s; padding: 20px; }
+        .modal { position: fixed; inset: 0; background: var(--modal-overlay); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: 0.3s; padding: 20px; }
         .modal.show { display: flex; opacity: 1; }
-        .modal-content { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 25px 80px rgba(0,0,0,0.3); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
+        .modal-content { background: var(--card-bg); padding: 30px; border-radius: 24px; width: 100%; max-width: 500px; box-shadow: 0 25px 80px rgba(0,0,0,0.4); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
         .modal.show .modal-content { transform: scale(1) translateY(0); }
+        
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; max-width: 90vw; }
-        .toast { background: var(--card-bg); color: var(--text-main); padding: 12px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 13px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: translateX(120%); transition: 0.4s; border: 1px solid var(--glass-border);}
+        .toast { background: var(--card-bg); color: var(--text-main); padding: 15px 20px; border-radius: 14px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; box-shadow: 0 15px 30px rgba(0,0,0,0.15); transform: translateX(120%); transition: 0.4s; border: 1px solid var(--glass-border);}
         .toast.show { transform: translateX(0); }
 
         /* ================= MOBILE RESPONSIVE ================= */
@@ -181,7 +200,7 @@
             html, body { overflow-y: auto; height: auto; min-height: 100dvh; }
             .app-container { flex-direction: column; height: auto; padding: 15px; padding-bottom: 110px; } 
             
-            .detail-panel { display: none !important; }
+            .detail-panel { display: none !important; } /* ซ่อน Detail Panel ขวาบนจอเล็ก */
             
             .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 20px; }
             .time-container { display: none; }
@@ -200,15 +219,15 @@
             .view-toggle { width: 100%; }
             .view-btn { flex: 1; text-align: center; }
 
-            /* ================= Monthly Mobile (ปฏิทิน 7 คอลัมน์ 30 วันเต็ม) ================= */
+            /* Monthly Mobile (ปฏิทิน 7 คอลัมน์ 30 วัน สีทึบเต็มช่อง) */
             .monthly-grid { grid-template-columns: repeat(7, 1fr) !important; gap: 4px; padding: 2px;}
             .month-header { display: block !important; font-size: 11px; padding: 4px 0; border-radius: 6px; } 
-            .month-day-card { min-height: 55px; padding: 4px; border-radius: 8px; justify-content: center; align-items: center;}
-            .m-date-num { font-size: 16px; margin: 0; margin-bottom: 2px;}
+            .month-day-card { min-height: 60px; padding: 4px; border-radius: 10px; align-items: center; justify-content: center;}
+            .m-date-num { font-size: 18px; margin: 0; margin-bottom: 2px;}
             .m-day-name-mobile { display: none !important; } 
-            .m-status-text { font-size: 10px; padding: 2px; border-radius: 4px; line-height: 1; letter-spacing: 0;}
+            .m-status-text { font-size: 9px; padding: 2px 4px; border-radius: 4px;}
             
-            .modal-content { padding: 25px; border-radius: 32px; margin: 15px;}
+            .modal-content { padding: 25px; border-radius: 24px; margin: 15px;}
         }
 
         .admin-menu-section { display: none; flex-direction: column; gap: 6px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--input-border); }
@@ -280,7 +299,7 @@
 
     <div class="detail-panel glass" id="rightDetailPanel">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px dashed var(--input-border); padding-bottom: 10px;">
-            <h3 id="panelModalTitle" style="margin:0; color:var(--text-main); font-size: 16px;">📋 ข้อมูลการจอง</h3>
+            <h3 id="panelModalTitle" style="margin:0; color:var(--text-main); font-size: 18px;">📋 ข้อมูลการจอง</h3>
         </div>
         <div id="panelDetailsContainer" style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
             <div style="text-align:center; padding: 40px 10px; color: var(--text-muted); opacity: 0.6;">
@@ -315,7 +334,7 @@
 
         <div id="hourlyInputs" style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700; color:var(--primary); margin-left:5px;">เวลาเริ่ม</label>
+                <label style="font-size:13px; font-weight:700; color:var(--primary); margin-left:5px;">เวลาเริ่ม</label>
                 <select id="startTime">
                     <option value="08:00">08:00</option><option value="09:00">09:00</option>
                     <option value="10:00">10:00</option><option value="11:00">11:00</option>
@@ -325,7 +344,7 @@
                 </select>
             </div>
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700; color:var(--color-booked); margin-left:5px;">เวลาสิ้นสุด</label>
+                <label style="font-size:13px; font-weight:700; color:var(--color-booked); margin-left:5px;">เวลาสิ้นสุด</label>
                 <select id="endTime">
                     <option value="09:00">09:00</option><option value="10:00">10:00</option>
                     <option value="11:00">11:00</option><option value="12:00">12:00</option>
@@ -502,7 +521,7 @@
         return h + (m / 60);
     }
 
-    // ================= Weekly View (UI เดิม 10 ช่องเลื่อนแนวนอน) =================
+    // ================= Weekly View =================
     function renderWeek() {
         const grid = document.getElementById('weeklyGrid');
         grid.innerHTML = '';
@@ -573,7 +592,7 @@
                     let origU = uName; let origT = tName;
                     let backup = getBackupData(b);
                     if (backup) { origU = backup.User || '-'; origT = backup.Team || '-'; }
-                    infoText = `เดิม: ${origU} | ${origT}`; // โชว์เหมือนในภาพ
+                    infoText = `เดิม: ${origU} | ${origT}`;
                 } else { 
                     slotClass = 'booked'; statusLabel = 'เต็ม'; 
                     infoText = `${uName} | ${tName}`;
@@ -595,7 +614,7 @@
         return html;
     }
 
-    // ================= Monthly View (Solid Colors 30 วัน โชว์ครบในมือถือ) =================
+    // ================= Monthly View =================
     function renderMonth() {
         const grid = document.getElementById('monthlyGrid');
         const headers = Array.from(grid.querySelectorAll('.month-header'));
@@ -621,22 +640,28 @@
             
             if (holiday) {
                 cardClass += ' m-holiday-card';
-                statusText = holiday; // ในมือถืออาจจะโดนตัดคำ แต่สีช่วยบอกได้
+                statusText = holiday;
             } else {
                 const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
                 let validBookings = dayData.filter(b => (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise'));
-                let activeCount = validBookings.length;
+                
                 let hasRevise = validBookings.some(b => b.Status === 'pending_revise');
+                
+                // คำนวณหา "เต็มวัน" หรือ "มีคิวจอง" (สมมติเต็มวันคือจองรวมกันเกินหรือเท่ากับ 10 ชั่วโมง)
+                let totalBookedHours = 0;
+                validBookings.forEach(b => {
+                    totalBookedHours += (timeToDecimal(b.StopTime) - timeToDecimal(b['Start Time']));
+                });
 
-                if (hasRevise) { cardClass += ' m-revise-card'; statusText = 'รอแก้ไข'; }
-                else if (activeCount >= 10) { cardClass += ' m-full-card'; statusText = 'เต็มแล้ว'; }
-                else if (activeCount > 0) { cardClass += ' m-partial-card'; statusText = 'มีคิวจอง'; }
-                else { cardClass += ' m-free-card'; statusText = 'ว่าง'; }
+                if (hasRevise) { cardClass += ' m-revise-card'; statusText = '✏️ รอแก้ไข'; }
+                else if (totalBookedHours >= 10) { cardClass += ' m-full-card'; statusText = '🔒 เต็มวัน'; }
+                else if (totalBookedHours > 0) { cardClass += ' m-partial-card'; statusText = '🔥 มีคิวจอง'; }
+                else { cardClass += ' m-free-card'; statusText = '✨ ว่าง'; }
             }
 
             const card = document.createElement('div');
             card.className = cardClass;
-            // เมื่อเป็นรายเดือน กดช่องไหน ให้เรียก showDetails แบบแสดง Pop-up (false = ไม่ prevent Modal)
+            // เมื่อเป็นรายเดือน กดช่องไหน ให้เรียก showDetails แบบแสดง Pop-up เลย (false = ไม่ prevent Modal)
             card.onclick = () => showDetails(dateStr, false); 
             
             let content = `
@@ -650,7 +675,7 @@
         }
     }
 
-    // ================= การจัดการการคลิกและแสดงรายละเอียด =================
+    // ================= การจัดการการคลิกและแสดงรายละเอียด (Panel & Modal) =================
     function handleSlotClick(dateStr, hour, slotClass) {
         showDetails(dateStr, true); // แสดงข้อมูลด้านขวา (บนจอใหญ่)
         
@@ -783,7 +808,7 @@
         if(containerModal) containerModal.innerHTML = html;
         if(containerPanel) containerPanel.innerHTML = html;
 
-        // บังคับเปิด Pop-up หากเป็นการเปิดจากมือถือ หรือจงใจเรียกด้วยคลิกที่การ์ด
+        // បังคับเปิด Pop-up หากเป็นการเปิดจากมือถือ หรือจงใจเรียกด้วยคลิกที่การ์ดในรายเดือน
         if (!preventModal && window.innerWidth <= 1080) {
             document.getElementById('dayDetailsModal').classList.add('show');
         }
