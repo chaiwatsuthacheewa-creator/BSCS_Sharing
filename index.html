@@ -405,6 +405,21 @@
         return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim();
     }
 
+    function getBackupData(b) {
+        let backupStr = b.Backup || b.backup || b.BACKUP || b['Column 12'];
+        if (!backupStr) {
+            for (let key in b) {
+                if (typeof b[key] === 'string' && b[key].includes('{"Date"')) {
+                    backupStr = b[key]; break;
+                }
+            }
+        }
+        if (backupStr) {
+            try { return JSON.parse(backupStr); } catch(e) {}
+        }
+        return null;
+    }
+
     function toggleTheme() {
         const body = document.body;
         const btn = document.getElementById('themeBtn');
@@ -545,11 +560,11 @@
                     let origU = uName, origT = tName, origP = phone;
                     let revU = uName, revT = tName, revP = phone;
                     
-                    if (b.Backup) {
-                        try {
-                            let backup = JSON.parse(b.Backup);
-                            origU = backup.User || '-'; origT = backup.Team || '-'; origP = (backup.Phone||"").replace(/'/g,'');
-                        } catch(e) {}
+                    let backup = getBackupData(b);
+                    if (backup) {
+                        origU = backup.User || '-';
+                        origT = backup.Team || '-';
+                        origP = (backup.Phone||"").replace(/'/g,'');
                     }
                     
                     infoHtml = `
@@ -730,11 +745,11 @@
                     let origU = b.User, origT = teamName, origP = b.Phone;
                     let revU = b.User, revT = teamName, revP = b.Phone;
                     
-                    if (b.Backup) {
-                        try {
-                            let backup = JSON.parse(b.Backup);
-                            origU = backup.User || '-'; origT = backup.Team || '-'; origP = (backup.Phone||"").replace(/'/g,'');
-                        } catch(e) {}
+                    let backup = getBackupData(b);
+                    if (backup) {
+                        origU = backup.User || '-';
+                        origT = backup.Team || '-';
+                        origP = (backup.Phone||"").replace(/'/g,'');
                     }
                     
                     infoHtml = `
