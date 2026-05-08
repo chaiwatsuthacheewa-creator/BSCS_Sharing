@@ -71,23 +71,25 @@
         .glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; box-shadow: var(--shadow-premium); }
         .app-container { display: flex; gap: 15px; width: 100%; height: 100vh; padding: 15px; align-items: stretch; }
 
-        /* Sidebar (Left) */
+        /* Sidebar */
         .sidebar { width: 220px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
         .sidebar .title-box { text-align: center; border-bottom: 1px solid var(--input-border); padding-bottom: 15px; margin-bottom: 15px; }
         .title { margin: 0; font-size: 20px; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 8px;}
         .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 8px; background: var(--header-bg); padding: 8px; border-radius: 8px; font-weight: 500;}
         
+        @keyframes blinkWarning { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .status-syncing { margin-top:6px; display:inline-block; padding:4px 10px; border-radius:10px; font-weight:700; font-size:11px; background: rgba(245, 158, 11, 0.15); color: #f59e0b !important; animation: blinkWarning 1s infinite; }
+        .status-online { margin-top:6px; display:inline-block; padding:4px 10px; border-radius:10px; font-weight:700; font-size:11px; background: rgba(16, 185, 129, 0.15); color: var(--color-free) !important; }
+        .status-offline { margin-top:6px; display:inline-block; padding:4px 10px; border-radius:10px; font-weight:700; font-size:11px; background: rgba(239, 68, 68, 0.15); color: #ef4444 !important; }
+
         .time-container { text-align: center; margin: auto 0; }
         #clock { font-size: 32px; font-weight: 600; color: var(--text-main); letter-spacing: -1px; margin: 0;}
         #dateDisplay { font-size: 13px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
 
         .sidebar-actions { display: flex; flex-direction: column; gap: 10px; }
-
-        /* Detail Panel (Right) */
         .detail-panel { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
-
-        /* Main Content (Center) */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
+        
         .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; margin-bottom: 15px; flex-shrink: 0; }
         .week-control { display: flex; align-items: center; gap: 8px; background: var(--header-bg); padding: 4px; border-radius: 12px; position: relative; }
         .month-selector { font-size: 16px; font-weight: 700; color: var(--primary); font-family: 'Kanit'; background: transparent; border: none; outline: none; cursor: pointer; padding: 4px 8px; }
@@ -100,17 +102,20 @@
         .view-btn { padding: 6px 14px; border: none; background: transparent; border-radius: 8px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: 0.2s; font-size: 13px;}
         .view-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); } 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); } }
-        .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
+        @keyframes pulseGlow { 
+            0% { box-shadow: 0 0 5px var(--primary), inset 0 0 5px var(--primary); border-color: var(--primary); } 
+            50% { box-shadow: 0 0 15px var(--primary), inset 0 0 10px var(--primary); border-color: #fff; } 
+            100% { box-shadow: 0 0 5px var(--primary), inset 0 0 5px var(--primary); border-color: var(--primary); } 
+        }
+        .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 1.5s infinite alternate !important; background: rgba(139, 92, 246, 0.05); }
 
-        /* ================= WEEKLY GRID (แถวยาว เลื่อนแนวนอน) ================= */
+        /* Weekly Grid */
         .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
         
         .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 90px; transition: 0.2s; align-items: stretch; overflow: hidden;}
-        
         .day-label { flex: 0 0 90px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; text-align: center;}
         .day-label:hover { filter: brightness(0.95); }
         .day-name { font-size: 14px; font-weight: 700; color: var(--text-main); line-height: 1.2; margin-bottom: 2px;}
@@ -120,62 +125,48 @@
         .slots-wrapper::-webkit-scrollbar { height: 6px; }
         .slots-wrapper::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         
-        .time-slot { 
-            flex: 0 0 135px; 
-            display: flex; flex-direction: column; 
-            padding: 8px 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; 
-            background: var(--card-bg); border: 1px solid var(--glass-border); 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative;
-        }
+        .time-slot { flex: 0 0 135px; display: flex; flex-direction: column; padding: 8px 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative;}
         .time-slot:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08);}
+        .slot-time-label { font-weight: 700; font-size: 10px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9;}
         
-        .slot-time-label { font-weight: 700; font-size: 10px; color: var(--text-main); margin-bottom: 8px; opacity: 0.8;}
+        .w-status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+        .w-status-badge svg { width: 12px; height: 12px; flex-shrink: 0;}
         
-        /* Outline Minimal Style สำหรับสัปดาห์ */
-        .badge-outline { 
-            font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 6px; 
-            display: inline-flex; align-items: center; justify-content: center; gap: 5px;
-            margin: auto; background: transparent; border: 1.5px solid; white-space: nowrap;
-        }
-        .badge-outline svg { width: 12px; height: 12px; flex-shrink: 0; }
-        
-        .badge-outline.free { border-color: var(--color-free); color: var(--color-free); }
-        .badge-outline.pend { border-color: var(--color-partial); color: var(--color-partial); }
-        .badge-outline.rev { border-color: var(--color-revise); color: var(--color-revise); }
-        .badge-outline.book { border-color: var(--color-booked); color: var(--color-booked); }
-
-        .slot-info-bottom { font-size: 10px; color: var(--text-main); margin-top: auto; line-height: 1.4; opacity: 0.9; font-weight: 500;}
+        .slot-info-bottom { font-size: 10px; color: var(--text-main); margin-top: auto; line-height: 1.3; word-break: break-word;}
         .slot-info-bottom.revise { border: 1px dashed var(--color-revise); padding: 4px; border-radius: 6px; margin-top: 4px; background: rgba(139, 92, 246, 0.05); color: var(--color-revise);}
         .slot-action-bottom { text-align: right; font-size: 10px; color: var(--color-free); opacity: 0.9; margin-top: auto; font-weight: 600;}
 
         .time-slot.free { border-top: 4px solid var(--color-free); }
+        .badge-free { background: linear-gradient(135deg, var(--color-free), #059669); }
         .time-slot.pending { border-top: 4px solid var(--color-partial); }
+        .badge-pending { background: linear-gradient(135deg, var(--color-partial), #d97706); }
         .time-slot.pending_revise { border-top: 4px solid var(--color-revise); }
+        .badge-revise { background: linear-gradient(135deg, var(--color-revise), #7c3aed); }
         .time-slot.booked { border-top: 4px solid var(--color-booked); }
-        .time-slot.disabled { border-top: 4px solid #94a3b8; background: var(--header-bg); opacity: 0.7; cursor: not-allowed; }
-        .time-slot.disabled-red { border-top: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); opacity: 0.7; cursor: not-allowed; }
+        .badge-booked { background: linear-gradient(135deg, var(--color-booked), #e11d48); } 
+        .time-slot.disabled { border-top: 4px solid var(--color-holiday); background: var(--header-bg); opacity: 0.8; cursor: not-allowed; }
 
-        /* ================= MONTHLY GRID (Soft Modern Pro 30 วัน สีเข้มขึ้นนิดนึง) ================= */
-        .monthly-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
+        /* Monthly Grid */
+        .monthly-grid { display: none; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
         .month-header { text-align: center; font-weight: 700; padding: 8px; background: var(--header-bg); border-radius: 12px; color: var(--text-main); font-size: 14px;}
-        
-        .month-day-card { border-radius: 14px; padding: 8px; min-height: 90px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); align-items: center; justify-content: center; text-align: center;}
-        .month-day-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); filter: brightness(1.05);}
-        
-        .m-date-num { font-size: 24px; font-weight: 700; margin-bottom: 4px; line-height: 1; color: inherit;}
-        .m-status-text { font-size: 13px; font-weight: 700; background: transparent; padding: 0; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: inherit; letter-spacing: 0.3px;}
-        .m-day-name-mobile { display: none; font-size: 12px; font-weight: 500; opacity: 0.8; margin-bottom: 2px; color: inherit;}
+        .month-day-card { border-radius: 14px; padding: 8px; min-height: 90px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid var(--glass-border); background: var(--card-bg); min-width: 0; overflow: hidden;}
+        .month-day-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-color: var(--primary);}
+        .m-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid var(--header-bg);}
+        .m-date-num { font-size: 18px; font-weight: 700; margin: 0; color: var(--text-main);}
+        .m-day-name-mobile { display: none; font-size: 12px; font-weight: 500; opacity: 0.8; margin-bottom: 2px; color: var(--text-main);}
+        .month-day-card.m-weekend { opacity: 0.65; }
+        .month-day-card.m-weekend:hover { opacity: 0.9; }
 
-        /* 🔥 Soft Modern Pro (สีอ่อน 25% ขอบเข้ม ตัวหนังสือเข้ม) 🔥 */
-        .m-free-card { background: rgba(16, 185, 129, 0.25) !important; color: var(--color-free) !important; border: 1px solid rgba(16, 185, 129, 0.4) !important;}
-        .m-partial-card { background: rgba(245, 158, 11, 0.25) !important; color: var(--color-partial) !important; border: 1px solid rgba(245, 158, 11, 0.4) !important;}
-        .m-revise-card { background: rgba(139, 92, 246, 0.25) !important; color: var(--color-revise) !important; border: 1px solid rgba(139, 92, 246, 0.4) !important;}
-        .m-full-card { background: rgba(239, 68, 68, 0.25) !important; color: var(--color-booked) !important; border: 1px solid rgba(239, 68, 68, 0.4) !important;}
-        .m-holiday-card { background: rgba(100, 116, 139, 0.15) !important; color: var(--text-muted) !important; border: 1px solid rgba(100, 116, 139, 0.2) !important;}
+        .ampm-container { display: flex; flex-direction: column; gap: 4px; width: 100%; margin-top: auto; }
+        .ampm-badge { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; font-weight: 600; color: #fff; padding: 4px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-shadow: 0 1px 2px rgba(0,0,0,0.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+        .ampm-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+        .ampm-text { flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; }
 
-        /* ลดความสว่างวันเสาร์-อาทิตย์ ให้ดูเบาลง */
-        .m-weekend { opacity: 0.55; }
-        .m-weekend:hover { opacity: 0.8; }
+        .ampm-badge.free { background: linear-gradient(135deg, var(--color-free), #059669); }
+        .ampm-badge.pending { background: linear-gradient(135deg, var(--color-partial), #d97706); }
+        .ampm-badge.revise { background: linear-gradient(135deg, var(--color-revise), #7c3aed); }
+        .ampm-badge.booked { background: linear-gradient(135deg, var(--color-booked), #e11d48); }
+        .ampm-badge.holiday { background: linear-gradient(135deg, var(--color-holiday), #475569); }
 
         /* Buttons & Inputs */
         .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 12px; border: none; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 14px; width: 100%; color: #fff;}
@@ -188,7 +179,6 @@
         input, select, textarea { width: 100%; padding: 10px 12px; margin: 6px 0 12px; border-radius: 10px; border: 1px solid var(--input-border); background: var(--glass-bg); color: var(--text-main); font-family: 'Kanit'; font-size: 13px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); font-weight: 500;}
         input:focus, select:focus, textarea:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 0 4px var(--primary-glow); }
         textarea { min-height: 80px; resize: vertical; }
-        select option { background: var(--card-bg); color: var(--text-main); }
 
         /* Modals & Toast */
         .modal { position: fixed; inset: 0; background: var(--modal-overlay); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: 0.3s; padding: 20px; }
@@ -203,13 +193,10 @@
         @media (max-width: 1080px) {
             html, body { overflow-y: auto; height: auto; min-height: 100dvh; }
             .app-container { flex-direction: column; height: auto; padding: 15px; padding-bottom: 110px; } 
-            
             .detail-panel { display: none !important; }
-            
             .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 20px; }
             .time-container { display: none; }
-            .sidebar-actions { position: fixed; bottom: 0; left: 0; right: 0; flex-direction: row; background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 15px 20px; z-index: 100; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.08); }
-            
+            .sidebar-actions { position: fixed; bottom: 0; left: 0; right: 0; flex-direction: row; background: var(--glass-bg); backdrop-filter: blur(25px); padding: 15px 20px; z-index: 100; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.08); }
             .weekly-grid { padding-bottom: 0;}
             .day-row { flex-direction: column; border-radius: 16px; }
             .day-label { width: 100%; flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid var(--glass-border); border-radius: 16px 16px 0 0; padding: 12px 15px; }
@@ -223,18 +210,26 @@
             .view-toggle { width: 100%; }
             .view-btn { flex: 1; text-align: center; }
 
-            /* Monthly Mobile - ปรับให้พอดี 30 วันในจอเดียว ไม่เลื่อน */
-            .monthly-grid { grid-template-columns: repeat(7, 1fr) !important; gap: 4px; padding: 2px;}
-            .month-header { display: block !important; font-size: 10px; padding: 4px 0; border-radius: 6px; margin-bottom: 2px;} 
-            .month-day-card { min-height: 55px; padding: 4px; border-radius: 8px; justify-content: flex-start; align-items: center;}
-            .m-date-num { font-size: 15px; margin-bottom: 2px;}
+            .monthly-grid { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 2px;}
+            .month-header { display: block !important; font-size: 11px; padding: 4px 0; border-radius: 6px; margin-bottom: 2px;} 
+            .month-day-card { min-height: 60px; padding: 4px; border-radius: 8px; justify-content: flex-start; align-items: center; min-width: 0;}
+            .m-date-num { font-size: 14px; margin-bottom: 2px;}
             .m-day-name-mobile { display: none !important; } 
-            .m-status-text { font-size: 9px; line-height: 1; }
+            
+            .ampm-container { gap: 2px; width: 100%;}
+            .ampm-badge { font-size: 9px; padding: 2px; border-radius: 4px; gap: 2px; width: 100%; max-width: 100%;}
+            .ampm-badge svg { width: 10px; height: 10px; }
+            .ampm-text { display: none; } 
             
             .modal-content { padding: 25px; border-radius: 32px; margin: 15px;}
         }
 
         .admin-menu-section { display: none; flex-direction: column; gap: 6px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--input-border); }
+        
+        /* สไตล์ปุ่ม Tab ในหน้า Admin */
+        .tab-btn { flex: 1; padding: 10px; border-radius: 10px; font-weight: 600; font-family: 'Kanit'; cursor: pointer; transition: 0.2s; font-size: 13px; border: 1px solid var(--input-border); background: var(--btn-outline-bg); color: var(--text-main); position: relative;}
+        .tab-btn.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 4px 12px var(--primary-glow);}
+        .badge-count { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 10px; border: 2px solid var(--card-bg); display: none;}
     </style>
 </head>
 <body>
@@ -244,6 +239,8 @@
     <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></symbol>
     <symbol id="icon-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></symbol>
     <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></symbol>
 </svg>
 
 <div id="toastContainer" class="toast-container"></div>
@@ -257,7 +254,7 @@
             </div>
             <div class="subtitle">
                 BSCS_GNR | 📞 3262-3264<br>
-                <div style="margin-top:6px; display:inline-block; background:rgba(16, 185, 129, 0.15); color:var(--color-free); padding:4px 10px; border-radius:10px; font-weight:700; font-size:11px;">🟢 ONLINE</div>
+                <div id="connStatus" class="status-syncing">⏳ กำลังซิงค์ข้อมูล...</div>
             </div>
         </div>
         
@@ -288,7 +285,6 @@
                     <label for="dateJump" class="btn-icon" style="margin: 0; background: transparent; box-shadow: none; font-size: 20px; border:none;" title="เลือกวันที่">📅</label>
                     <input type="date" id="dateJump" class="hidden-date-picker" onchange="jumpToDate(this.value)">
                 </div>
-                
                 <button class="btn-icon" onclick="changeDateRange(1)">▶</button>
             </div>
             
@@ -388,7 +384,7 @@
 
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('bookingModal')">ยกเลิก</button>
-            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
+            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการบันทึก</button>
         </div>
     </div>
 </div>
@@ -406,10 +402,17 @@
 </div>
 
 <div id="adminDashModal" class="modal">
-    <div class="modal-content" style="max-width: 650px;">
+    <div class="modal-content" style="max-width: 700px;">
         <h3 style="margin-top:0; font-size: 20px; color:var(--primary);">🛡️ จัดการคิวจอง (<span id="dashTeamLabel"></span>)</h3>
-        <div style="color:var(--text-muted); margin-bottom: 15px; font-size: 13px; font-weight:600;">รายการขออนุมัติและรายการที่อนุมัติแล้ว</div>
-        <div id="pendingListContainer" style="max-height: 50vh; overflow-y: auto; padding-right: 5px;"></div>
+        
+        <div style="display:flex; gap:10px; margin-bottom:15px; background:var(--header-bg); padding:5px; border-radius:12px;">
+            <button class="tab-btn active" id="tabNormal" onclick="switchAdminTab('normal')">📋 คิวจองของทีม</button>
+            <button class="tab-btn" id="tabRevise" onclick="switchAdminTab('revise')">🔔 ขอแทรกคิว <span id="reviseCount" class="badge-count">0</span></button>
+        </div>
+
+        <div id="normalListContainer" style="max-height: 45vh; overflow-y: auto; padding-right: 5px;"></div>
+        <div id="reviseListContainer" style="max-height: 45vh; overflow-y: auto; padding-right: 5px; display:none;"></div>
+        
         <div style="display:flex; gap:10px; margin-top:15px; padding-top:15px; border-top:1px solid var(--input-border);">
             <button class="btn btn-primary" style="flex:1;" onclick="closeModal('adminDashModal')">ปิดหน้าต่าง</button>
         </div>
@@ -435,11 +438,10 @@
     let currentView = 'week'; 
     let currentRefDate = new Date(); 
     let currentAdmin = null; 
+    let currentAdminTab = 'normal';
     let selectedDateStr = new Date().toLocaleDateString('en-CA'); 
 
-    function getTeamName(b) {
-        return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim();
-    }
+    function getTeamName(b) { return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim(); }
 
     function getBackupData(b) {
         let backupStr = b.Backup || b.backup || b.BACKUP || b['Column 12'];
@@ -450,9 +452,7 @@
                 }
             }
         }
-        if (backupStr) {
-            try { return JSON.parse(backupStr); } catch(e) {}
-        }
+        if (backupStr) { try { return JSON.parse(backupStr); } catch(e) {} }
         return null;
     }
 
@@ -531,7 +531,33 @@
         return h + (m / 60);
     }
 
-    // ================= Weekly View =================
+    function analyzeSlot(dayData) {
+        let am = { class: 'free', priority: 0 };
+        let pm = { class: 'free', priority: 0 };
+        
+        const getPriority = (status) => (status === 'approved' || status === 'pending') ? 3 : status === 'pending_revise' ? 4 : status === 'rejected' ? 1 : 0;
+        const getClass = (status) => {
+            if (status === 'approved') return 'booked';
+            if (status === 'pending') return 'pending';
+            if (status === 'pending_revise') return 'revise';
+            if (status === 'rejected') return 'rejected';
+            return 'free';
+        };
+
+        dayData.forEach(b => {
+            if (b.Status === 'cancelled') return;
+            
+            const startH = parseInt(b['Start Time']?.split(':')[0] || 0);
+            const stopH = parseInt(b.StopTime?.split(':')[0] || 0);
+            const prio = getPriority(b.Status);
+            const sClass = getClass(b.Status);
+            
+            if (startH < 12 && stopH > 8) { if(prio > am.priority) { am.class = sClass; am.priority = prio; } }
+            if (startH < 18 && stopH > 12) { if(prio > pm.priority) { pm.class = sClass; pm.priority = prio; } }
+        });
+        return { am, pm };
+    }
+
     function renderWeek() {
         const grid = document.getElementById('weeklyGrid');
         grid.innerHTML = '';
@@ -547,7 +573,6 @@
 
             const row = document.createElement('div');
             row.className = `day-row ${isToday ? 'is-today-highlight' : ''}`;
-            
             row.innerHTML = `
                 <div class="day-label" onclick="showDetails('${dateStr}', true)">
                     <div class="day-name" style="color:${holiday ? 'var(--color-booked)' : (isToday ? 'var(--primary)' : 'var(--text-main)')}">${daysTH[current.getDay()]}</div>
@@ -561,25 +586,14 @@
 
     function renderSlots(dateStr, isHoliday) {
         let html = '';
-        const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
+        const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr && b.Status !== 'cancelled');
+        
         for (let h = 8; h < 18; h++) {
             let endTimeStr = String(h+1).padStart(2,'0') + ":00";
             let timeLabel = `${String(h).padStart(2,'0')}:00 - ${endTimeStr}`;
 
             if (isHoliday) {
-                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', true)">
-                            <div class="slot-time-label">${timeLabel}</div>
-                            <div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted);">หยุด</div>
-                         </div>`;
-                continue;
-            }
-
-            const isCancelled = dayData.some(b => b.Status === 'cancelled' && timeToDecimal(b['Start Time']) < (h+1) && timeToDecimal(b.StopTime) > h);
-            if (isCancelled) {
-                html += `<div class="time-slot disabled-red" onclick="showDetails('${dateStr}', true)">
-                            <div class="slot-time-label">${timeLabel}</div>
-                            <div style="margin:auto; font-size:13px; font-weight:700; color:#ef4444;">ปิดใช้งาน</div>
-                         </div>`;
+                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', true)"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted);">หยุด</div></div>`;
                 continue;
             }
 
@@ -593,45 +607,32 @@
 
                 let slotClass = ''; let statusLabel = ''; let infoText = '';
                 
-                // ใช้ Outline Minimal Style 
                 if (b.Status === 'pending') { 
                     slotClass = 'pending'; 
-                    statusLabel = `<div class="badge-outline pend"><svg><use href="#icon-clock"></use></svg> รออนุมัติ</div>`;
+                    statusLabel = `<div class="w-status-badge badge-pending"><svg><use href="#icon-clock"></use></svg> รออนุมัติ</div>`;
                     infoText = `👤 ${uName} | 🏢 ${tName}`;
                 } else if (b.Status === 'pending_revise') { 
                     slotClass = 'pending_revise'; 
-                    statusLabel = `<div class="badge-outline rev"><svg><use href="#icon-pen"></use></svg> รอแก้ไข</div>`;
+                    statusLabel = `<div class="w-status-badge badge-revise"><svg><use href="#icon-pen"></use></svg> รอแก้ไข</div>`;
                     let origU = uName; let origT = tName;
                     let backup = getBackupData(b);
                     if (backup) { origU = backup.User || '-'; origT = backup.Team || '-'; }
-                    
-                    infoText = `
-                        <div class="slot-info-bottom" style="margin-bottom:2px;">เดิม: 👤 ${origU} | 🏢 ${origT}</div>
-                        <div class="slot-info-bottom revise">แก้โดย: 👤 ${uName} | 🏢 ${tName}</div>
-                    `;
+                    infoText = `<div class="slot-info-bottom" style="margin-bottom:2px;">เดิม: 👤 ${origU} | 🏢 ${origT}</div><div class="slot-info-bottom revise">แก้โดย: 👤 ${uName} | 🏢 ${tName}</div>`;
                 } else { 
                     slotClass = 'booked'; 
-                    statusLabel = `<div class="badge-outline book"><svg><use href="#icon-lock"></use></svg> เต็มแล้ว</div>`;
+                    statusLabel = `<div class="w-status-badge badge-booked"><svg><use href="#icon-lock"></use></svg> เต็มแล้ว</div>`;
                     infoText = `👤 ${uName} | 🏢 ${tName}`;
                 }
 
-                if (b.Status === 'pending_revise') {
-                    html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
-                        <div class="slot-time-label">${timeLabel}</div>
-                        <div style="text-align:left; margin-bottom:4px; margin-top:2px;">${statusLabel}</div>
-                        <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">${infoText}</div>
-                    </div>`;
-                } else {
-                    html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
-                        <div class="slot-time-label">${timeLabel}</div>
-                        ${statusLabel}
-                        <div class="slot-info-bottom">${infoText}</div>
-                    </div>`;
-                }
+                html += `<div class="time-slot ${slotClass}" onclick="handleSlotClick('${dateStr}', ${h}, '${slotClass}')">
+                    <div class="slot-time-label">${timeLabel}</div>
+                    <div style="text-align:${b.Status==='pending_revise'?'left':'center'}; margin-bottom:4px; margin-top:2px;">${statusLabel}</div>
+                    <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end;">${infoText}</div>
+                </div>`;
             } else {
                 html += `<div class="time-slot free" onclick="handleSlotClick('${dateStr}', ${h}, 'free')">
                     <div class="slot-time-label">${timeLabel}</div>
-                    <div class="badge-outline free"><svg><use href="#icon-check"></use></svg> ว่าง</div>
+                    <div style="margin:auto 0; text-align:center;"><div class="w-status-badge badge-free"><svg><use href="#icon-check"></use></svg> ว่าง</div></div>
                     <div class="slot-action-bottom">+ กดเพื่อจอง</div>
                 </div>`;
             }
@@ -639,7 +640,6 @@
         return html;
     }
 
-    // ================= Monthly View =================
     function renderMonth() {
         const grid = document.getElementById('monthlyGrid');
         const headers = Array.from(grid.querySelectorAll('.month-header'));
@@ -665,42 +665,30 @@
             let cardClass = `month-day-card ${isToday ? 'is-today-highlight' : ''}`;
             if (isWeekend) cardClass += ' m-weekend';
             
-            let statusText = '';
-            
-            if (holiday) {
-                cardClass += ' m-holiday-card';
-                statusText = holiday; 
-            } else {
-                const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
-                let validBookings = dayData.filter(b => (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise'));
-                let activeCount = validBookings.length;
-                let hasRevise = validBookings.some(b => b.Status === 'pending_revise');
-
-                if (hasRevise) { cardClass += ' m-revise-card'; statusText = 'รอแก้ไข'; }
-                else if (activeCount >= 10) { cardClass += ' m-full-card'; statusText = 'เต็มแล้ว'; }
-                else if (activeCount > 0) { cardClass += ' m-partial-card'; statusText = 'มีคิวจอง'; }
-                else { cardClass += ' m-free-card'; statusText = 'ว่าง'; }
-            }
-
             const card = document.createElement('div');
             card.className = cardClass;
             card.onclick = () => showDetails(dateStr, false); 
             
-            let content = `
-                <div class="m-day-name-mobile">${dayNameMobile}</div>
-                <div class="m-date-num">${i}</div>
-                <div class="m-status-text">${statusText}</div>
-            `;
+            let content = `<div class="m-card-header"><div class="m-date-num" style="color:${holiday ? 'var(--color-booked)' : 'var(--text-main)'}"><span class="m-day-name-mobile">${dayNameMobile}</span> ${i}</div></div>`;
+
+            if (holiday) {
+                content += `<div class="ampm-container" style="justify-content:center; height:100%;"><div class="ampm-badge holiday" style="width:100%; height:100%;"><span class="ampm-text">${holiday}</span></div></div>`;
+            } else {
+                const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr && b.Status !== 'cancelled');
+                const slots = analyzeSlot(dayData);
+                content += `<div class="ampm-container">
+                    <div class="ampm-badge ${slots.am.class}"><svg><use href="#icon-sun"></use></svg> <span class="ampm-text">เช้า</span></div>
+                    <div class="ampm-badge ${slots.pm.class}"><svg><use href="#icon-moon"></use></svg> <span class="ampm-text">บ่าย</span></div>
+                </div>`;
+            }
             
             card.innerHTML = content;
             grid.appendChild(card);
         }
     }
 
-    // ================= การจัดการการคลิกและแสดงรายละเอียด =================
     function handleSlotClick(dateStr, hour, slotClass) {
         showDetails(dateStr, true); 
-        
         if (slotClass === 'free') {
             openBooking();
             document.getElementById('formDate').value = dateStr;
@@ -709,15 +697,12 @@
             document.getElementById('startTime').value = String(hour).padStart(2,'0') + ":00";
             document.getElementById('endTime').value = String(hour+1).padStart(2,'0') + ":00";
         } else {
-            if (window.innerWidth <= 1080) {
-                document.getElementById('dayDetailsModal').classList.add('show');
-            }
+            if (window.innerWidth <= 1080) document.getElementById('dayDetailsModal').classList.add('show');
         }
     }
 
     function showDetails(dateStr, preventModal = false) {
         selectedDateStr = dateStr; 
-        
         const containerModal = document.getElementById('modalDetailsContainer');
         const containerPanel = document.getElementById('panelDetailsContainer');
         const titleModal = document.getElementById('dayModalTitle');
@@ -729,139 +714,103 @@
         if(titleModal) titleModal.innerHTML = `📅 วันที่ ${thaiDate}`;
         if(titlePanel) titlePanel.innerHTML = `📅 วันที่ ${thaiDate}`;
 
-        const rawData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
+        const rawData = bookings.filter(b => b.Date?.split('T')[0] === dateStr && b.Status !== 'cancelled');
         const dayData = currentAdmin ? rawData : rawData.filter(b => b.Status !== 'rejected');
 
         let html = '';
 
         if (isHoliday) {
             html = `<div style="text-align:center; padding:30px 10px; background:rgba(239,68,68,0.05); border-radius:16px; border:2px solid rgba(239,68,68,0.2);">
-                <div style="font-size:40px; margin-bottom:10px;">🏖️</div>
-                <h3 style="color:var(--color-booked); margin:0 0 5px 0;">ปิดให้บริการ</h3>
-                <p style="color:var(--text-muted); font-size:13px;">วันนี้เป็นวันหยุดนักขัตฤกษ์ (${isHoliday})</p>
-            </div>`;
+                <div style="font-size:40px; margin-bottom:10px;">🏖️</div><h3 style="color:var(--color-booked); margin:0 0 5px 0;">ปิดให้บริการ</h3><p style="color:var(--text-muted); font-size:13px;">วันนี้เป็นวันหยุดนักขัตฤกษ์ (${isHoliday})</p></div>`;
         } else if (dayData.length === 0) {
-            html = `
-                <div style="text-align:center; padding:30px 10px; background:rgba(16,185,129,0.05); border-radius:16px; border:2px dashed rgba(16,185,129,0.3);">
-                    <div style="font-size:40px; margin-bottom:10px;">✨</div>
-                    <h3 style="color:var(--color-free); margin:0 0 10px 0; font-size:18px;">ว่างทั้งวัน!</h3>
-                    <p style="color:var(--text-main); font-size:13px; margin-bottom:15px; font-weight:500;">สามารถเลือกเวลาที่ต้องการจองได้เลยครับ</p>
-                    <button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:100%; font-size:14px; padding:12px;">+ สร้างการจองใหม่</button>
-                </div>
-            `;
+            html = `<div style="text-align:center; padding:30px 10px; background:rgba(16,185,129,0.05); border-radius:16px; border:2px dashed rgba(16,185,129,0.3);">
+                <div style="font-size:40px; margin-bottom:10px;">✨</div><h3 style="color:var(--color-free); margin:0 0 10px 0; font-size:18px;">ว่างทั้งวัน!</h3>
+                <button class="btn btn-primary" onclick="openBookingWithDate('${dateStr}')" style="width:100%; font-size:14px; padding:12px;">+ สร้างการจองใหม่</button></div>`;
         } else {
             html = `<div style="margin-bottom:10px; font-size:14px; font-weight:700; color:var(--text-main);">📋 รายการคิวจอง:</div>`;
             dayData.sort((a,b) => (a['Start Time']||"").localeCompare(b['Start Time']||"")).forEach(b => {
                 
-                let statusText = ''; 
-                let statusColor = 'var(--color-booked)';
-                
-                if (b.Status === 'pending') { 
-                    statusText = `<div class="badge-outline pend" style="margin:0;"><svg><use href="#icon-clock"></use></svg> รออนุมัติ</div>`; 
-                    statusColor = 'var(--color-partial)'; 
-                }
-                else if (b.Status === 'pending_revise') { 
-                    statusText = `<div class="badge-outline rev" style="margin:0;"><svg><use href="#icon-pen"></use></svg> รอแก้ไข</div>`; 
-                    statusColor = 'var(--color-revise)'; 
-                }
-                else if (b.Status === 'rejected') { 
-                    statusText = `<div class="badge-outline" style="border-color:var(--color-rejected); color:var(--color-rejected); margin:0;">ไม่อนุมัติ</div>`; 
-                    statusColor = 'var(--color-rejected)'; 
-                }
-                else if (b.Status === 'cancelled') { 
-                    statusText = `<div class="badge-outline" style="border-color:var(--color-rejected); color:var(--color-rejected); margin:0;">ปิดใช้งาน</div>`; 
-                    statusColor = 'var(--color-rejected)'; 
-                }
-                else { 
-                    statusText = `<div class="badge-outline book" style="margin:0;"><svg><use href="#icon-lock"></use></svg> จองแล้ว</div>`; 
-                }
+                let statusText = 'จองแล้ว'; let statusColor = 'var(--color-booked)';
+                if (b.Status === 'pending') { statusText = 'รออนุมัติ'; statusColor = 'var(--color-partial)'; }
+                else if (b.Status === 'pending_revise') { statusText = 'รอแก้ไข'; statusColor = 'var(--color-revise)'; }
+                else if (b.Status === 'rejected') { statusText = 'ไม่อนุมัติ'; statusColor = 'var(--color-rejected)'; }
 
                 let teamName = getTeamName(b);
-                
+                let backup = getBackupData(b);
+                let origTeam = teamName;
+                if (backup) {
+                    origTeam = (backup.Team || backup['Column 1'] || backup.Column1 || teamName).toString().trim();
+                }
+
                 let canManage = false;
                 if (currentAdmin) {
                     if (currentAdmin.super) canManage = true;
-                    else if (currentAdmin.team.toUpperCase() === teamName.toUpperCase()) canManage = true;
+                    // ให้แอดมินเห็นและจัดการได้ ถ้าคิวเดิมเป็นของทีมตัวเอง หรือ คิวใหม่เป็นของทีมตัวเอง
+                    else if (currentAdmin.team.toUpperCase() === teamName.toUpperCase() || currentAdmin.team.toUpperCase() === origTeam.toUpperCase()) canManage = true;
                 }
 
                 let actionBtns = '';
-                if (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise') {
-                    if (canManage) {
-                        actionBtns = `<div style="margin-top:10px; display:flex; gap:6px; border-top:1px dashed var(--input-border); padding-top:10px; flex-wrap:wrap;">
-                            <button class="btn btn-outline" style="flex:1; padding:6px; font-size:11px; font-weight:600; color:var(--text-main);" onclick="openReviseBooking('${b.ID}')">✏️ แก้ไข</button>
-                            <button class="btn btn-outline" style="flex:1; padding:6px; font-size:11px; font-weight:600; color:var(--color-booked);" onclick="userDeleteBooking('${b.ID}')">🗑️ ยกเลิก</button>
-                        </div>`;
-                    } else if (b.Status !== 'pending_revise') {
-                        actionBtns = `<div style="margin-top:10px; display:flex; gap:6px; border-top:1px dashed var(--input-border); padding-top:10px; flex-wrap:wrap;">
-                            <button class="btn btn-primary" style="flex:1; padding:6px; font-size:11px; font-weight:600; background:var(--color-revise); border:none; color:#fff;" onclick="openReviseBooking('${b.ID}')">✏️ ขอ Revise (แทรกคิว)</button>
-                        </div>`;
+                if (canManage) {
+                    actionBtns = `<div class="admin-action-btns" style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:8px;">`;
+                    if (b.Status === 'pending') {
+                        actionBtns += `<button class="btn" style="flex:1 1 100%; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติ</button>`;
+                    } else if (b.Status === 'pending_revise') {
+                        actionBtns += `<button class="btn" style="flex:1; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติให้แทรก</button>`;
+                        actionBtns += `<button class="btn btn-outline" style="flex:1; color:var(--color-rejected); border-color:var(--color-rejected); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'rejected')">❌ ปฏิเสธ</button>`;
                     }
+                    
+                    if (b.Status === 'approved') {
+                        actionBtns += `<button class="btn btn-outline" style="flex:1; color:var(--text-main); border-color:var(--text-muted); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'edit')">✏️ แก้ไข</button>`;
+                        actionBtns += `<button class="btn btn-outline" style="flex:1; color:var(--color-partial); border-color:var(--color-partial); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'transfer')">🔄 โอนคิว</button>`;
+                    }
+                    if (b.Status !== 'rejected' && b.Status !== 'pending_revise') {
+                        actionBtns += `<button class="btn btn-outline" style="flex:1; color:var(--color-booked); border-color:var(--color-booked); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ ลบ (คืนว่าง)</button>`;
+                    }
+                    actionBtns += `</div>`;
+                } else if (b.Status === 'approved' || b.Status === 'pending') {
+                    actionBtns = `<div style="margin-top:10px; display:flex; gap:6px; border-top:1px dashed var(--input-border); padding-top:10px; flex-wrap:wrap;">
+                        <button class="btn btn-primary" style="flex:1; padding:6px; font-size:11px; font-weight:600; background:var(--color-revise); border:none; color:#fff;" onclick="openReviseBooking('${b.ID}', 'revise')">✏️ ขอแทรกคิว (Revise)</button>
+                    </div>`;
                 }
 
                 let infoHtml = '';
                 if (b.Status === 'pending_revise') {
                     let origU = b.User, origT = teamName, origP = b.Phone;
                     let revU = b.User, revT = teamName, revP = b.Phone;
+                    if (backup) { origU = backup.User || '-'; origT = backup.Team || '-'; origP = (backup.Phone||"").replace(/'/g,''); }
                     
-                    let backup = getBackupData(b);
-                    if (backup) {
-                        origU = backup.User || '-';
-                        origT = backup.Team || '-';
-                        origP = (backup.Phone||"").replace(/'/g,'');
-                    }
-                    
-                    infoHtml = `
-                        <div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px; margin-bottom:6px;">
-                            <div style="font-weight:700; color:var(--text-muted); margin-bottom:2px;">คิวเดิม:</div>
-                            👤 <b>${origU}</b> | 🏢 <b>${origT}</b> | 📞 <b>${origP}</b>
-                        </div>
-                        <div style="font-size:11px; color:var(--color-revise); line-height:1.4; background:rgba(139, 92, 246, 0.05); padding:8px 10px; border-radius:8px; border: 1px dashed var(--color-revise);">
-                            <div style="font-weight:700; margin-bottom:2px;">✏️ ขอแก้ไขคิวโดย:</div>
-                            👤 <b>${revU}</b> | 🏢 <b>${revT}</b> | 📞 <b>${(revP||"").replace(/'/g,'')}</b>
-                        </div>
-                    `;
+                    infoHtml = `<div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px; margin-bottom:6px;">
+                            <div style="font-weight:700; color:var(--text-muted); margin-bottom:2px;">คิวเดิม:</div>👤 <b>${origU}</b> | 🏢 <b>${origT}</b> | 📞 <b>${origP}</b></div>
+                        <div style="font-size:11px; color:var(--color-revise); line-height:1.4; background:rgba(139, 92, 246, 0.05); border: 1px dashed var(--color-revise); padding:8px; border-radius:8px;">
+                            <div style="font-weight:700; margin-bottom:2px;">✏️ ขอแทรก/โอนสิทธิ์ให้:</div>👤 <b>${revU}</b> | 🏢 <b>${revT}</b> | 📞 <b>${(revP||"").replace(/'/g,'')}</b></div>`;
                 } else {
-                    infoHtml = `
-                        <div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px;">
-                            👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone||"").replace(/'/g,'')}</b>
-                        </div>
-                    `;
+                    infoHtml = `<div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px;">
+                            👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone||"").replace(/'/g,'')}</b></div>`;
                 }
 
-                html += `
-                    <div style="background:var(--card-bg); padding:12px; border-radius:16px; margin-bottom:10px; border:1px solid var(--input-border); box-shadow:0 2px 8px rgba(0,0,0,0.02); border-left:6px solid ${statusColor};">
+                html += `<div style="background:var(--card-bg); padding:12px; border-radius:16px; margin-bottom:10px; border:1px solid var(--input-border); box-shadow:0 2px 8px rgba(0,0,0,0.02); border-left:6px solid ${statusColor};">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                             <strong style="color:var(--text-main); font-size:13px; background:var(--header-bg); padding:2px 8px; border-radius:6px;">⏰ ${b['Start Time']} - ${b.StopTime}</strong>
-                            ${statusText}
+                            <span style="font-size:10px; font-weight:700; color:${statusColor}; background:var(--header-bg); padding:2px 8px; border-radius:6px;">${statusText}</span>
                         </div>
                         <div style="color:var(--primary); font-size:14px; font-weight:700; margin-bottom:6px;">📌 ${b.Subject}</div>
                         ${infoHtml}
                         ${actionBtns}
-                    </div>
-                `;
+                    </div>`;
             });
             html += `<button class="btn btn-outline" onclick="openBookingWithDate('${dateStr}')" style="width:100%; padding:12px; border:2px dashed var(--input-border); font-size:13px; background:transparent;">+ สร้างการจองใหม่</button>`;
         }
 
         if(containerModal) containerModal.innerHTML = html;
         if(containerPanel) containerPanel.innerHTML = html;
-
-        if (!preventModal && window.innerWidth <= 1080) {
-            document.getElementById('dayDetailsModal').classList.add('show');
-        }
+        if (!preventModal && window.innerWidth <= 1080) { document.getElementById('dayDetailsModal').classList.add('show'); }
     }
 
     function toggleTimeInputs() { document.getElementById('hourlyInputs').style.display = document.getElementById('bookType').value === 'hourly' ? 'flex' : 'none'; }
-    
     function toggleOtherTeam() {
         const select = document.getElementById('formTeamSelect');
         const otherInput = document.getElementById('formTeamOther');
-        if (select.value === 'อื่นๆ') {
-            otherInput.style.display = 'block';
-        } else {
-            otherInput.style.display = 'none';
-            otherInput.value = '';
-        }
+        if (select.value === 'อื่นๆ') { otherInput.style.display = 'block'; } else { otherInput.style.display = 'none'; otherInput.value = ''; }
     }
 
     function openBooking() { 
@@ -878,14 +827,32 @@
     function openBookingWithDate(d) { closeModal('dayDetailsModal'); document.getElementById('formDate').value = d; openBooking(); }
     function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
-    function openReviseBooking(id) {
+    // ฟังก์ชันเปิดแก้ไขข้อมูล 
+    function openReviseBooking(id, mode = 'revise') {
         closeModal('dayDetailsModal');
+        closeModal('adminDashModal');
         const b = bookings.find(x => x.ID === id);
         if(!b) return;
 
-        document.getElementById('bookingModalTitle').innerText = "✏️ แก้ไขข้อมูลการจอง";
-        document.getElementById('editingId').value = b.ID;
+        if (mode === 'transfer') {
+            document.getElementById('bookingModalTitle').innerText = "🔄 โอนสิทธิ์ / เปลี่ยนคนจอง";
+            document.getElementById('formUser').value = ""; 
+            document.getElementById('formUser').placeholder = "👤 ชื่อผู้รับโอนคิว (คนจองหลักใหม่)";
+            document.getElementById('formPhone').value = "";
+            document.getElementById('formPhone').placeholder = "📞 เบอร์ติดต่อใหม่";
+        } else if (mode === 'edit') {
+            document.getElementById('bookingModalTitle').innerText = "✏️ แก้ไขข้อมูลการจอง";
+            document.getElementById('formUser').value = b.User; 
+            document.getElementById('formPhone').value = (b.Phone||"").replace(/'/g,'');
+        } else {
+            document.getElementById('bookingModalTitle').innerText = "📝 ขอแทรกคิว (Revise)";
+            document.getElementById('formUser').value = ""; 
+            document.getElementById('formUser').placeholder = "👤 ชื่อของคุณ (ผู้ขอแทรก)";
+            document.getElementById('formPhone').value = "";
+            document.getElementById('formPhone').placeholder = "📞 เบอร์ติดต่อของคุณ";
+        }
         
+        document.getElementById('editingId').value = b.ID;
         if(b.Date) document.getElementById('formDate').value = b.Date.split('T')[0];
         document.getElementById('bookType').value = 'hourly';
         toggleTimeInputs();
@@ -894,11 +861,6 @@
         document.getElementById('endTime').value = b.StopTime;
         document.getElementById('formSubject').value = b.Subject.replace(" (Revise)", "");
         document.getElementById('formDetail').value = b.Detail !== "-" ? b.Detail : "";
-        
-        document.getElementById('formUser').value = ""; 
-        document.getElementById('formUser').placeholder = "👤 ชื่อของคุณ (ผู้แก้ไข)";
-        document.getElementById('formPhone').value = "";
-        document.getElementById('formPhone').placeholder = "📞 เบอร์ติดต่อของคุณ";
         
         let tName = getTeamName(b);
         let select = document.getElementById('formTeamSelect');
@@ -912,29 +874,42 @@
             document.getElementById('formTeamOther').value = tName;
         }
 
-        document.getElementById('submitBtn').innerText = "บันทึกการแก้ไข";
+        document.getElementById('submitBtn').innerText = "บันทึกข้อมูล";
         document.getElementById('bookingModal').classList.add('show');
     }
 
-    async function userDeleteBooking(id) {
-        if(!confirm(`คุณต้องการยกเลิกและคืนคิวนี้ให้ว่างใช่หรือไม่?`)) return;
-        closeModal('dayDetailsModal');
-        showToast(`⏳ กำลังยกเลิกคิว...`, "warning");
-        try {
-            await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: 'rejected' }) });
-            showToast(`✅ ยกเลิกคิวเรียบร้อย! (คืนห้องว่าง)`, "success"); 
-            syncDataSilently(); 
-        } catch(e) { showToast(`❌ ดำเนินการล้มเหลว`, "error"); }
-    }
-
-    async function syncDataSilently() {
+    async function syncDataSilently(isInitial = false) {
+        const connStatus = document.getElementById('connStatus');
+        if(isInitial && connStatus) {
+            connStatus.className = 'status-syncing';
+            connStatus.innerHTML = '⏳ กำลังซิงค์ข้อมูล...';
+        }
         try {
             const res = await fetch(API_URL + "?t=" + new Date().getTime());
             bookings = JSON.parse(await res.text());
+            
+            if (isInitial) {
+                currentRefDate = new Date(); 
+                currentMonthOffset = 0;
+                const ms = document.getElementById('monthSelect');
+                if (ms) ms.value = 0;
+            }
+
             renderCurrentView();
             showDetails(selectedDateStr, true);
             if(currentAdmin && document.getElementById('adminDashModal').classList.contains('show')) renderAdminDashboard();
-        } catch (e) { console.log("Sync Error"); }
+            
+            if(connStatus) {
+                connStatus.className = 'status-online';
+                connStatus.innerHTML = '🟢 ONLINE';
+            }
+        } catch (e) { 
+            console.log("Sync Error"); 
+            if(connStatus) {
+                connStatus.className = 'status-offline';
+                connStatus.innerHTML = '🔴 OFFLINE';
+            }
+        }
     }
 
     async function submitBooking() {
@@ -980,41 +955,48 @@
                 closeModal('bookingModal');
                 syncDataSilently();
             } else showToast(result.msg, "error");
-        } catch(e) { showToast("เกิดข้อผิดพลาดในการส่งข้อมูล", "error"); } finally { btn.innerText = "ยืนยันการจอง"; btn.disabled = false; }
+        } catch(e) { showToast("เกิดข้อผิดพลาดในการส่งข้อมูล", "error"); } finally { btn.innerText = "ยืนยันการบันทึก"; btn.disabled = false; }
     }
 
     function openLoginModal() { document.getElementById('loginModal').classList.add('show'); }
-
     function checkLogin() {
         const u = document.getElementById('loginUser').value.toUpperCase(); 
         const p = document.getElementById('loginPass').value;
-        
         if (adminAccounts[u] && adminAccounts[u].pass === p) {
             currentAdmin = adminAccounts[u]; 
             showToast(`✅ ยินดีต้อนรับ Admin ทีม ${currentAdmin.team}`);
             closeModal('loginModal');
-            
             document.getElementById('adminLoginBtn').style.display = 'none';
             document.getElementById('adminMenuSection').style.display = 'flex';
             document.getElementById('adminTeamLabel').innerText = currentAdmin.team;
-            
             renderCurrentView();
             showDetails(selectedDateStr, true);
-        } else {
-            showToast('❌ Username หรือ Password ไม่ถูกต้อง', 'error');
-        }
+        } else { showToast('❌ Username หรือ Password ไม่ถูกต้อง', 'error'); }
     }
 
     function logoutAdmin() {
         currentAdmin = null;
         showToast('👋 ออกจากระบบผู้ดูแลเรียบร้อย');
         closeModal('adminDashModal');
-        
         document.getElementById('adminLoginBtn').style.display = 'flex';
         document.getElementById('adminMenuSection').style.display = 'none';
-        
         renderCurrentView();
         showDetails(selectedDateStr, true);
+    }
+
+    function switchAdminTab(tab) {
+        currentAdminTab = tab;
+        if(tab === 'normal') {
+            document.getElementById('tabNormal').classList.add('active');
+            document.getElementById('tabRevise').classList.remove('active');
+            document.getElementById('normalListContainer').style.display = 'block';
+            document.getElementById('reviseListContainer').style.display = 'none';
+        } else {
+            document.getElementById('tabNormal').classList.remove('active');
+            document.getElementById('tabRevise').classList.add('active');
+            document.getElementById('normalListContainer').style.display = 'none';
+            document.getElementById('reviseListContainer').style.display = 'block';
+        }
     }
 
     function openAdminDashboard() {
@@ -1025,61 +1007,105 @@
     function renderAdminDashboard() {
         if(!currentAdmin) return;
         document.getElementById('dashTeamLabel').innerText = currentAdmin.team;
-        const container = document.getElementById('pendingListContainer');
         
-        let activeBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
+        let allTeamBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
+        
+        // 🌟 แก้ไข: กรองข้อมูลโดยเช็คทั้ง "ทีมเจ้าของคิวเดิม" และ "ทีมที่ขอแทรก"
         if (!currentAdmin.super) {
-            activeBookings = activeBookings.filter(b => getTeamName(b).toUpperCase() === currentAdmin.team.toUpperCase());
+            allTeamBookings = allTeamBookings.filter(b => {
+                let currentTeam = getTeamName(b).toUpperCase();
+                let backup = getBackupData(b);
+                let origTeam = backup ? (backup.Team || backup['Column 1'] || backup.Column1 || currentTeam).toString().trim().toUpperCase() : currentTeam;
+                
+                return currentTeam === currentAdmin.team.toUpperCase() || origTeam === currentAdmin.team.toUpperCase();
+            });
         }
         
-        if (activeBookings.length === 0) { container.innerHTML = '<p style="text-align:center; font-size:14px;">✅ โล่งเลย ไม่มีรายการในระบบ</p>'; return; }
-        container.innerHTML = '';
-        
-        activeBookings.sort((a,b) => {
-            const aWait = (a.Status === 'pending' || a.Status === 'pending_revise');
-            const bWait = (b.Status === 'pending' || b.Status === 'pending_revise');
-            if(aWait && !bWait) return -1;
-            if(!aWait && bWait) return 1;
-            return new Date(b.Date) - new Date(a.Date);
-        }).forEach(b => {
-            const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
-            let teamName = getTeamName(b);
-            
-            let statusBadge = ''; let borderCol = '';
-            if (b.Status === 'pending') { statusBadge = '⚠️ รออนุมัติการจอง'; borderCol = 'var(--color-partial)'; }
-            else if (b.Status === 'pending_revise') { statusBadge = '✏️ รออนุมัติแก้ไขคิว'; borderCol = 'var(--color-revise)'; }
-            else { statusBadge = '🔒 อนุมัติแล้ว'; borderCol = 'var(--color-booked)'; }
+        const normalBookings = allTeamBookings.filter(b => b.Status === 'approved' || b.Status === 'pending');
+        const reviseBookings = allTeamBookings.filter(b => b.Status === 'pending_revise');
 
-            container.innerHTML += `
-                <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--input-border); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid ${borderCol};">
-                    <div style="display:flex; justify-content:space-between;">
-                        <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
-                        <span style="font-size:11px; font-weight:700; color:${borderCol};">${statusBadge}</span>
-                    </div>
-                    <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
-                    <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
-                    <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
-                        ${(b.Status === 'pending' || b.Status === 'pending_revise') ? `<button class="btn btn-success" style="flex:1; padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติ</button>` : ''}
-                        <button class="btn btn-outline" style="flex:1; padding:8px; font-size:12px; color:var(--color-rejected);" onclick="updateStatus('${b.ID}', 'rejected')">❌ ไม่อนุมัติ</button>
-                        ${b.Status === 'approved' ? `<button class="btn btn-outline" style="flex:1; padding:8px; font-size:12px; color:var(--text-muted);" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ ลบคิวนี้</button>` : ''}
-                    </div>
-                </div>`;
-        });
+        const badge = document.getElementById('reviseCount');
+        badge.innerText = reviseBookings.length;
+        badge.style.display = reviseBookings.length > 0 ? 'inline-block' : 'none';
+
+        const normalContainer = document.getElementById('normalListContainer');
+        if (normalBookings.length === 0) { 
+            normalContainer.innerHTML = '<p style="text-align:center; font-size:14px; color:var(--text-muted); padding:30px;">✅ ไม่มีคิวจองในระบบ</p>'; 
+        } else {
+            normalContainer.innerHTML = '';
+            normalBookings.sort((a,b) => new Date(a.Date) - new Date(b.Date)).forEach(b => {
+                const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
+                let teamName = getTeamName(b);
+                let statusBadge = b.Status === 'pending' ? '⚠️ รออนุมัติ' : '🔒 อนุมัติแล้ว'; 
+                let borderCol = b.Status === 'pending' ? 'var(--color-partial)' : 'var(--color-booked)';
+
+                normalContainer.innerHTML += `
+                    <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--input-border); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid ${borderCol};">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
+                            <span style="font-size:11px; font-weight:700; color:${borderCol};">${statusBadge}</span>
+                        </div>
+                        <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
+                        <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
+                        
+                        <div class="admin-action-btns" style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:8px;">
+                            ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); padding:8px; font-size:13px; color:#fff;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติการจอง</button>` : ''}
+                            
+                            <button class="btn btn-outline" style="flex:1; color:var(--text-main); border-color:var(--text-muted); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'edit')">✏️ แก้ไข</button>
+                            <button class="btn btn-outline" style="flex:1; color:var(--color-partial); border-color:var(--color-partial); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'transfer')">🔄 โอนคิว</button>
+                            <button class="btn btn-outline" style="flex:1; color:var(--color-booked); border-color:var(--color-booked); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'cancelled')">🗑️ ลบ (คืนว่าง)</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        const reviseContainer = document.getElementById('reviseListContainer');
+        if (reviseBookings.length === 0) { 
+            reviseContainer.innerHTML = '<p style="text-align:center; font-size:14px; color:var(--text-muted); padding:30px;">✅ ไม่มีรายการขอแทรกคิว</p>'; 
+        } else {
+            reviseContainer.innerHTML = '';
+            reviseBookings.sort((a,b) => new Date(a.Date) - new Date(b.Date)).forEach(b => {
+                const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
+                let teamName = getTeamName(b);
+                let backup = getBackupData(b);
+                let origU = backup ? backup.User || '-' : '-';
+                let origT = backup ? (backup.Team || backup['Column 1'] || backup.Column1 || '-') : '-';
+
+                reviseContainer.innerHTML += `
+                    <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--color-revise); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid var(--color-revise);">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
+                            <span style="font-size:11px; font-weight:700; color:var(--color-revise);">🔔 ขอแทรกคิว</span>
+                        </div>
+                        <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">คิวเดิม: 👤 ${origU} | 🏢 ${origT}</div>
+                        <div style="font-size:12px; color:var(--text-main); background:rgba(139, 92, 246, 0.05); border: 1px dashed var(--color-revise); padding:8px; border-radius:8px;">
+                            <strong>ขอแทรกโดย:</strong> 👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}
+                        </div>
+                        
+                        <div class="admin-action-btns" style="margin-top: 15px; display:flex; gap:10px;">
+                            <button class="btn" style="flex:1; background:var(--color-free); padding:8px; font-size:12px; color:#fff;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติให้แทรก</button>
+                            <button class="btn btn-outline" style="flex:1; color:var(--color-rejected); border-color:var(--color-rejected); padding:8px; font-size:12px;" onclick="updateStatus('${b.ID}', 'rejected')">❌ ปฏิเสธ</button>
+                        </div>
+                    </div>`;
+            });
+        }
     }
 
     async function updateStatus(id, status) {
-        let actionWord = status === 'approved' ? 'อนุมัติ' : 'ปฏิเสธ/ยกเลิก';
-        if(!confirm(`ยืนยันการ ${actionWord} รายการนี้?`)) return;
-        closeModal('adminDashModal'); 
-        showToast(`⏳ กำลังประมวลผล...`, "warning");
+        let msg = status === 'approved' ? 'อนุมัติ' : status === 'rejected' ? 'ปฏิเสธ' : 'ลบ (คืนห้องว่าง)';
+        if(!confirm(`ยืนยันการดำเนินการ: ${msg} ?`)) return;
+        closeModal('dayDetailsModal'); 
+        closeModal('adminDashModal');
+        showToast(`กำลัง ${msg}...`, "warning");
         try {
             await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: status }) });
-            showToast(`✅ อัปเดตข้อมูลเรียบร้อย!`, "success"); syncDataSilently(); 
-        } catch(e) { showToast(`❌ อัปเดตล้มเหลว`, "error"); }
+            showToast(`✅ ${msg} เรียบร้อยแล้ว`, "success"); syncDataSilently(false); 
+        } catch(e) { showToast(`❌ ดำเนินการล้มเหลว`, "error"); }
     }
 
-    syncDataSilently();
-    setInterval(syncDataSilently, 10000);
+    syncDataSilently(true);
+    setInterval(() => syncDataSilently(false), 10000);
 </script>
 </body>
 </html>
