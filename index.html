@@ -118,13 +118,13 @@
         }
         .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 1.5s infinite alternate !important; background: rgba(139, 92, 246, 0.05); }
 
-        /* Weekly Grid */
+        /* ================= WEEKLY GRID ================= */
         .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
         
-        .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 90px; transition: 0.2s; align-items: stretch; overflow: hidden;}
+        .day-row { display: flex; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--glass-border); min-height: 95px; transition: 0.2s; align-items: stretch; overflow: hidden;}
         .day-label { flex: 0 0 90px; padding: 10px; background: var(--card-bg); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; text-align: center;}
         .day-label:hover { filter: brightness(0.95); }
         .day-name { font-size: 14px; font-weight: 700; color: var(--text-main); line-height: 1.2; margin-bottom: 2px;}
@@ -136,6 +136,7 @@
         
         .time-slot { flex: 0 0 135px; display: flex; flex-direction: column; padding: 8px 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative;}
         .time-slot:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08);}
+        
         .slot-time-label { font-weight: 700; font-size: 11.5px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9; text-align: center; letter-spacing: 0.5px;}
         
         .w-status-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
@@ -221,26 +222,17 @@
 
             .sidebar-actions { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--input-border); padding-top: 10px; margin-top: 0; gap: 8px;}
 
-            /* Monthly Mobile - ปรับปรุงความสว่างและความโดดเด่น */
             .monthly-grid { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 2px;}
             .month-header { display: block !important; font-size: 12px; padding: 6px 0; border-radius: 6px; margin-bottom: 2px; background: rgba(255,255,255,0.08);} 
             .month-day-card { min-height: 65px; padding: 4px; border-radius: 8px; justify-content: flex-start; align-items: center; min-width: 0; border: 1px solid rgba(255,255,255,0.15); background: var(--glass-bg);}
-            .month-day-card.m-weekend { opacity: 0.95; } /* เพิ่มความสว่างให้วันหยุดในมือถือ */
+            .month-day-card.m-weekend { opacity: 0.95; } 
             .m-date-num { font-size: 15px; margin-bottom: 3px; font-weight: 700; color: #ffffff;}
             .m-day-name-mobile { display: none !important; } 
             
             .ampm-container { gap: 3px; width: 100%;}
-            /* ปรับให้เห็นคำว่าเช้าบ่ายและไอคอนครบในมือถือ พร้อมแสงเงาให้ป๊อปอัป */
-            .ampm-badge { font-size: 9px; padding: 4px 2px; border-radius: 4px; gap: 2px; width: 100%; max-width: 100%; flex-direction: row; box-shadow: 0 2px 6px rgba(0,0,0,0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.4);}
+            .ampm-badge { font-size: 8px; padding: 4px 2px; border-radius: 4px; gap: 2px; width: 100%; max-width: 100%; flex-direction: row; box-shadow: 0 2px 6px rgba(0,0,0,0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.4);}
             .ampm-badge svg { width: 10px; height: 10px; }
             .ampm-text { display: inline-block; font-size: 9px; letter-spacing: 0; font-weight: 700;} 
-            
-            /* Override สีสถานะเฉพาะมือถือให้สว่างและสีสด (Vibrant) ขึ้น */
-            .ampm-badge.free { background: linear-gradient(135deg, #34d399, #10b981); color: #fff;}
-            .ampm-badge.pending { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #fff;}
-            .ampm-badge.revise { background: linear-gradient(135deg, #a78bfa, #8b5cf6); color: #fff;}
-            .ampm-badge.booked { background: linear-gradient(135deg, #f87171, #ef4444); color: #fff;}
-            .ampm-badge.holiday { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff;}
             
             .status-legend { width: 100%; justify-content: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;}
             
@@ -319,7 +311,6 @@
             </div>
         </div>
 
-        <!-- Legend -->
         <div class="status-legend" style="margin-bottom: 10px;">
             <div class="legend-item"><span class="legend-dot dot-free"></span> ว่าง</div>
             <div class="legend-item"><span class="legend-dot dot-booked"></span> เต็ม/จองแล้ว</div>
@@ -463,14 +454,15 @@
         "2026-05-01": "วันแรงงานแห่งชาติ",
         "2026-05-04": "วันฉัตรมงคล",
         "2026-05-31": "วันวิสาขบูชา",
+        "2026-06-01": "ชดเชยวันวิสาขบูชา",
         "2026-06-03": "เฉลิมฯ พระราชินี",
         "2026-07-28": "เฉลิมฯ ร.10",
         "2026-07-29": "วันอาสาฬหบูชา",
-        "2026-07-30": "วันเข้าพรรษา",
         "2026-08-12": "วันแม่แห่งชาติ",
         "2026-10-13": "วันนวมินทรมหาราช",
         "2026-10-23": "วันปิยมหาราช",
         "2026-12-05": "วันพ่อแห่งชาติ",
+        "2026-12-07": "ชดเชยวันพ่อแห่งชาติ",
         "2026-12-10": "วันรัฐธรรมนูญ",
         "2026-12-31": "วันสิ้นปี"
     };
@@ -1100,6 +1092,7 @@
         
         let allTeamBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
         
+        // กรองข้อมูล: แสดงทั้งทีมที่เป็น "เจ้าของคิวเดิม" และ "คนที่มาขอแทรกคิว"
         if (!currentAdmin.super) {
             allTeamBookings = allTeamBookings.filter(b => {
                 let currentTeam = getTeamName(b).toUpperCase();
@@ -1138,7 +1131,7 @@
                         <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
                         
                         <div class="admin-action-btns" style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:8px;">
-                            ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติ</button>` : ''}
+                            ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติการจอง</button>` : ''}
                             
                             <button class="btn btn-outline" style="flex:1; color:var(--text-main); border-color:var(--text-muted); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'edit')">✏️ แก้ไข</button>
                             <button class="btn btn-outline" style="flex:1; color:var(--color-partial); border-color:var(--color-partial); padding:8px; font-size:12px;" onclick="openReviseBooking('${b.ID}', 'transfer')">🔄 โอนคิว</button>
