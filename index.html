@@ -87,9 +87,9 @@
         #dateDisplay { font-size: 13px; color: var(--text-muted); margin-top: 5px; font-weight: 500;}
 
         .sidebar-actions { display: flex; flex-direction: column; gap: 10px; }
-        .detail-panel { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; padding: 20px; }
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
+        .detail-panel { display: none !important; } /* ซ่อน Detail Panel แบบถาวร ให้แสดงใน Popup เท่านั้น */
         
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; }
         .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; margin-bottom: 15px; flex-shrink: 0; }
         .week-control { display: flex; align-items: center; gap: 8px; background: var(--header-bg); padding: 4px; border-radius: 12px; position: relative; }
         .month-selector { font-size: 16px; font-weight: 700; color: var(--primary); font-family: 'Kanit'; background: transparent; border: none; outline: none; cursor: pointer; padding: 4px 8px; }
@@ -103,7 +103,7 @@
         .view-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
         /* ================= LEGEND ================= */
-        .status-legend { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: var(--header-bg); padding: 8px 15px; border-radius: 10px; margin-bottom: 10px;}
+        .status-legend { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--header-bg); padding: 8px 15px; border-radius: 10px; margin-bottom: 10px; }
         .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); font-weight: 500; }
         .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
         .dot-free { background: linear-gradient(135deg, var(--color-free), #059669); box-shadow: 0 0 5px var(--color-free); }
@@ -119,7 +119,7 @@
         }
         .is-today-highlight { border: 2px solid var(--primary) !important; animation: pulseGlow 1.5s infinite alternate !important; background: rgba(139, 92, 246, 0.05); }
 
-        /* Weekly Grid */
+        /* ================= WEEKLY GRID ================= */
         .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
@@ -131,18 +131,16 @@
         .day-name { font-size: 14px; font-weight: 700; color: var(--text-main); line-height: 1.2; margin-bottom: 2px;}
         .day-date { font-size: 11px; color: var(--text-muted); font-weight: 500;}
         
-        .slots-wrapper { flex: 1; display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 10px; gap: 8px; align-items: stretch; scroll-behavior: smooth;}
-        .slots-wrapper::-webkit-scrollbar { height: 6px; }
-        .slots-wrapper::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .slots-wrapper { flex: 1; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); padding: 10px; gap: 6px; align-items: stretch;}
         
-        .time-slot { flex: 0 0 135px; display: flex; flex-direction: column; padding: 8px 10px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative;}
+        .time-slot { display: flex; flex-direction: column; padding: 6px 4px; cursor: pointer; transition: 0.2s; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--glass-border); box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-height: 85px; position: relative; min-width: 0;}
         .time-slot:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.08);}
         .slot-time-label { font-weight: 700; font-size: 11.5px; color: var(--text-main); margin-bottom: 6px; opacity: 0.9; text-align: center; letter-spacing: 0.5px;}
         
-        .w-status-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
-        .w-status-badge svg { width: 13px; height: 13px; flex-shrink: 0;}
+        .w-status-badge { font-size: 11px; font-weight: 700; padding: 4px 6px; border-radius: 6px; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: auto; width: 100%; text-shadow: 0 1px 2px rgba(0,0,0,0.2); box-shadow: 0 2px 4px rgba(0,0,0,0.1); white-space: nowrap; overflow: hidden;}
+        .w-status-badge svg { width: 12px; height: 12px; flex-shrink: 0;}
         
-        .slot-info-bottom { font-size: 11.5px; color: var(--text-main); margin-top: auto; padding-top: 4px; line-height: 1.4; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; justify-content: center; gap: 4px;}
+        .slot-info-bottom { font-size: 10.5px; color: var(--text-main); margin-top: auto; padding-top: 4px; line-height: 1.3; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; justify-content: center; gap: 4px;}
         .slot-info-bottom.revise { border: 1px dashed var(--color-revise); padding: 4px; border-radius: 6px; margin-top: 4px; background: rgba(139, 92, 246, 0.05); color: var(--color-revise);}
         .slot-action-bottom { text-align: center; font-size: 11px; color: var(--color-free); opacity: 0.9; margin-top: auto; padding-top: 4px; font-weight: 600;}
 
@@ -154,9 +152,9 @@
         .badge-revise { background: linear-gradient(135deg, var(--color-revise), #7c3aed); }
         .time-slot.booked { border-top: 4px solid var(--color-booked); }
         .badge-booked { background: linear-gradient(135deg, var(--color-booked), #e11d48); } 
-        .time-slot.disabled { border-top: 4px solid var(--color-holiday); background: var(--header-bg); opacity: 0.8; cursor: not-allowed; }
+        .time-slot.disabled { border-top: 4px solid var(--color-holiday); background: var(--header-bg); opacity: 0.8; cursor: pointer; }
 
-        /* Monthly Grid */
+        /* ================= MONTHLY GRID ================= */
         .monthly-grid { display: none; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
         .month-header { text-align: center; font-weight: 700; padding: 8px; background: var(--header-bg); border-radius: 12px; color: var(--text-main); font-size: 14px;}
         .month-day-card { border-radius: 14px; padding: 8px; min-height: 90px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid var(--glass-border); background: var(--card-bg); min-width: 0; overflow: hidden;}
@@ -194,7 +192,7 @@
         /* Modals & Toast */
         .modal { position: fixed; inset: 0; background: var(--modal-overlay); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: 0.3s; padding: 20px; }
         .modal.show { display: flex; opacity: 1; }
-        .modal-content { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 25px 80px rgba(0,0,0,0.3); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
+        .modal-content { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 480px; box-shadow: 0 25px 80px rgba(0,0,0,0.3); transform: scale(0.95) translateY(20px); transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; border: 1px solid var(--glass-border);}
         .modal.show .modal-content { transform: scale(1) translateY(0); }
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; max-width: 90vw; }
         .toast { background: var(--card-bg); color: var(--text-main); padding: 12px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 13px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: translateX(120%); transition: 0.4s; border: 1px solid var(--glass-border);}
@@ -204,12 +202,13 @@
         @media (max-width: 1080px) {
             html, body { overflow-y: auto; height: auto; min-height: 100dvh; }
             .app-container { flex-direction: column; height: auto; padding: 15px; padding-bottom: 110px; } 
-            .detail-panel { display: none !important; }
             .sidebar { width: 100%; height: auto; padding: 20px; border-radius: 20px; }
             .time-container { display: none; }
             .sidebar-actions { position: static; flex-direction: row; background: transparent; backdrop-filter: none; padding: 15px 0 0 0; z-index: auto; gap: 10px; border-top: 1px solid var(--input-border); border-radius: 0; box-shadow: none; margin-top: 15px; }
+            
             .weekly-grid { padding-bottom: 0;}
-            .day-row { flex-direction: column; border-radius: 16px; }
+            .slots-wrapper { grid-template-columns: repeat(5, minmax(0, 1fr)); } 
+            .day-row { flex-direction: column; border-radius: 16px; height: auto; min-height: auto;}
             .day-label { width: 100%; flex-direction: row; justify-content: space-between; border-right: none; border-bottom: 1px solid var(--glass-border); border-radius: 16px 16px 0 0; padding: 12px 15px; }
         }
         
@@ -222,6 +221,12 @@
             .view-btn { flex: 1; text-align: center; }
 
             .sidebar-actions { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--input-border); padding-top: 10px; margin-top: 0; gap: 8px;}
+
+            .slots-wrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 8px; gap: 6px; }
+            .time-slot { min-height: 70px; padding: 6px 4px; }
+            .slot-time-label { font-size: 11px; margin-bottom: 4px; letter-spacing: 0; }
+            .w-status-badge { font-size: 10px; padding: 3px 4px; }
+            .slot-info-bottom { font-size: 10px; }
 
             .monthly-grid { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 2px;}
             .month-header { display: block !important; font-size: 13px; padding: 7px 0; border-radius: 6px; margin-bottom: 3px; background: rgba(255,255,255,0.12); color: #fff;} 
@@ -249,23 +254,22 @@
         }
 
         .admin-menu-section { display: none; flex-direction: column; gap: 6px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--input-border); grid-column: span 2;}
-        
         .tab-btn { flex: 1; padding: 10px; border-radius: 10px; font-weight: 600; font-family: 'Kanit'; cursor: pointer; transition: 0.2s; font-size: 13px; border: 1px solid var(--input-border); background: var(--btn-outline-bg); color: var(--text-main); position: relative;}
         .tab-btn.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 4px 12px var(--primary-glow);}
         .badge-count { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 10px; border: 2px solid var(--card-bg); display: none;}
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
 <svg style="display: none;">
-    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.05 0 0 1-8.14-8.1 8.59 8.05 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"></path></symbol>
+    <symbol id="icon-partial" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M12 12l4.5-4.5M22 12A10 10 0 1 1 2 12a10 10 0 0 1 20 0z"></path></symbol>
     <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></symbol>
     <symbol id="icon-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></symbol>
     <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></symbol>
     <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
-    <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></symbol>
-    <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></symbol>
-    <symbol id="icon-partial" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M12 12l4.5-4.5M22 12A10 10 0 1 1 2 12a10 10 0 0 1 20 0z"></path></symbol>
 </svg>
 
 <div id="toastContainer" class="toast-container"></div>
@@ -314,7 +318,7 @@
             </div>
             
             <div class="nav-actions-right">
-                <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="เปลี่ยนโหมดสี">🌙</button>
+                <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="เปลี่ยนโหมดสี">☀️</button>
                 <div class="view-toggle">
                     <button class="view-btn active" id="btnViewWeek" onclick="switchView('week')">สัปดาห์</button>
                     <button class="view-btn" id="btnViewMonth" onclick="switchView('month')">เดือน</button>
@@ -322,7 +326,7 @@
             </div>
         </div>
 
-        <div class="status-legend" style="margin-bottom: 10px;">
+        <div class="status-legend">
             <div class="legend-item"><span class="legend-dot dot-free"></span> ว่าง</div>
             <div class="legend-item"><span class="legend-dot dot-partial"></span> ว่างบางส่วน</div>
             <div class="legend-item"><span class="legend-dot dot-booked"></span> เต็ม/จองแล้ว</div>
@@ -334,18 +338,6 @@
         <div class="monthly-grid" id="monthlyGrid">
             <div class="month-header">อา.</div><div class="month-header">จ.</div><div class="month-header">อ.</div>
             <div class="month-header">พ.</div><div class="month-header">พฤ.</div><div class="month-header">ศ.</div><div class="month-header">ส.</div>
-        </div>
-    </div>
-
-    <div class="detail-panel glass" id="rightDetailPanel">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px dashed var(--input-border); padding-bottom: 10px;">
-            <h3 id="panelModalTitle" style="margin:0; color:var(--text-main); font-size: 16px;">📋 ข้อมูลการจอง</h3>
-        </div>
-        <div id="panelDetailsContainer" style="overflow-y: auto; flex-grow: 1; padding-right: 5px;">
-            <div style="text-align:center; padding: 40px 10px; color: var(--text-muted); opacity: 0.6;">
-                <div style="font-size: 40px; margin-bottom: 10px;">👆</div>
-                คลิกที่ตาราง<br>เพื่อดูรายละเอียด
-            </div>
         </div>
     </div>
 </div>
@@ -417,7 +409,7 @@
 
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('bookingModal')">ยกเลิก</button>
-            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการบันทึก</button>
+            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
         </div>
     </div>
 </div>
@@ -493,32 +485,6 @@
 
     let selectedDateStr = getYYYYMMDD(new Date()); 
 
-    // ✅ ตัวแปลงเวลาที่สมบูรณ์ 100% (จัดการขยะ และป้องกันตัวอักษรแปลกประหลาด)
-    function formatTime(val) {
-        try {
-            if (!val) return "00:00";
-            let str = String(val).trim();
-            if (str.includes('T')) {
-                const parts = str.split('T');
-                str = parts.length > 1 ? parts[1] : str;
-            }
-            const parts = str.split(':');
-            let h = parseInt(parts[0]);
-            let m = parts.length > 1 ? parseInt(parts[1]) : 0;
-            if (isNaN(h)) h = 0;
-            if (isNaN(m)) m = 0;
-            return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-        } catch(e) {
-            return "00:00";
-        }
-    }
-
-    function getSafeStart(b) { 
-        return formatTime(b['Start Time'] || b.startTime || b.StartTime || b['Start time']); 
-    }
-    function getSafeStop(b) { 
-        return formatTime(b.StopTime || b['Stop Time'] || b.stopTime || b['Stop time']); 
-    }
     function getTeamName(b) { return (b['Team'] || b['Column 1'] || b.Column1 || '-').toString().trim(); }
 
     function getBackupData(b) {
@@ -609,33 +575,25 @@
     }
 
     function timeToDecimal(timeStr) {
-        const str = formatTime(timeStr);
-        const parts = str.split(':');
-        return Number(parts[0]) + (Number(parts[1]) / 60);
+        if (!timeStr) return 0;
+        const [h, m] = timeStr.split(':').map(Number);
+        return h + (m / 60);
     }
 
     // ====================================================================
-    // VIRTUAL SPLIT LOGIC
+    // VIRTUAL SPLIT LOGIC (ตัวแยกคิวเสมือนเพื่อคืนเวลาให้คนเดิม)
     // ====================================================================
     function expandBookings(dayData) {
         let expanded = [];
-        if (!Array.isArray(dayData)) return expanded;
-
         dayData.forEach(b => {
-            if (!b || b.Status === 'cancelled' || b.Status === 'rejected') return;
+            if (b.Status === 'cancelled' || b.Status === 'rejected') return;
             
             let bak = getBackupData(b);
-            let bStart = getSafeStart(b);
-            let bStop = getSafeStop(b);
-            
-            if (bak && b.Status === 'pending_revise') {
-                let bakStart = getSafeStart(bak);
-                let bakStop = getSafeStop(bak);
-                
-                let oStart = timeToDecimal(bakStart);
-                let oStop = timeToDecimal(bakStop);
-                let rStart = timeToDecimal(bStart);
-                let rStop = timeToDecimal(bStop);
+            if (bak) {
+                let oStart = timeToDecimal(bak['Start Time']);
+                let oStop = timeToDecimal(bak.StopTime);
+                let rStart = timeToDecimal(b['Start Time']);
+                let rStop = timeToDecimal(b.StopTime);
                 let origTeam = bak.Team || bak['Column 1'] || bak.Column1 || getTeamName(b);
                 
                 if (oStart < rStart) {
@@ -646,8 +604,8 @@
                         User: bak.User || '-', 
                         Team: origTeam, 
                         Phone: bak.Phone || '-', 
-                        'Start Time': bakStart, 
-                        StopTime: bStart, 
+                        'Start Time': bak['Start Time'], 
+                        StopTime: b['Start Time'], 
                         isOriginalPart: true,
                         _decStart: oStart,
                         _decStop: rStart
@@ -661,8 +619,8 @@
                         User: bak.User || '-', 
                         Team: origTeam, 
                         Phone: bak.Phone || '-', 
-                        'Start Time': bStop, 
-                        StopTime: bakStop, 
+                        'Start Time': b.StopTime, 
+                        StopTime: bak.StopTime, 
                         isOriginalPart: true,
                         _decStart: rStop,
                         _decStop: oStop
@@ -672,10 +630,8 @@
             
             expanded.push({
                 ...b,
-                'Start Time': bStart,
-                StopTime: bStop,
-                _decStart: timeToDecimal(bStart),
-                _decStop: timeToDecimal(bStop)
+                _decStart: timeToDecimal(b['Start Time']),
+                _decStop: timeToDecimal(b.StopTime)
             });
         });
         return expanded;
@@ -688,8 +644,8 @@
         let am = { class: 'free', duration: 0, status: 'free' };
         let pm = { class: 'free', duration: 0, status: 'free' };
         
-        let amHours = [0,0,0,0]; 
-        let pmHours = [0,0,0,0,0,0]; 
+        let amHours = [0,0,0,0]; // 8,9,10,11 (4 ชม.)
+        let pmHours = [0,0,0,0,0]; // 13,14,15,16,17 (5 ชม.)
         
         let expanded = expandBookings(dayData);
         
@@ -703,9 +659,10 @@
                         else if (am.status === 'free') am.status = 'booked';
                     }
                 }
-                for(let h=12; h<18; h++) {
+                // ข้าม 12:00-13:00
+                for(let h=13; h<18; h++) {
                     if (start <= h && stop >= h+1) { 
-                        pmHours[h-12] = 1; 
+                        pmHours[h-13] = 1; 
                         if (status === 'pending_revise') pm.status = 'revise';
                         else if (status === 'pending' && pm.status !== 'revise') pm.status = 'pending';
                         else if (pm.status === 'free') pm.status = 'booked';
@@ -718,11 +675,13 @@
         am.duration = amHours.reduce((a,b)=>a+b, 0);
         pm.duration = pmHours.reduce((a,b)=>a+b, 0);
 
-        if (am.duration > 0 && am.duration < 3) am.class = 'partial'; 
-        else if (am.duration >= 3) am.class = am.status;
+        // เช้า: ถ้าจองไม่ถึง 4 ชม. = ว่างบางส่วน (ถ้าจองเต็ม 4 = status นั้นๆ)
+        if (am.duration > 0 && am.duration < 4) am.class = 'partial'; 
+        else if (am.duration >= 4) am.class = am.status;
 
-        if (pm.duration > 0 && pm.duration < 3) pm.class = 'partial';
-        else if (pm.duration >= 3) pm.class = pm.status;
+        // บ่าย: ถ้าจองไม่ถึง 4 ชม. = ว่างบางส่วน (ถ้าจองตั้งแต่ 4 ชม. ขึ้นไป = status นั้นๆ)
+        if (pm.duration > 0 && pm.duration < 4) pm.class = 'partial'; 
+        else if (pm.duration >= 4) pm.class = pm.status;
 
         return { am, pm };
     }
@@ -749,7 +708,7 @@
             const row = document.createElement('div');
             row.className = `day-row ${isToday ? 'is-today-highlight' : ''}`;
             row.innerHTML = `
-                <div class="day-label" onclick="showDetails('${dateStr}', true)">
+                <div class="day-label" onclick="showDetails('${dateStr}', false)">
                     <div class="day-name" style="color:${holiday ? 'var(--color-booked)' : (isToday ? 'var(--primary)' : 'var(--text-main)')}">${daysTH[current.getDay()]}</div>
                     <div class="day-date">${current.getDate()} ${current.toLocaleDateString('th-TH',{month:'short'})}</div>
                 </div>
@@ -761,7 +720,7 @@
 
     function renderSlots(dateStr, isHoliday) {
         let html = '';
-        const dayData = bookings.filter(b => b && (b.Date || "").toString().split('T')[0] === dateStr);
+        const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
         const expanded = expandBookings(dayData);
 
         for (let h = 8; h < 18; h++) {
@@ -769,12 +728,12 @@
             let timeLabel = `${String(h).padStart(2,'0')}:00 - ${endTimeStr}`;
 
             if (isHoliday) {
-                html += `<div class="time-slot disabled" onclick="showToast('❌ ไม่สามารถจองได้: ${isHoliday}', 'error')"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted); text-align:center;">หยุด</div></div>`;
+                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', false)"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted); text-align:center;">หยุด</div></div>`;
                 continue;
             }
 
-            let b = expanded.find(x => x && x.Status === 'pending_revise' && x._decStart <= h && x._decStop >= h+1);
-            if (!b) b = expanded.find(x => x && (x.Status === 'approved' || x.Status === 'pending') && x._decStart <= h && x._decStop >= h+1);
+            let b = expanded.find(x => x.Status === 'pending_revise' && !x.isOriginalPart && x._decStart <= h && x._decStop >= h+1);
+            if (!b) b = expanded.find(x => (x.Status === 'approved' || x.Status === 'pending') && x._decStart <= h && x._decStop >= h+1);
 
             if (b) {
                 html += buildSlotHTML(b, h, dateStr, timeLabel);
@@ -859,7 +818,7 @@
             if (holiday) {
                 content += `<div class="ampm-container" style="justify-content:center; height:100%;"><div class="ampm-badge holiday" style="width:100%; height:100%;"><span class="ampm-text">${holiday}</span></div></div>`;
             } else {
-                const dayData = bookings.filter(b => b && (b.Date || "").toString().split('T')[0] === dateStr);
+                const dayData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
                 const slots = analyzeSlot(dayData);
                 
                 let amIcon = slots.am.class === 'partial' ? '#icon-partial' : '#icon-sun';
@@ -878,8 +837,9 @@
         }
     }
 
+    // จัดการการคลิกให้เด้ง Popup แน่นอนในทุกๆ กรณี
     function handleSlotClick(dateStr, hour, slotClass) {
-        showDetails(dateStr, true); 
+        showDetails(dateStr, true); // สร้าง HTML ใหม่เตรียมไว้เสมอ
         if (slotClass === 'free') {
             openBooking();
             document.getElementById('formDate').value = dateStr;
@@ -888,14 +848,16 @@
             document.getElementById('startTime').value = String(hour).padStart(2,'0') + ":00";
             document.getElementById('endTime').value = String(hour+1).padStart(2,'0') + ":00";
         } else {
-            if (window.innerWidth <= 1080) document.getElementById('dayDetailsModal').classList.add('show');
+            document.getElementById('dayDetailsModal').classList.add('show');
         }
     }
 
+    // ====================================================================
+    // RENDER: Modal ดูคิว (Show Details)
+    // ====================================================================
     function showDetails(dateStr, preventModal = false) {
         selectedDateStr = dateStr; 
         const containerModal = document.getElementById('modalDetailsContainer');
-        const containerPanel = document.getElementById('panelDetailsContainer');
         
         const [yy, mm, dd] = dateStr.split('-').map(Number);
         const localDate = new Date(yy, mm - 1, dd);
@@ -906,9 +868,8 @@
         const isHoliday = thaiHolidays[dateStr] || (isWeekend ? "วันหยุดเสาร์-อาทิตย์" : null);
         
         if(document.getElementById('dayModalTitle')) document.getElementById('dayModalTitle').innerHTML = `📅 วันที่ ${thaiDate}`;
-        if(document.getElementById('panelModalTitle')) document.getElementById('panelModalTitle').innerHTML = `📅 วันที่ ${thaiDate}`;
 
-        const rawData = bookings.filter(b => b && (b.Date || "").toString().split('T')[0] === dateStr);
+        const rawData = bookings.filter(b => b.Date?.split('T')[0] === dateStr);
         const dayData = currentAdmin ? rawData.filter(b => b.Status !== 'cancelled') : rawData.filter(b => b.Status !== 'cancelled' && b.Status !== 'rejected');
         
         const expanded = expandBookings(dayData);
@@ -925,7 +886,7 @@
         } else {
             html = `<div style="margin-bottom:10px; font-size:14px; font-weight:700; color:var(--text-main);">📋 รายการคิวจอง:</div>`;
             
-            expanded.sort((a,b) => (getSafeStart(a)).localeCompare(getSafeStart(b))).forEach(b => {
+            expanded.sort((a,b) => (a['Start Time']||"").localeCompare(b['Start Time']||"")).forEach(b => {
                 let statusText = 'จองแล้ว'; let statusColor = 'var(--color-booked)';
                 if (b.Status === 'pending') { statusText = 'รออนุมัติ'; statusColor = 'var(--color-partial)'; }
                 else if (b.Status === 'pending_revise') { statusText = 'รอแก้ไข'; statusColor = 'var(--color-revise)'; }
@@ -969,25 +930,25 @@
                 let infoHtml = '';
                 if (b.Status === 'pending_revise' && !b.isOriginalPart) {
                     let bak = getBackupData(b);
-                    let origU = bak ? bak.User : '-';
+                    let origU = bak ? bak.User || '-' : '-';
                     let origT = bak ? (bak.Team || bak['Column 1'] || bak.Column1 || '-') : '-';
-                    let origP = bak ? (bak.Phone || "").toString().replace(/'/g,'') : '-';
+                    let origP = bak ? (bak.Phone||"").replace(/'/g,'') : '-';
                     
                     infoHtml = `<div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px; margin-bottom:6px;">
                             <div style="font-weight:700; color:var(--text-muted); margin-bottom:2px;">คิวเดิม:</div>👤 <b>${origU}</b> | 🏢 <b>${origT}</b> | 📞 <b>${origP}</b></div>
                         <div style="font-size:11px; color:var(--color-revise); line-height:1.4; background:rgba(139, 92, 246, 0.05); border: 1px dashed var(--color-revise); padding:8px; border-radius:8px;">
-                            <div style="font-weight:700; margin-bottom:2px;">✏️ ขอแทรก/โอนสิทธิ์ให้:</div>👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone || "").toString().replace(/'/g,'')}</b></div>`;
+                            <div style="font-weight:700; margin-bottom:2px;">✏️ ขอแทรก/โอนสิทธิ์ให้:</div>👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone||"").replace(/'/g,'')}</b></div>`;
                 } else {
                     infoHtml = `<div style="font-size:11px; color:var(--text-main); line-height:1.4; background:var(--btn-outline-bg); padding:8px 10px; border-radius:8px;">
-                            👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone || "").toString().replace(/'/g,'')}</b></div>`;
+                            👤 <b>${b.User}</b> | 🏢 <b>${teamName}</b> | 📞 <b>${(b.Phone||"").replace(/'/g,'')}</b></div>`;
                 }
 
                 html += `<div style="background:var(--card-bg); padding:12px; border-radius:16px; margin-bottom:10px; border:1px solid var(--input-border); box-shadow:0 2px 8px rgba(0,0,0,0.02); border-left:6px solid ${statusColor};">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                            <strong style="color:var(--text-main); font-size:13px; background:var(--header-bg); padding:2px 8px; border-radius:6px;">⏰ ${getSafeStart(b)} - ${getSafeStop(b)}</strong>
+                            <strong style="color:var(--text-main); font-size:13px; background:var(--header-bg); padding:2px 8px; border-radius:6px;">⏰ ${b['Start Time']} - ${b.StopTime}</strong>
                             <span style="font-size:10px; font-weight:700; color:${statusColor}; background:var(--header-bg); padding:2px 8px; border-radius:6px;">${statusText}</span>
                         </div>
-                        <div style="color:var(--primary); font-size:14px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
+                        <div style="color:var(--primary); font-size:14px; font-weight:700; margin-bottom:6px;">📌 ${b.Subject}</div>
                         ${infoHtml}
                         ${actionBtns}
                     </div>`;
@@ -996,8 +957,7 @@
         }
 
         if(containerModal) containerModal.innerHTML = html;
-        if(containerPanel) containerPanel.innerHTML = html;
-        if (!preventModal && window.innerWidth <= 1080) { document.getElementById('dayDetailsModal').classList.add('show'); }
+        if (!preventModal) document.getElementById('dayDetailsModal').classList.add('show'); 
     }
 
     function toggleTimeInputs() { document.getElementById('hourlyInputs').style.display = document.getElementById('bookType').value === 'hourly' ? 'flex' : 'none'; }
@@ -1036,7 +996,7 @@
         } else if (mode === 'edit') {
             document.getElementById('bookingModalTitle').innerText = "✏️ แก้ไขข้อมูลการจอง";
             document.getElementById('formUser').value = b.User; 
-            document.getElementById('formPhone').value = (b.Phone || "").toString().replace(/'/g,'');
+            document.getElementById('formPhone').value = (b.Phone||"").replace(/'/g,'');
         } else {
             document.getElementById('bookingModalTitle').innerText = "📝 ขอแทรกคิว (Revise)";
             document.getElementById('formUser').value = ""; 
@@ -1046,13 +1006,13 @@
         }
         
         document.getElementById('editingId').value = b.ID;
-        if(b.Date) document.getElementById('formDate').value = (b.Date || "").toString().split('T')[0];
+        if(b.Date) document.getElementById('formDate').value = b.Date.split('T')[0];
         document.getElementById('bookType').value = 'hourly';
         toggleTimeInputs();
         
-        document.getElementById('startTime').value = getSafeStart(b);
-        document.getElementById('endTime').value = getSafeStop(b);
-        document.getElementById('formSubject').value = (b.Subject || "").toString().replace(" (Revise)", "");
+        document.getElementById('startTime').value = b['Start Time'];
+        document.getElementById('endTime').value = b.StopTime;
+        document.getElementById('formSubject').value = b.Subject.replace(" (Revise)", "");
         document.getElementById('formDetail').value = b.Detail !== "-" ? b.Detail : "";
         
         let tName = getTeamName(b);
@@ -1071,46 +1031,23 @@
         document.getElementById('bookingModal').classList.add('show');
     }
 
-    // ====================================================================
-    // SYNC DATA ✅ แยกระบบตรวจจับ และไม่เตะเข้าออฟไลน์ถ้าแค่ข้อมูลแหว่ง
-    // ====================================================================
     async function syncDataSilently(isInitial = false) {
         const connStatus = document.getElementById('connStatus');
         if(isInitial && connStatus) {
             connStatus.className = 'status-syncing';
             connStatus.innerHTML = '⏳ กำลังซิงค์ข้อมูล...';
         }
-        
         try {
-            // 1. ดึงข้อมูล
-            const res = await fetch(API_URL + "?t=" + new Date().getTime()); 
-            const textData = await res.text();
+            const res = await fetch(API_URL + "?t=" + new Date().getTime());
+            bookings = JSON.parse(await res.text());
             
-            // 2. แปลงข้อมูลอย่างปลอดภัย
-            try {
-                bookings = JSON.parse(textData);
-                if (!Array.isArray(bookings)) bookings = []; // ถ้าไม่ใช่อาเรย์ให้คืนค่าว่าง
-                
-                if(connStatus) {
-                    connStatus.className = 'status-online';
-                    connStatus.innerHTML = '🟢 ONLINE';
+            // Auto-Approve: จองปุ๊บอนุมัติปั๊บ (ฝั่ง Client)
+            bookings.forEach(b => {
+                if (b.Status === 'pending') {
+                    b.Status = 'approved'; 
                 }
-            } catch(parseErr) {
-                // ถ้า JSON พังจาก Google ส่ง HTML หรือ Error มา เราแค่ไม่เอาข้อมูลรอบนี้มาใช้ แต่หน้าเว็บยังออนไลน์อยู่
-                console.warn("API/JSON Parsing issue, keeping old data. Res: ", textData.substring(0,50));
-            }
+            });
             
-        } catch (e) { 
-            // จะเข้า Catch นี้ก็ต่อเมื่ออินเทอร์เน็ตพัง หรือถูกบล็อกจริงๆ
-            console.error("⛔ Network Sync Error:", e);
-            if(connStatus) {
-                connStatus.className = 'status-offline';
-                connStatus.innerHTML = '🔴 OFFLINE';
-            }
-        }
-
-        // 3. สั่งวาดหน้าจอ (Render) แยกออกมาต่างหาก การันตีหน้าเว็บไม่ขาว
-        try {
             if (isInitial) {
                 currentRefDate = new Date(); 
                 const ms = document.getElementById('monthSelector');
@@ -1121,8 +1058,16 @@
             showDetails(selectedDateStr, true);
             if(currentAdmin && document.getElementById('adminDashModal').classList.contains('show')) renderAdminDashboard();
             
-        } catch (renderError) {
-            console.error("⛔ Render Error:", renderError);
+            if(connStatus) {
+                connStatus.className = 'status-online';
+                connStatus.innerHTML = '🟢 ONLINE';
+            }
+        } catch (e) { 
+            console.log("Sync Error"); 
+            if(connStatus) {
+                connStatus.className = 'status-offline';
+                connStatus.innerHTML = '🔴 OFFLINE';
+            }
         }
     }
 
@@ -1162,7 +1107,8 @@
             detail: document.getElementById('formDetail').value,
             user: document.getElementById('formUser').value,
             team: selectedTeam,
-            phone: document.getElementById('formPhone').value
+            phone: document.getElementById('formPhone').value,
+            status: editingId ? 'pending_revise' : 'approved' 
         };
 
         if(!data.subject || !data.user || !data.team) return showToast("กรอกข้อมูลให้ครบถ้วนก่อนน้า", "warning");
@@ -1229,8 +1175,9 @@
         if(!currentAdmin) return;
         document.getElementById('dashTeamLabel').innerText = currentAdmin.team;
         
-        let allTeamBookings = bookings.filter(b => b && (b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise'));
+        let allTeamBookings = bookings.filter(b => b.Status === 'approved' || b.Status === 'pending' || b.Status === 'pending_revise');
         
+        // กรองข้อมูล: แสดงทั้งทีมที่เป็น "เจ้าของคิวเดิม" และ "คนที่มาขอแทรกคิว"
         if (!currentAdmin.super) {
             allTeamBookings = allTeamBookings.filter(b => {
                 let currentTeam = getTeamName(b).toUpperCase();
@@ -1253,7 +1200,7 @@
             normalContainer.innerHTML = '<p style="text-align:center; font-size:14px; color:var(--text-muted); padding:30px;">✅ ไม่มีคิวจองในระบบ</p>'; 
         } else {
             normalContainer.innerHTML = '';
-            normalBookings.sort((a,b) => new Date((a.Date||"").toString()) - new Date((b.Date||"").toString())).forEach(b => {
+            normalBookings.sort((a,b) => new Date(a.Date) - new Date(b.Date)).forEach(b => {
                 const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
                 let teamName = getTeamName(b);
                 let statusBadge = b.Status === 'pending' ? '⚠️ รออนุมัติ' : '🔒 อนุมัติแล้ว'; 
@@ -1262,11 +1209,11 @@
                 normalContainer.innerHTML += `
                     <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--input-border); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid ${borderCol};">
                         <div style="display:flex; justify-content:space-between;">
-                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${getSafeStart(b)}-${getSafeStop(b)}</strong>
+                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
                             <span style="font-size:11px; font-weight:700; color:${borderCol};">${statusBadge}</span>
                         </div>
                         <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
-                        <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${(b.Phone||"").toString().replace(/'/g,'')}</div>
+                        <div style="font-size:12px; color:var(--text-main); background:var(--btn-outline-bg); padding:8px; border-radius:8px;">👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}</div>
                         
                         <div class="admin-action-btns" style="margin-top: 15px; display:flex; flex-wrap:wrap; gap:8px;">
                             ${b.Status === 'pending' ? `<button class="btn" style="flex:1 1 100%; background:var(--color-free); border:none; color:#fff; padding:8px; font-size:13px;" onclick="updateStatus('${b.ID}', 'approved')">✅ อนุมัติการจอง</button>` : ''}
@@ -1284,7 +1231,7 @@
             reviseContainer.innerHTML = '<p style="text-align:center; font-size:14px; color:var(--text-muted); padding:30px;">✅ ไม่มีรายการขอแทรกคิว</p>'; 
         } else {
             reviseContainer.innerHTML = '';
-            reviseBookings.sort((a,b) => new Date((a.Date||"").toString()) - new Date((b.Date||"").toString())).forEach(b => {
+            reviseBookings.sort((a,b) => new Date(a.Date) - new Date(b.Date)).forEach(b => {
                 const dateFmt = b.Date ? new Date(b.Date).toLocaleDateString('th-TH', {day:'numeric', month:'short'}) : '';
                 let teamName = getTeamName(b);
                 let backup = getBackupData(b);
@@ -1294,13 +1241,13 @@
                 reviseContainer.innerHTML += `
                     <div style="background:var(--card-bg); padding:15px; border-radius:16px; margin-bottom:12px; border:1px solid var(--color-revise); box-shadow:0 4px 10px rgba(0,0,0,0.03); border-left:6px solid var(--color-revise);">
                         <div style="display:flex; justify-content:space-between;">
-                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${getSafeStart(b)}-${getSafeStop(b)}</strong>
+                            <strong style="background:var(--header-bg); padding:4px 10px; border-radius:8px; color:var(--text-main); font-size:12px;">📅 ${dateFmt} | ⏰ ${b['Start Time']}-${b.StopTime}</strong>
                             <span style="font-size:11px; font-weight:700; color:var(--color-revise);">🔔 ขอแทรกคิว</span>
                         </div>
                         <div style="color:var(--primary); font-size:16px; font-weight:700; margin:8px 0;">📌 ${b.Subject}</div>
                         <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">คิวเดิม: 👤 ${origU} | 🏢 ${origT}</div>
                         <div style="font-size:12px; color:var(--text-main); background:rgba(139, 92, 246, 0.05); border: 1px dashed var(--color-revise); padding:8px; border-radius:8px;">
-                            <strong>ขอแทรกโดย:</strong> 👤 ${b.User} | 🏢 ${teamName} | 📞 ${(b.Phone||"").toString().replace(/'/g,'')}
+                            <strong>ขอแทรกโดย:</strong> 👤 ${b.User} | 🏢 ${teamName} | 📞 ${b.Phone?.replace(/'/g,'')}
                         </div>
                         
                         <div class="admin-action-btns" style="margin-top: 15px; display:flex; gap:10px;">
@@ -1312,82 +1259,20 @@
         }
     }
 
-    // ====================================================================
-    // UPDATE STATUS LOGIC 
-    // ====================================================================
     async function updateStatus(id, status) {
         let msg = status === 'approved' ? 'อนุมัติ' : status === 'rejected' ? 'ปฏิเสธ' : 'ลบ (คืนห้องว่าง)';
         if(!confirm(`ยืนยันการดำเนินการ: ${msg} ?`)) return;
-        
         closeModal('dayDetailsModal'); 
         closeModal('adminDashModal');
         showToast(`กำลัง ${msg}...`, "warning");
-        
         try {
-            const b = bookings.find(x => x && x.ID === id);
-            let splitRequests = [];
-
-            if (status === 'approved' && b && b.Status === 'pending_revise') {
-                let bak = getBackupData(b);
-                if (bak) {
-                    let currentStart = getSafeStart(b);
-                    let currentStop = getSafeStop(b);
-                    let backupStart = getSafeStart(bak);
-                    let backupStop = getSafeStop(bak);
-
-                    let oStart = timeToDecimal(backupStart);
-                    let oStop = timeToDecimal(backupStop);
-                    let rStart = timeToDecimal(currentStart);
-                    let rStop = timeToDecimal(currentStop);
-                    
-                    let origTeam = bak.Team || bak['Column 1'] || bak.Column1 || getTeamName(b);
-                    let origSubject = bak.Subject || (b.Subject ? b.Subject.toString().replace(" (Revise)", "") : "-");
-                    let origDetail = bak.Detail || "-";
-                    let origUser = bak.User || "-";
-                    let origPhone = (bak.Phone || "").toString().replace(/'/g,'') || "-";
-                    
-                    // ป้องกัน Error จากวันที่ที่เป็นค่าว่าง
-                    let origDate = b.Date ? b.Date.toString().split('T')[0] : getYYYYMMDD(new Date());
-
-                    if (oStart < rStart) {
-                        splitRequests.push({
-                            action: 'create',
-                            Date: origDate,
-                            startTime: backupStart,
-                            stopTime: currentStart,
-                            subject: origSubject, detail: origDetail, user: origUser, team: origTeam, phone: origPhone
-                        });
-                    }
-                    if (oStop > rStop) {
-                        splitRequests.push({
-                            action: 'create',
-                            Date: origDate,
-                            startTime: currentStop,
-                            stopTime: backupStop,
-                            subject: origSubject, detail: origDetail, user: origUser, team: origTeam, phone: origPhone
-                        });
-                    }
-                }
-            }
-
             await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'update', id: id, status: status }) });
-
-            if (splitRequests.length > 0) {
-                showToast(`กำลังคืนสิทธิ์เวลาที่เหลือให้เจ้าของเดิม...`, "info");
-                for (let req of splitRequests) {
-                    await fetch(API_URL, { method: 'POST', body: JSON.stringify(req) });
-                }
-            }
-
-            showToast(`✅ ${msg} เรียบร้อยแล้ว`, "success"); 
-            syncDataSilently(false); 
-        } catch(e) { 
-            showToast(`❌ ดำเนินการล้มเหลว`, "error"); 
-            console.error("Update Error:", e);
-        }
+            showToast(`✅ ${msg} เรียบร้อยแล้ว`, "success"); syncDataSilently(false); 
+        } catch(e) { showToast(`❌ ดำเนินการล้มเหลว`, "error"); }
     }
 
     syncDataSilently(true);
+    // รีเฟรชอัตโนมัติทุก 15 วินาที ตามที่ร้องขอ
     setInterval(() => syncDataSilently(false), 15000);
 </script>
 </body>
