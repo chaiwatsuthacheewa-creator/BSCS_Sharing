@@ -113,7 +113,8 @@
         .dot-disabled { background: linear-gradient(135deg, var(--color-holiday), #475569); box-shadow: 0 0 5px var(--color-holiday); }
 
         /* ================= WEEKLY GRID ================= */
-        .weekly-grid { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
+        /* ตั้งให้หน้าแรกปิดการแสดงผลรายสัปดาห์ (แสดงรายเดือนแทน) */
+        .weekly-grid { display: none; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1; padding-bottom: 10px; padding-right: 5px;}
         .weekly-grid::-webkit-scrollbar { width: 6px; }
         .weekly-grid::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         body.dark-mode .weekly-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
@@ -148,7 +149,8 @@
         .time-slot.disabled { border-top: 4px solid var(--color-holiday); background: var(--header-bg); opacity: 0.8; cursor: pointer; }
 
         /* ================= MONTHLY GRID ================= */
-        .monthly-grid { display: none; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
+        /* ตั้งให้โชว์เป็นค่าเริ่มต้น */
+        .monthly-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; overflow-y: auto; flex-grow: 1; padding: 5px; align-content: start;}
         .month-header { text-align: center; font-weight: 700; padding: 8px; background: var(--header-bg); border-radius: 12px; color: var(--text-main); font-size: 14px;}
         .month-day-card { border-radius: 14px; padding: 8px; min-height: 90px; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid var(--glass-border); background: var(--card-bg); min-width: 0; overflow: hidden;}
         .month-day-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-color: var(--primary);}
@@ -191,6 +193,7 @@
         .toast { background: var(--card-bg); color: var(--text-main); padding: 12px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 13px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: translateX(120%); transition: 0.4s; border: 1px solid var(--glass-border);}
         .toast.show { transform: translateX(0); }
 
+        /* ================= MOBILE RESPONSIVE ================= */
         @media (max-width: 1080px) {
             html, body { overflow-y: auto; height: auto; min-height: 100dvh; }
             .app-container { flex-direction: column; height: auto; padding: 15px; padding-bottom: 110px; } 
@@ -210,21 +213,26 @@
             .week-control { width: 100%; justify-content: space-between;}
             .view-toggle { width: 100%; }
             .view-btn { flex: 1; text-align: center; }
+
             .sidebar-actions { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--input-border); padding-top: 10px; margin-top: 0; gap: 8px;}
             .slots-wrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 8px; gap: 6px; }
             .time-slot { min-height: 70px; padding: 6px 4px; }
             .slot-time-label { font-size: 11px; margin-bottom: 4px; letter-spacing: 0; }
             .w-status-badge { font-size: 10px; padding: 3px 4px; }
             .slot-info-bottom { font-size: 10px; }
+
             .monthly-grid { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 2px;}
             .month-header { display: block !important; font-size: 13px; padding: 7px 0; border-radius: 6px; margin-bottom: 3px; background: rgba(255,255,255,0.12); color: #fff;} 
             .month-day-card { min-height: 68px; padding: 5px; border-radius: 10px; justify-content: flex-start; align-items: center; min-width: 0; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);}
             .month-day-card.m-weekend { opacity: 1; background: rgba(0,0,0,0.2);} 
             .m-date-num { font-size: 16px; margin-bottom: 4px; font-weight: 700; color: #ffffff; text-shadow: 0 0 5px rgba(0,0,0,0.5);}
+            .m-day-name-mobile { display: none !important; } 
+            
             .ampm-container { gap: 4px; width: 100%;}
             .ampm-badge { font-size: 10px; padding: 5px 2px; border-radius: 6px; gap: 3px; width: 100%; max-width: 100%; flex-direction: row; box-shadow: 0 2px 8px rgba(0,0,0,0.5); text-shadow: 0 1px 2px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);}
             .ampm-badge svg { width: 11px; height: 11px; }
             .ampm-text { display: inline-block; font-size: 10px; letter-spacing: 0; font-weight: 700;} 
+            
             .status-legend { width: 100%; justify-content: center; background: rgba(255,255,255,0.08); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);}
             .legend-item { color: #fff; font-size: 13px; font-weight: 600;}
             .modal-content { padding: 25px; border-radius: 32px; margin: 15px;}
@@ -236,7 +244,7 @@
         .badge-count { position: absolute; top: -5px; right: -5px; background: #ef4444; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 10px; border: 2px solid var(--card-bg); display: none;}
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
 <svg style="display: none;">
     <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></symbol>
@@ -297,12 +305,14 @@
             <div class="nav-actions-right">
                 <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="เปลี่ยนโหมดสี">☀️</button>
                 <div class="view-toggle">
-                    <button class="view-btn active" id="btnViewWeek" onclick="switchView('week')">สัปดาห์</button>
-                    <button class="view-btn" id="btnViewMonth" onclick="switchView('month')">เดือน</button>
+                    <button class="view-btn" id="btnViewWeek" onclick="switchView('week')">สัปดาห์</button>
+                    <!-- ตั้งค่าเริ่มต้นให้แถบ "เดือน" ทึบแสงใช้งานอยู่ -->
+                    <button class="view-btn active" id="btnViewMonth" onclick="switchView('month')">เดือน</button>
                 </div>
             </div>
         </div>
 
+        <!-- Legend -->
         <div class="status-legend">
             <div class="legend-item"><span class="legend-dot dot-free"></span> ว่าง</div>
             <div class="legend-item"><span class="legend-dot dot-partial"></span> ว่างบางส่วน</div>
@@ -319,10 +329,11 @@
     </div>
 </div>
 
+<!-- ================= MODALS ================= -->
 <div id="dayDetailsModal" class="modal">
     <div class="modal-content">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-            <h3 id="dayModalTitle" style="margin:0; color:var(--text-main);">📅 รายละเอียด</h3>
+            <h3 id="dayModalTitle" style="margin:0; color:var(--text-main); font-size: 18px;">📅 รายละเอียด</h3>
             <button onclick="closeModal('dayDetailsModal')" class="btn-icon" style="border-radius: 50%; background: var(--btn-outline-bg); font-weight:bold;">✕</button>
         </div>
         <div id="modalDetailsContainer"></div>
@@ -386,7 +397,24 @@
 
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('bookingModal')">ยกเลิก</button>
-            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการบันทึก</button>
+            <button class="btn btn-primary" style="flex:2;" onclick="submitBooking()" id="submitBtn">ยืนยันการจอง</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= NEW CONFLICT MODAL ================= -->
+<div id="conflictModal" class="modal">
+    <div class="modal-content" style="max-width: 450px;">
+        <h3 style="margin-top:0; color:var(--color-booked); font-size: 20px;">⚠️ ช่วงเวลานี้มีการจองแล้ว</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">ระบบไม่อนุญาตให้จองซ้อนทับกัน คุณสามารถดูรายละเอียดคิวเดิมและเลือก "ขอแทรกคิว" หรือกดกลับเพื่อเปลี่ยนเวลาใหม่ได้ครับ</p>
+        
+        <div id="conflictDetails" style="background:var(--header-bg); padding:15px; border-radius:12px; margin-bottom:15px; border:1px solid var(--input-border); border-left:6px solid var(--color-booked);">
+            <!-- ข้อมูลคิวชนจะถูกใส่เข้ามาที่นี่ -->
+        </div>
+        
+        <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline" style="flex:1;" onclick="closeModal('conflictModal'); document.getElementById('bookingModal').classList.add('show');">กลับไปเปลี่ยนเวลา</button>
+            <button class="btn btn-primary" style="flex:1; background:var(--color-revise);" onclick="proceedToRevise()">✏️ ขอแทรกคิว</button>
         </div>
     </div>
 </div>
@@ -448,7 +476,7 @@
     };
     
     let bookings = [];
-    let currentView = 'week'; 
+    let currentView = 'month'; // เปลี่ยนให้แสดงหน้าเดือนเป็นค่าเริ่มต้น
     let currentRefDate = new Date(); 
     let currentAdmin = null; 
     let currentAdminTab = 'normal';
@@ -558,7 +586,7 @@
     }
 
     // ====================================================================
-    // VIRTUAL SPLIT LOGIC (ตัวแยกคิวเพื่อคืนเวลาส่วนที่เหลือให้เจ้าของเดิม)
+    // VIRTUAL SPLIT LOGIC
     // ====================================================================
     function expandBookings(dayData) {
         let expanded = [];
@@ -573,51 +601,20 @@
                 let rStop = timeToDecimal(b.StopTime);
                 let origTeam = bak.Team || bak['Column 1'] || bak.Column1 || getTeamName(b);
                 
-                // คิวเดิมช่วงก่อนโดนแทรก
                 if (oStart < rStart) {
-                    expanded.push({
-                        ...b, 
-                        ID: b.ID + '_pre', 
-                        Status: 'approved', 
-                        User: bak.User || '-', 
-                        Team: origTeam, 
-                        Phone: b.Phone, 
-                        'Start Time': bak['Start Time'], 
-                        StopTime: b['Start Time'], 
-                        isOriginalPart: true,
-                        _decStart: oStart,
-                        _decStop: rStart
-                    });
+                    expanded.push({...b, ID: b.ID + '_pre', Status: 'approved', User: bak.User || '-', Team: origTeam, Phone: bak.Phone, 'Start Time': bak['Start Time'], StopTime: b['Start Time'], isOriginalPart: true, _decStart: oStart, _decStop: rStart});
                 }
-                // คิวเดิมช่วงหลังโดนแทรก
                 if (oStop > rStop) {
-                    expanded.push({
-                        ...b, 
-                        ID: b.ID + '_post', 
-                        Status: 'approved', 
-                        User: bak.User || '-', 
-                        Team: origTeam, 
-                        Phone: b.Phone, 
-                        'Start Time': b.StopTime, 
-                        StopTime: bak.StopTime, 
-                        isOriginalPart: true,
-                        _decStart: rStop,
-                        _decStop: oStop
-                    });
+                    expanded.push({...b, ID: b.ID + '_post', Status: 'approved', User: bak.User || '-', Team: origTeam, Phone: bak.Phone, 'Start Time': b.StopTime, StopTime: bak.StopTime, isOriginalPart: true, _decStart: rStop, _decStop: oStop});
                 }
             }
-            
-            expanded.push({
-                ...b,
-                _decStart: timeToDecimal(b['Start Time']),
-                _decStop: timeToDecimal(b.StopTime)
-            });
+            expanded.push({...b, _decStart: timeToDecimal(b['Start Time']), _decStop: timeToDecimal(b.StopTime)});
         });
         return expanded;
     }
 
     // ====================================================================
-    // LOGIC: ว่างบางส่วนสำหรับรายเดือน (เงื่อนไขไม่เกิน 4 ชั่วโมง ตัดช่วงเที่ยง)
+    // LOGIC: ว่างบางส่วนสำหรับรายเดือน
     // ====================================================================
     function analyzeSlot(dayData) {
         let am = { class: 'free', duration: 0, status: 'free' };
@@ -638,7 +635,6 @@
                         else if (am.status === 'free') am.status = 'booked';
                     }
                 }
-                // ตัดเวลาพัก 12:00 - 13:00 ออกจากการคำนวณอย่างสมบูรณ์
                 for(let h=13; h<18; h++) {
                     if (start <= h && stop >= h+1) { 
                         pmHours[h-13] = 1; 
@@ -654,11 +650,11 @@
         am.duration = amHours.reduce((a,b)=>a+b, 0);
         pm.duration = pmHours.reduce((a,b)=>a+b, 0);
 
-        // เช้าไม่เกิน 4 ชั่วโมง = ว่างบางส่วน
+        // เช้า: ถ้าจองไม่ถึง 4 ชม. = ว่างบางส่วน / 4 ชม. ขึ้นไป = เต็ม
         if (am.duration > 0 && am.duration < 4) am.class = 'partial'; 
         else if (am.duration >= 4) am.class = am.status;
 
-        // บ่ายไม่เกิน 4 ชั่วโมง = ว่างบางส่วน (ถ้าจอง 4 ชม. ขึ้นไป เช่น จองเต็ม 5 ชม. = เต็ม)
+        // บ่าย: ถ้าจองไม่ถึง 4 ชม. = ว่างบางส่วน / 4 ชม. ขึ้นไป = เต็ม
         if (pm.duration > 0 && pm.duration < 4) pm.class = 'partial'; 
         else if (pm.duration >= 4) pm.class = pm.status;
 
@@ -707,14 +703,11 @@
             let timeLabel = `${String(h).padStart(2,'0')}:00 - ${endTimeStr}`;
 
             if (isHoliday) {
-                html += `<div class="time-slot disabled" onclick="showDetails('${dateStr}', false)"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted); text-align:center;">หยุด</div></div>`;
+                html += `<div class="time-slot disabled" onclick="handleSlotClick('${dateStr}', ${h}, 'disabled')"><div class="slot-time-label">${timeLabel}</div><div style="margin:auto; font-size:13px; font-weight:700; color:var(--text-muted); text-align:center;">หยุด</div></div>`;
                 continue;
             }
 
-            // 1. หารายการที่เป็นคิวแทรกก่อน
             let b = expanded.find(x => x.Status === 'pending_revise' && !x.isOriginalPart && x._decStart <= h && x._decStop >= h+1);
-            
-            // 2. ถ้าไม่เจอแทรก ให้หาคิวปกติ หรือ คิวเดิมที่เหลืออยู่
             if (!b) b = expanded.find(x => (x.Status === 'approved' || x.Status === 'pending') && x._decStart <= h && x._decStop >= h+1);
 
             if (b) {
@@ -819,7 +812,6 @@
         }
     }
 
-    // ปลดล็อกเงื่อนไขความกว้างหน้าจอ กดทุกจุดเด้ง Popup แน่นอน 100% รวมถึงวันย้อนหลัง
     function handleSlotClick(dateStr, hour, slotClass) {
         showDetails(dateStr, true); 
         if (slotClass === 'free') {
@@ -910,7 +902,6 @@
                 }
 
                 let infoHtml = '';
-                // การันตีความปลอดภัยด้วยการครอบ String บังคับเป็นข้อความ ป้องกัน Error .replace
                 if (b.Status === 'pending_revise' && !b.isOriginalPart) {
                     let bak = getBackupData(b);
                     let origU = bak ? bak.User || '-' : '-';
@@ -963,13 +954,53 @@
         document.getElementById('bookingModal').classList.add('show'); 
         toggleTimeInputs(); 
     }
+    
     function openBookingWithDate(d) { closeModal('dayDetailsModal'); document.getElementById('formDate').value = d; openBooking(); }
+    
     function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+    // ====================================================================
+    // REVISE AND CONFLICT LOGIC
+    // ====================================================================
+    let pendingConflictId = null;
+
+    function showConflictModal(b, dateStr) {
+        pendingConflictId = String(b.ID).replace('_pre', '').replace('_post', '');
+        
+        let uName = b.User;
+        let tName = getTeamName(b);
+        let phone = String(b.Phone || "").replace(/'/g, '');
+        
+        let bak = getBackupData(b);
+        if (b.isOriginalPart && bak) {
+            uName = bak.User || '-';
+            tName = bak.Team || bak['Column 1'] || bak.Column1 || tName;
+            phone = String(bak.Phone || "").replace(/'/g, '');
+        }
+
+        document.getElementById('conflictDetails').innerHTML = `
+            <div style="font-size:12px; font-weight:700; color:var(--text-main); background:var(--header-bg); padding:4px 8px; border-radius:6px; display:inline-block; margin-bottom:8px;">
+                📅 ${dateStr} | ⏰ ${b['Start Time']} - ${b.StopTime}
+            </div>
+            <div style="font-size:15px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 ${b.Subject}</div>
+            <div style="font-size:12px; color:var(--text-muted);">👤 ${uName} | 🏢 ${tName} | 📞 ${phone}</div>
+        `;
+        
+        closeModal('bookingModal');
+        document.getElementById('conflictModal').classList.add('show');
+    }
+
+    function proceedToRevise() {
+        closeModal('conflictModal');
+        if (pendingConflictId) {
+            openReviseBooking(pendingConflictId, 'revise');
+        }
+    }
 
     function openReviseBooking(id, mode = 'revise') {
         closeModal('dayDetailsModal');
         closeModal('adminDashModal');
-        // ใช้การเปรียบเทียบแบบยืดหยุ่น (==) เพื่อแปลง Type ระหว่าง String และ Number ให้ตรงกันโดยอัตโนมัติ
+        
         const b = bookings.find(x => x.ID == id);
         if(!b) return;
 
@@ -1027,7 +1058,7 @@
             const res = await fetch(API_URL + "?t=" + new Date().getTime());
             bookings = JSON.parse(await res.text());
             
-            // Auto-Approve เฉพาะคิวปกติ (ไม่นับรวมคิวขอแทรก pending_revise)
+            // Auto-Approve เฉพาะคิวปกติ
             bookings.forEach(b => {
                 if (b.Status === 'pending') {
                     b.Status = 'approved'; 
@@ -1065,8 +1096,7 @@
         if (!inputDate) return showToast("โปรดเลือกวันที่จ้า", "error");
         
         const [yy, mm, dd] = inputDate.split('-').map(Number);
-        const localDate = new Date(yy, mm - 1, dd);
-        const dayOfWeek = localDate.getDay();
+        const dayOfWeek = new Date(yy, mm - 1, dd).getDay();
         const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
         const isHoliday = thaiHolidays[inputDate] || (isWeekend ? "วันหยุดเสาร์-อาทิตย์" : null);
 
@@ -1085,7 +1115,39 @@
         let selectedTeam = document.getElementById('formTeamSelect').value;
         if (selectedTeam === 'อื่นๆ') selectedTeam = document.getElementById('formTeamOther').value;
 
-        // 🔥 ส่งคีย์คู่ขนานทับซ้อนกันเพื่อป้องกันปัญหาพิมพ์เล็ก/พิมพ์ใหญ่อ้างอิงใน Sheets Apps Script ทุกเวอร์ชัน
+        // ==========================================
+        // ตรวจจับคิวชน (Overlap Detection)
+        // ==========================================
+        const nSt = timeToDecimal(st);
+        const nEd = timeToDecimal(ed);
+        let isReviseMode = document.getElementById('bookingModalTitle').innerText.includes("ขอแทรกคิว");
+        
+        // ตรวจสอบการทับซ้อน ถ้าไม่ใช่การขอแทรกคิวโดยตรง
+        if (!isReviseMode) {
+            const dayData = bookings.filter(b => b.Date?.split('T')[0] === inputDate);
+            const expanded = expandBookings(dayData);
+            
+            let hasConflict = null;
+            for (let eb of expanded) {
+                if (eb.Status === 'cancelled' || eb.Status === 'rejected') continue;
+                
+                // ข้ามการตรวจจับคิวของตัวเองในกรณีอีดิท
+                let origID = String(eb.ID).replace('_pre', '').replace('_post', '');
+                if (editingId && origID === String(editingId)) continue;
+                
+                // ตรวจสอบทับซ้อน (ให้ชนขอบได้)
+                if (nSt < eb._decStop && nEd > eb._decStart) {
+                    hasConflict = eb;
+                    break;
+                }
+            }
+            
+            if (hasConflict) {
+                showConflictModal(hasConflict, inputDate);
+                return; // หยุดการส่งข้อมูลทันที
+            }
+        }
+
         const data = {
             action: editingId ? 'revise' : 'create', 
             id: editingId,
@@ -1265,7 +1327,7 @@
     }
 
     syncDataSilently(true);
-    // อัปเดตและดึงข้อมูลแบบ Real-time ทุก 15 วินาที
+    // อัปเดตข้อมูลอัตโนมัติ ทุกๆ 15 วินาที
     setInterval(() => syncDataSilently(false), 15000);
 </script>
 </body>
