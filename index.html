@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+    <base target="_top">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BSCS_Sharing ✨</title>
@@ -1121,9 +1122,8 @@
             connStatus.innerHTML = '⏳ กำลังซิงค์ข้อมูล...';
         }
         try {
-            const res = await fetch(API_URL + "?t=" + new Date().getTime());
-            const incoming = JSON.parse(await res.text());
-            if (!res.ok || !Array.isArray(incoming)) throw new Error('โหลดข้อมูลไม่สำเร็จ');
+            const incoming = await callAppsScript('getBookings');
+            if (!Array.isArray(incoming)) throw new Error('โหลดข้อมูลไม่สำเร็จ');
             bookings = incoming;
             
             // Auto-Approve เฉพาะคิวปกติ
@@ -1147,30 +1147,27 @@
             console.log("Sync Error"); 
             if(connStatus) {
                 connStatus.className = 'status-offline';
-                connStatus.innerHTML = '🔴 OFFLINE';
+                connStatus.textContent = '🔴 ' + (e.message || 'โหลดข้อมูลไม่สำเร็จ');
             }
         }
     }
 
+    function callAppsScript(method, data) {
+        return new Promise((resolve,reject)=>{
+            if (!(window.google && window.google.script && window.google.script.run)) {
+                reject(new Error('กรุณาเปิดผ่านลิงก์ Web App /exec หลังเพิ่มไฟล์ Index ใน Apps Script — ไฟล์ที่เปิดจากเครื่องยังบันทึกไม่ได้'));
+                return;
+            }
+            const runner=window.google.script.run.withSuccessHandler(resolve)
+                .withFailureHandler(error=>reject(new Error(error.message || 'ติดต่อ Apps Script ไม่สำเร็จ กรุณาตรวจรายการก่อนส่งซ้ำ')));
+            if(method==='getBookings') runner.getBookings();
+            else if(method==='saveBookingRequest') runner.saveBookingRequest(data);
+            else reject(new Error('คำสั่งไม่ถูกต้อง'));
+        });
+    }
     async function sendBookingRequest(data) {
-        let res;
-        try {
-            res = await fetch(API_URL, {
-                method: 'POST',
-                headers: {'Content-Type':'text/plain;charset=utf-8'},
-                body: JSON.stringify(data)
-            });
-        } catch (e) {
-            throw new Error('เชื่อมต่อ Web App ไม่สำเร็จ: ตรวจ API_URL และสิทธิ์เข้าถึง Deployment ก่อนลองใหม่ ให้โหลดรายการตรวจสอบก่อน เพราะคำขออาจบันทึกแล้วแต่ไม่ได้รับคำตอบ');
-        }
-        let result;
-        try { result = JSON.parse(await res.text()); }
-        catch (e) {
-            throw new Error(`Web App ตอบกลับเป็นข้อมูลที่อ่านไม่ได้ (HTTP ${res.status}) อาจเป็นหน้าเข้าสู่ระบบหรือหน้า Error กรุณาตรวจ URL /exec และ Apps Script Executions ก่อนส่งซ้ำ`);
-        }
-        if (!res.ok || !result || result.status !== 'success') {
-            throw new Error(result?.msg || result?.error || `บันทึกไม่สำเร็จ (HTTP ${res.status})`);
-        }
+        const result=await callAppsScript('saveBookingRequest',data);
+        if(!result || result.status!=='success') throw new Error(result?.msg || 'บันทึกไม่สำเร็จ');
         return result;
     }
 
