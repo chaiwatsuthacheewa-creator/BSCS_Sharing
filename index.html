@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>BSCS_Sharing ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -249,6 +249,79 @@
         @keyframes friend-bob {0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
         @media(prefers-reduced-motion:reduce){.date-friend{animation:none}}
         @media(max-width:480px){.date-friend{width:24px;height:24px}}
+        /* Mobile readability: opaque surfaces, readable text, generous touch targets. */
+        .mobile-status {display:none}
+        :root {--primary-text:#fff;--color-rejected:#c0264c}
+        @media(max-width:1080px){
+            .day-label {flex-basis:auto}
+        }
+        @media(max-width:768px){
+            html,body {width:100%;height:auto;min-height:100dvh;overflow-x:hidden}
+            body {--text-muted:#526176;--input-border:#ccd5e3}
+            body.dark-mode {--text-muted:#c3cde0;--input-border:#526078}
+            .app-container {padding:12px;padding-bottom:max(24px,env(safe-area-inset-bottom));gap:12px}
+            .main-content {height:auto;min-height:0}
+            .sidebar,.nav-header {padding:16px;background:var(--card-bg)}
+            .sidebar .title-box {position:relative}
+            .title {color:var(--primary);background:none;-webkit-text-fill-color:currentColor}
+            .subtitle {font-size:13px;line-height:1.7}
+            .week-control {min-width:0}
+            .month-selector {min-width:0;width:100%;font-size:16px;margin:0;padding:8px 4px}
+            .week-control>.btn-icon,.week-control>div {flex-shrink:0}
+            .hidden-date-picker {right:0;width:44px;height:44px;margin:0}
+            .btn,.btn-icon,.view-btn,.tab-btn {min-height:44px}
+            .btn-icon {width:44px;flex-shrink:0}
+            .btn {line-height:1.5;white-space:normal}
+            input,select,textarea {font-size:16px;min-height:46px;line-height:1.5}
+            .status-legend {gap:10px 14px;justify-content:flex-start;padding:12px;background:var(--card-bg);border:1px solid var(--glass-border)}
+            .legend-item {color:var(--text-main);font-size:13px;line-height:1.5}
+            .legend-dot {flex-shrink:0;box-shadow:none}
+            .month-header {color:var(--text-main);background:var(--card-bg);font-size:14px}
+            .month-day-card,.month-day-card.m-weekend {background:var(--card-bg);border:1px solid var(--glass-border);align-items:stretch;opacity:1;padding:8px;min-height:120px}
+            .m-card-header {width:100%;gap:4px;min-height:32px;flex-wrap:wrap}
+            .m-date-num {color:var(--text-main);text-shadow:none;margin:0;line-height:1.4}
+            .ampm-badge {box-shadow:none;text-shadow:none;min-height:30px;white-space:normal;padding:6px 3px;line-height:1.5}
+            .ampm-text {overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere;font-size:12px}
+            .ampm-badge svg {flex-shrink:0}
+            .ampm-badge.holiday {height:auto!important;min-height:60px}
+            .time-slot {min-height:112px;padding:10px 8px}
+            .slot-time-label {font-size:13px}
+            .w-status-badge {font-size:12px;white-space:normal;min-height:30px}
+            .slot-info-bottom {font-size:12px;white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+            .modal {padding:12px;align-items:center}
+            .modal-content {margin:0;padding:18px;width:100%;max-height:calc(100dvh - 24px);border-radius:20px;overscroll-behavior:contain;overflow-wrap:anywhere}
+            .modal-content h3 {line-height:1.5}
+            .admin-action-btns {flex-wrap:wrap}
+            .admin-action-btns .btn {flex:1 1 130px!important;min-height:44px;font-size:14px!important}
+            #normalListContainer,#reviseListContainer {max-height:55dvh!important}
+            .toast-container {left:12px;right:12px;top:max(12px,env(safe-area-inset-top));max-width:none}
+            .toast-container>div {overflow-wrap:anywhere}
+            .month-day-card:hover,.time-slot:hover {transform:none}
+            :focus-visible {outline:3px solid #f59e0b;outline-offset:3px}
+        }
+        @media(max-width:600px){
+            /* Use dated cards instead of squeezing seven columns into a phone. */
+            .monthly-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px;padding:2px;overflow:visible}
+            .monthly-grid>.month-header,.monthly-grid>div:not([class]) {display:none!important}
+            .month-day-card {min-height:154px;padding:12px;border-radius:16px}
+            .m-date-num {font-size:23px}
+            .m-day-name-mobile {display:block!important;font-size:13px;color:var(--text-muted);font-weight:500;opacity:1}
+            .m-card-header {flex-wrap:nowrap;align-items:center;margin-bottom:8px}
+            .date-friend {width:30px;height:30px}
+            .ampm-container {gap:6px}
+            .ampm-badge {min-height:34px;padding:6px;justify-content:flex-start;gap:5px}
+            .ampm-badge.holiday {justify-content:center}
+            .ampm-badge .desktop-status {display:none}
+            .mobile-status {display:inline}
+            .ampm-text {font-size:12px;font-weight:500}
+            .ampm-badge svg {width:12px;height:12px}
+            #bookingModal .modal-content {padding-bottom:max(18px,env(safe-area-inset-bottom))}
+        }
+        @media(max-width:360px){
+            .app-container {padding:8px}
+            .month-day-card {padding:8px}
+            .nav-header {padding:10px}
+        }
     </style>
 </head>
 <body class="dark-mode">
@@ -808,10 +881,11 @@
                 let pmIcon = slots.pm.class === 'partial' ? '#icon-partial' : '#icon-moon';
                 let amText = slots.am.class === 'partial' ? 'ว่างบางส่วน' : 'เช้า';
                 let pmText = slots.pm.class === 'partial' ? 'ว่างบางส่วน' : 'บ่าย';
+                const mobileStatus={free:'ว่าง',partial:'ว่างบางส่วน',pending:'รออนุมัติ',revise:'รอแทรกคิว',booked:'จองแล้ว'};
 
                 content += `<div class="ampm-container">
-                    <div class="ampm-badge ${slots.am.class}"><svg><use href="${amIcon}"></use></svg> <span class="ampm-text">${amText}</span></div>
-                    <div class="ampm-badge ${slots.pm.class}"><svg><use href="${pmIcon}"></use></svg> <span class="ampm-text">${pmText}</span></div>
+                    <div class="ampm-badge ${slots.am.class}"><svg><use href="${amIcon}"></use></svg> <span class="ampm-text"><span class="desktop-status">${amText}</span><span class="mobile-status">เช้า · ${mobileStatus[slots.am.class]||amText}</span></span></div>
+                    <div class="ampm-badge ${slots.pm.class}"><svg><use href="${pmIcon}"></use></svg> <span class="ampm-text"><span class="desktop-status">${pmText}</span><span class="mobile-status">บ่าย · ${mobileStatus[slots.pm.class]||pmText}</span></span></div>
                 </div>`;
             }
             
