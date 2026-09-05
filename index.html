@@ -540,7 +540,7 @@
         const t = document.createElement('div');
         let borderColor = type === 'success' ? 'var(--color-free)' : (type === 'warning' ? 'var(--color-partial)' : (type === 'info' ? 'var(--color-revise)' : 'var(--color-booked)'));
         t.style = `background:var(--card-bg); backdrop-filter:blur(10px); color:var(--text-main); padding:12px 18px; border-radius:12px; margin-bottom:10px; box-shadow:0 8px 25px rgba(0,0,0,0.15); border-left:6px solid ${borderColor}; transition:0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform:translateX(120%); font-family:'Kanit'; font-weight:600; font-size:13px; border:1px solid var(--glass-border);`;
-        t.innerHTML = msg;
+        t.textContent = msg;
         c.appendChild(t);
         setTimeout(() => t.style.transform = 'translateX(0)', 10);
         setTimeout(() => { t.style.transform = 'translateX(120%)'; setTimeout(() => t.remove(), 400); }, 3500);
@@ -1152,6 +1152,34 @@
         }
     }
 
+    async function sendBookingRequest(data) {
+        let res;
+        try {
+            res = await fetch(API_URL, {
+                method: 'POST',
+                headers: {'Content-Type':'text/plain;charset=utf-8'},
+                body: JSON.stringify(data)
+            });
+        } catch (e) {
+            throw new Error('เชื่อมต่อ Web App ไม่สำเร็จ: ตรวจ API_URL และสิทธิ์เข้าถึง Deployment ก่อนลองใหม่ ให้โหลดรายการตรวจสอบก่อน เพราะคำขออาจบันทึกแล้วแต่ไม่ได้รับคำตอบ');
+        }
+        let result;
+        try { result = JSON.parse(await res.text()); }
+        catch (e) {
+            throw new Error(`Web App ตอบกลับเป็นข้อมูลที่อ่านไม่ได้ (HTTP ${res.status}) อาจเป็นหน้าเข้าสู่ระบบหรือหน้า Error กรุณาตรวจ URL /exec และ Apps Script Executions ก่อนส่งซ้ำ`);
+        }
+        if (!res.ok || !result || result.status !== 'success') {
+            throw new Error(result?.msg || result?.error || `บันทึกไม่สำเร็จ (HTTP ${res.status})`);
+        }
+        return result;
+    }
+
+    function showSaveError(error) {
+        const message = error?.message || 'ไม่ทราบสาเหตุ กรุณาดู Apps Script Executions';
+        showToast(message, 'error');
+        alert('ยังยืนยันการบันทึกไม่ได้\n\n' + message);
+    }
+
     async function submitBooking() {
         const btn = document.getElementById('submitBtn');
         const inputDate = document.getElementById('formDate').value;
@@ -1264,8 +1292,7 @@
         
         btn.innerText = "กำลังส่งข้อมูล..."; btn.disabled = true;
         try {
-            const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
-            const result = await res.json();
+            const result = await sendBookingRequest(data);
             if(result.status === 'success') {
                 showToast(editingId ? "✨ ส่งข้อมูลแก้ไขแล้ว!" : "✨ จองเวลาเรียบร้อยแล้ว!", "success");
                 pendingConflictId = null;
@@ -1275,7 +1302,7 @@
                 closeModal('bookingModal');
                 syncDataSilently();
             } else showToast(result.msg, "error");
-        } catch(e) { showToast("เกิดข้อผิดพลาดในการส่งข้อมูล", "error"); } finally { btn.innerText = "ยืนยันการจอง"; btn.disabled = false; }
+        } catch(e) { showSaveError(e); } finally { btn.innerText = "ยืนยันการจอง"; btn.disabled = false; }
     }
 
     function openLoginModal() { document.getElementById('loginModal').classList.add('show'); }
@@ -1422,12 +1449,10 @@
         closeModal('adminDashModal');
         showToast(`กำลัง ${msg}...`, "warning");
         try {
-            const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ protocol:2, action: 'update', id: id, status: status, Date:booking.Date, startTime:booking['Start Time'], stopTime:booking.StopTime }) });
-            const result = await res.json();
-            if (!res.ok || result.status !== 'success') throw new Error(result.msg || 'Update failed');
+            await sendBookingRequest({ protocol:2, action: 'update', id: id, status: status, Date:booking.Date, startTime:booking['Start Time'], stopTime:booking.StopTime });
             showToast(`✅ ${msg} เรียบร้อยแล้ว`, "success");
             await syncDataSilently(false); 
-        } catch(e) { showToast('❌ ' + (e.message || 'ดำเนินการล้มเหลว'), "error"); }
+        } catch(e) { showSaveError(e); }
     }
 
     syncDataSilently(true);
