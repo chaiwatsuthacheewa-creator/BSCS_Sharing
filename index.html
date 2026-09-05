@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <base target="_top">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BSCS_Sharing ✨</title>
@@ -603,7 +602,7 @@
             if (b.Status === 'cancelled' || b.Status === 'rejected') return;
             
             let bak = getBackupData(b);
-            if (bak && b.Status === 'pending_revise') {
+            if (bak && ['pending_revise','approved'].includes(b.Status)) {
                 let oStart = timeToDecimal(bak['Start Time']);
                 let oStop = timeToDecimal(bak.StopTime);
                 let rStart = timeToDecimal(b['Start Time']);
@@ -1122,7 +1121,7 @@
             connStatus.innerHTML = '⏳ กำลังซิงค์ข้อมูล...';
         }
         try {
-            const incoming = await callAppsScript('getBookings');
+            const incoming = await callWebApp('getBookings');
             if (!Array.isArray(incoming)) throw new Error('โหลดข้อมูลไม่สำเร็จ');
             bookings = incoming;
             
@@ -1156,7 +1155,6 @@
         if (!['getBookings','saveBookingRequest'].includes(method)) throw new Error('คำสั่งไม่ถูกต้อง');
         const reading=method==='getBookings';
         const url=new URL(API_URL);
-        url.searchParams.set('api','1');
         if(reading) url.searchParams.set('t',Date.now());
         let response;
         try {
@@ -1173,25 +1171,60 @@
         let result;
         try {result=JSON.parse(await response.text());}
         catch(error){throw new Error('Web App ไม่ได้ส่ง JSON (HTTP '+response.status+') กรุณาอัปเดต GS ล่าสุดและตรวจว่าลิงก์ API แสดงหน้าเข้าสู่ระบบหรือไม่');}
-        if(!response.ok || result?.error || result?.status==='error') throw new Error(result?.msg || result?.error || 'HTTP '+response.status);
+        if(!response.ok || result?.error || result?.status==='error') {
+            const error=new Error(result?.msg || result?.error || 'HTTP '+response.status);
+            error.confirmed=Boolean(result && result.status==='error');
+            throw error;
+        }
         return result;
     }
-    function callAppsScript(method, data) {
-        if (!(window.google && window.google.script && window.google.script.run)) {
-            return callWebApp(method,data);
+    const pendingRequests=new Map();
+    async function verifyRequest(requestId){
+        for(let attempt=0;attempt<6;attempt++){
+            const url=new URL(API_URL);
+            url.searchParams.set('action','requestResult');
+            url.searchParams.set('requestId',requestId);
+            url.searchParams.set('t',Date.now());
+            let result;
+            try{
+                const response=await fetch(url.toString(),{redirect:'follow'});
+                result=await response.json();
+                if(!response.ok)result=null;
+            }catch(error){}
+            if(Array.isArray(result))throw new Error('GS ที่เผยแพร่ยังเป็นเวอร์ชันเก่า กรุณาเลือก New version ใน Deployment เดิม');
+            if(result && result.requestId===requestId){
+                if(result.status==='success')return result;
+                if(result.status==='error'){
+                    const error=new Error(result.msg||'GS ปฏิเสธคำขอ');error.confirmed=true;throw error;
+                }
+                if(result.status==='uncertain')throw new Error('GS เขียนข้อมูลไม่ครบหรือยืนยันผลไม่ได้: '+result.msg);
+            }
+            if(attempt<5)await new Promise(resolve=>setTimeout(resolve,1500));
         }
-        return new Promise((resolve,reject)=>{
-            const runner=window.google.script.run.withSuccessHandler(resolve)
-                .withFailureHandler(error=>reject(new Error(error.message || 'ติดต่อ Apps Script ไม่สำเร็จ กรุณาตรวจรายการก่อนส่งซ้ำ')));
-            if(method==='getBookings') runner.getBookings();
-            else if(method==='saveBookingRequest') runner.saveBookingRequest(data);
-            else reject(new Error('คำสั่งไม่ถูกต้อง'));
-        });
+        throw new Error('ยังตรวจผลคำขอไม่ได้ กรุณาตรวจ Apps Script → Executions และรายการในชีต เลขอ้างอิง: '+requestId);
     }
     async function sendBookingRequest(data) {
-        const result=await callAppsScript('saveBookingRequest',data);
-        if(!result || result.status!=='success') throw new Error(result?.msg || 'บันทึกไม่สำเร็จ');
-        return result;
+        const key=JSON.stringify(data);
+        let requestId=pendingRequests.get(key);
+        if(!requestId){
+            requestId=window.crypto?.randomUUID ? window.crypto.randomUUID() : 'REQ-'+Date.now()+'-'+Math.random().toString(36).slice(2)+'-'+Math.random().toString(36).slice(2);
+            pendingRequests.set(key,requestId);
+        }
+        try{
+            let result;
+            try{result=await callWebApp('saveBookingRequest',{...data,requestId});}
+            catch(error){if(error.confirmed)throw error;}
+            if(!result || result.status!=='success' || result.requestId!==requestId){
+                showToast('กำลังตรวจผลการบันทึก เลขอ้างอิง '+requestId,'info');
+                result=await verifyRequest(requestId);
+            }
+            pendingRequests.delete(key);
+            return result;
+        }catch(error){
+            if(error.confirmed)pendingRequests.delete(key);
+            error.message+='\nเลขอ้างอิง: '+requestId;
+            throw error;
+        }
     }
 
     function showSaveError(error) {
@@ -1288,7 +1321,6 @@
         }
 
         const data = {
-            protocol: 2,
             action: editingId ? 'revise' : 'create', 
             id: editingId,
             Date: inputDate, 
